@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="propiedad" extends="struts-default" namespace="/Propiedad">
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>
+        <action name="guardar" method="guardar" class="Acciones.PropiedadAction">
+            <result name="success" type="redirect">listar</result>
+            <result name="input" type="tiles">/Propiedad/Alta.tiles</result>
+        </action>
+        <action name="modificar" method="modificar" class="Acciones.PropiedadAction">
+            <result name="success" type="redirect">listar</result>
+            <result name="input" type="tiles">/Propiedad/Modificacion.tiles</result>
+        </action>
+        <action name="eliminar" method="eliminar" class="Acciones.PropiedadAction">
+            <result name="success" type="redirect">listar</result>
+        </action>
+        <action name="listar" method="list" class="Acciones.PropiedadAction">
+            <result name="success" type="tiles">/Propiedad/Todos.tiles</result>
+        </action>
+        <action name="editar" method="editar" class="Acciones.PropiedadAction">
+            <result name="success" type="tiles">/Propiedad/Modificacion.tiles</result>
+        </action> 
+        <action name="nuevo" method="nuevo" class="Acciones.PropiedadAction">
+            <result name="nuevo" type="tiles">/Propiedad/Alta.tiles</result>
+        </action>      
+        <action name="ver" method="execute" class="Acciones.VerPropiedadAction">
+            <result name="success" type="tiles">/Propiedad/Ver.tiles</result>
+        </action>              
+    </package>
+</struts>

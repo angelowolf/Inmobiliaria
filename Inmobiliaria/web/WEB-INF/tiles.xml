@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="baseLayout" template="/BaseLayout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="body" value="" /> 
+    </definition>
+    <!--Servicios-->
+    <definition name="/Servicio/AltaModificacion.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Formulario Servicios" />
+        <put-attribute name="body" value="/Servicio/AltaModificacion.jsp" />
+    </definition>
+    <definition name="/Servicio/Todos.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Servicios" />
+        <put-attribute name="body" value="/Servicio/Todos.jsp" />
+    </definition>
+    <!--Propiedades-->
+    <definition name="/Propiedad/Alta.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Alta Propiedad" />
+        <put-attribute name="body" value="/Propiedad/Alta.jsp" />
+    </definition>
+    <definition name="/Propiedad/Modificacion.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Modificar Propiedad" />
+        <put-attribute name="body" value="/Propiedad/Modificacion.jsp" />
+    </definition>
+    <definition name="/Propiedad/Todos.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Propiedads" />
+        <put-attribute name="body" value="/Propiedad/Todos.jsp" />
+    </definition>  
+    <definition name="/Propiedad/Ver.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Propiedad" />
+        <put-attribute name="body" value="/Propiedad/Ver.jsp" />
+    </definition>  
+</tiles-definitions>
