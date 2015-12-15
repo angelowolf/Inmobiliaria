@@ -60,13 +60,11 @@ public class ControladorPropiedad {
         propiedadDAO.eliminar(m);
         //Eliminar archivos.
         File directory = new File(ruta);
-        System.out.println(ruta);
         if (directory.exists()) {
             try {
                 delete(directory);
             } catch (IOException e) {
                 e.printStackTrace();
-                System.exit(0);
             }
         }
     }

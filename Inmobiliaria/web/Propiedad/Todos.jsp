@@ -4,6 +4,7 @@
 <%@taglib uri="http://displaytag.sf.net" prefix="display" %>
 <div class="form-group">
     <s:actionmessage theme="bootstrap"/>
+    <s:actionerror theme="bootstrap"/>
     <fieldset>
         <legend>
             Propiedades

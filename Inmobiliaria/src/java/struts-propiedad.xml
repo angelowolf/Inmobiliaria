@@ -9,10 +9,18 @@
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>
         <action name="guardar" method="guardar" class="Acciones.PropiedadAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/jpg, image/png,image/jpeg</param>
+            </interceptor-ref> 
+            <interceptor-ref name="defaultStack"/>
             <result name="success" type="redirect">listar</result>
             <result name="input" type="tiles">/Propiedad/Alta.tiles</result>
         </action>
         <action name="modificar" method="modificar" class="Acciones.PropiedadAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/jpg, image/png,image/jpeg</param>
+            </interceptor-ref> 
+            <interceptor-ref name="defaultStack"/>
             <result name="success" type="redirect">listar</result>
             <result name="input" type="tiles">/Propiedad/Modificacion.tiles</result>
         </action>

@@ -24,9 +24,9 @@ public class VerPropiedadAction extends ActionSupport {
 
     @Override
     public String execute() {
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        int id = Integer.parseInt(request.getParameter("idPropiedad"));
-        propiedad = controladorPropiedad.getOne(id);
+//        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+//        int id = Integer.parseInt(request.getParameter("idPropiedad"));
+        propiedad = controladorPropiedad.getOne(idPropiedad);
         return SUCCESS;
     }
 

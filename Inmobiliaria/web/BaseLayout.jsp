@@ -79,6 +79,7 @@
     <script src="/Inmobiliaria/js/sidebar_menu.js"></script>
     <script src="/Inmobiliaria/js/asd.js"></script>   
     <script src="/Inmobiliaria/js/es.js"></script>   
+    <script src="/Inmobiliaria/js/AddFile.js"></script>   
 
 </body>
 </html>

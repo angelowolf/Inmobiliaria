@@ -7,6 +7,8 @@ package Controlador;
 
 import Persistencia.DAO.Implementacion.ImagenPropiedadDAO;
 import Persistencia.Modelo.ImagenPropiedad;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -43,5 +45,29 @@ public class ControladorImagenPropiedad {
 
     public List<ImagenPropiedad> getTodos(int idPropiedad) {
         return imagenPropiedadDAO.listar(idPropiedad);
+    }
+
+    public ImagenPropiedad getOne(int id) {
+        return imagenPropiedadDAO.buscar(id);
+    }
+
+    public void eliminarImagen(String ruta) {
+        File archivo = new File(ruta);
+        try {
+            archivo.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void renombrarCarpeta(String rutaOriginal, String rutaNueva) {
+        // File (or directory) with old name
+        File file = new File(rutaOriginal);
+
+// File (or directory) with new name
+        File file2 = new File(rutaNueva);
+
+// Rename file (or directory)
+        file.renameTo(file2);
     }
 }
