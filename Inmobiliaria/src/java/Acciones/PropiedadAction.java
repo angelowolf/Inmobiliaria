@@ -202,8 +202,6 @@ public class PropiedadAction extends ActionSupport {
         if (imagen != null) {
             for (int i = 0; i < imagen.size(); i++) {
                 File cadaImagen = imagen.get(i);
-                System.out.println(propiedad.getCodigoPropiedad());
-                System.out.println(imagenFileName.get(i));
                 String rutaBD = "ImagenPropiedad\\" + propiedad.getCodigoPropiedad() + "\\" + imagenFileName.get(i);
                 try {
                     FileUtils.copyFile(cadaImagen, new File(directorio, imagenFileName.get(i)));

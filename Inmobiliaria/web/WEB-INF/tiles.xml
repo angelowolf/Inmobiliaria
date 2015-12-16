@@ -7,6 +7,10 @@
         <put-attribute name="title" value="" />
         <put-attribute name="body" value="" /> 
     </definition>
+    <definition name="layoutSitio" template="/LayoutSitio.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="body" value="" /> 
+    </definition>
     <!--Servicios-->
     <definition name="/Servicio/AltaModificacion.tiles" extends="baseLayout">
         <put-attribute name="title" value="Formulario Servicios" />
@@ -29,7 +33,7 @@
         <put-attribute name="title" value="Propiedads" />
         <put-attribute name="body" value="/Propiedad/Todos.jsp" />
     </definition>  
-    <definition name="/Propiedad/Ver.tiles" extends="baseLayout">
+    <definition name="/Propiedad/Ver.tiles" extends="layoutSitio">
         <put-attribute name="title" value="Propiedad" />
         <put-attribute name="body" value="/Propiedad/Ver.jsp" />
     </definition>  

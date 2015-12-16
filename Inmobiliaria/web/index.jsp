@@ -1,4 +1,3 @@
-<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
 <%@taglib uri="/struts-tags" prefix="s"%>
 <%@taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>

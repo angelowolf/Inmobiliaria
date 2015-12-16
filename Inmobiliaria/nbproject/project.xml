@@ -16,6 +16,13 @@
                 </library>
                 <library dirs="200">
                     <file>${libs.DisplayTag.classpath}</file>
+                </library>
+                <library dirs="200">
+                    <file>${libs.displaytag.classpath}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${libs.struts2xml.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
@@ -28,7 +35,6 @@
                 </library>
                 <library dirs="200">
                     <file>${libs.struts2-xml.classpath}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${libs.commons-dbcp.classpath}</file>
