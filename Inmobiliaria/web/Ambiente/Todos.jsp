@@ -7,20 +7,20 @@
     <s:actionerror theme="bootstrap"/>
     <fieldset>
         <legend>
-            Servicios
+            Ambientes
         </legend>
     </fieldset>  
     <div class=" col-md-12">
-        <display:table name="servicioLista" pagesize="10" requestURI="${listar}" uid="row">
-            <display:column property="idServicio" title="Numero Servicio"/>
+        <display:table name="ambienteLista" pagesize="10" requestURI="${listar}" uid="row">
+            <display:column property="idAmbiente" title="Numero Ambiente"/>
             <display:column sortable="true" property="nombre" title="Nombre"/>
             <display:column title="Funciones">
                 <s:form action="editar" id="editURL" style="display:inline-block;">
-                    <s:hidden name="idServicio" value="%{#attr.row.idServicio}"/>
+                    <s:hidden name="idAmbiente" value="%{#attr.row.idAmbiente}"/>
                     <s:submit value="Editar" action="%{editURL}" cssClass="btn btn-info"/>
                 </s:form>
                 <s:form action="eliminar" id="deleteURL" style="display:inline-block;">
-                    <s:hidden name="idServicio" value="%{#attr.row.idServicio}"/>
+                    <s:hidden name="idAmbiente" value="%{#attr.row.idAmbiente}"/>
                     <s:submit value="Eliminar" action="%{deleteURL}" cssClass="btn btn-danger"/>
                 </s:form>
             </display:column>

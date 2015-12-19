@@ -5,9 +5,10 @@
  */
 package Persistencia.DAO.Implementacion;
 
-import Persistencia.DAO.Interface.IImagenPropiedad;
+import Persistencia.DAO.Interface.IAmbiente;
 import Persistencia.DAO.Util.GenericDAO;
-import Persistencia.Modelo.ImagenPropiedad;
+import Persistencia.Modelo.Ambiente;
+import Persistencia.Modelo.Servicio;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
@@ -17,43 +18,46 @@ import org.hibernate.Transaction;
  *
  * @author Angelo
  */
-public class ImagenPropiedadDAO extends GenericDAO<ImagenPropiedad, Integer> implements IImagenPropiedad {
+public class AmbienteDAO extends GenericDAO<Ambiente, Integer> implements IAmbiente {
 
     @Override
-    public List<ImagenPropiedad> listar() {
+    public List<Ambiente> listar() {
         Session session = getHibernateTemplate();
-        List<ImagenPropiedad> objetos = new ArrayList();
+        List<Ambiente> objetos = new ArrayList<Ambiente>();
         Transaction tx = null;
         try {
 
             //   tx = session.beginTransaction();
-            objetos = session.createQuery("from ImagenPropiedad").list();
+            objetos = session.createQuery("from Ambiente").list();
             //   tx.commit();
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
-
         return objetos;
     }
 
-    public List<ImagenPropiedad> listar(int idPropiedad) {
+    public List<Ambiente> buscar(String nombre) {
         Session session = getHibernateTemplate();
-        List<ImagenPropiedad> objetos = new ArrayList<ImagenPropiedad>();
+        List<Ambiente> objetos = new ArrayList<Ambiente>();
         try {
-            String sql = "from ImagenPropiedad where id_propiedad = :idPropiedad";
-            objetos = session.createQuery(sql).setParameter("idPropiedad", idPropiedad).list();
+            String sql = "from Ambiente where nombre = :nombre";
+            objetos = session.createQuery(sql).setParameter("nombre", nombre).list();
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
         return objetos;
     }
 
-    public void eliminarTodos(int id) {
+    public List<Ambiente> ambienteEnUso(int id) {
+
         Session session = getHibernateTemplate();
+        List<Ambiente> objetos = new ArrayList<Ambiente>();
         try {
-            session.createSQLQuery("delete from ImagenPropiedad where id_propiedad = :id").setParameter("id", id).executeUpdate();
+            String sql = "select * from Ambiente s inner join ambientes_propiedades sp ON s.id_ambiente = sp.id_ambiente WHERE s.id_ambiente LIKE :id ";
+            objetos = session.createSQLQuery(sql).addEntity(Servicio.class).setParameter("id", id).list();
         } catch (RuntimeException e) {
             e.printStackTrace();
-        }}
-
+        }
+        return objetos;
+    }
 }

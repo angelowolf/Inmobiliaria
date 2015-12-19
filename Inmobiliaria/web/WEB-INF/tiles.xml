@@ -20,6 +20,15 @@
         <put-attribute name="title" value="Servicios" />
         <put-attribute name="body" value="/Servicio/Todos.jsp" />
     </definition>
+      <!--Ambientes-->
+    <definition name="/Ambiente/AltaModificacion.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Formulario Ambientes" />
+        <put-attribute name="body" value="/Ambiente/AltaModificacion.jsp" />
+    </definition>
+    <definition name="/Ambiente/Todos.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Ambientes" />
+        <put-attribute name="body" value="/Ambiente/Todos.jsp" />
+    </definition>
     <!--Propiedades-->
     <definition name="/Propiedad/Alta.tiles" extends="baseLayout">
         <put-attribute name="title" value="Alta Propiedad" />

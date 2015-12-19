@@ -5,9 +5,11 @@
  */
 package Acciones;
 
+import Controlador.ControladorAmbiente;
 import Controlador.ControladorImagenPropiedad;
 import Controlador.ControladorPropiedad;
 import Controlador.ControladorServicio;
+import Persistencia.Modelo.Ambiente;
 import Persistencia.Modelo.ImagenPropiedad;
 import Persistencia.Modelo.Propiedad;
 import Persistencia.Modelo.Servicio;
@@ -32,17 +34,26 @@ import org.apache.struts2.ServletActionContext;
  */
 public class PropiedadAction extends ActionSupport {
 
+    private static final String STORAGE_PATH = System.getenv("OPENSHIFT_DATA_DIR") == null ? "D:/imagenes/tmp/" : System.getenv("OPENSHIFT_DATA_DIR");
     private Propiedad propiedad = new Propiedad();
-    private List<Propiedad> propiedadLista = new ArrayList<>();
+    private List<Propiedad> propiedadLista = new ArrayList<Propiedad>();
     private final ControladorPropiedad controladorPropiedad = new ControladorPropiedad();
     private final ControladorServicio controladorServicio = new ControladorServicio();
+    private final ControladorAmbiente controladorAmbiente = new ControladorAmbiente();
     private final ControladorImagenPropiedad controladorImagenPropiedad = new ControladorImagenPropiedad();
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
     private List<File> imagen;
     private List<String> imagenFileName;
     private List<String> imagenContentType;
     private String[] serviciosElegidos;
+    private String[] ambientesElegidos;
     private String[] imagenesElegidos;
+    private List<ImagenPropiedad> todosImagenes = new ArrayList<ImagenPropiedad>();
+    private List<String> imagenesDefault = new ArrayList<String>();
+    private List<Servicio> todosServicios = new ArrayList<Servicio>();
+    private List<String> serviciosDefault = new ArrayList<String>();
+    private List<Ambiente> todosAmbientes = new ArrayList<Ambiente>();
+    private List<String> ambientesDefault = new ArrayList<String>();
 
     private boolean validar() {
         boolean flag = true;
@@ -86,8 +97,10 @@ public class PropiedadAction extends ActionSupport {
     }
 
     public String guardar() {
-        this.cargarServicios();
+//        this.cargarServicios();
         if (!validarGuardar()) {
+            this.cargarServiciosINPUT();
+            this.cargarAmbientesINPUT();
             return INPUT;
         }
         //Agrego los servicios elegidos a la propiedad
@@ -99,18 +112,27 @@ public class PropiedadAction extends ActionSupport {
             }
         }
 
-        String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
-        ruta += "\\" + propiedad.getCodigoPropiedad();
+        //Agrego los ambientes elegidos a la propiedad
+        if (ambientesElegidos != null) {
+            for (String ambientesElegido : ambientesElegidos) {
+                int id = Integer.parseInt(ambientesElegido);
+                Ambiente a = controladorAmbiente.getOne(id);
+                propiedad.addAmbiente(a);
+            }
+        }
 
+//        String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
+//        ruta += "\\" + propiedad.getCodigoPropiedad();
+        String ruta = STORAGE_PATH + "ImagenPropiedad\\" + propiedad.getCodigoPropiedad();
+        sesion.put("ruta", ruta);
         File directorio = new File(ruta);
         if (!directorio.exists()) {
             directorio.mkdirs();
         }
         for (int i = 0; i < imagen.size(); i++) {
             File cadaImagen = imagen.get(i);
-            System.out.println(propiedad.getCodigoPropiedad());
-            System.out.println(imagenFileName.get(i));
-            String rutaBD = "ImagenPropiedad\\" + propiedad.getCodigoPropiedad() + "\\" + imagenFileName.get(i);
+//            String rutaBD = "ImagenPropiedad\\" + propiedad.getCodigoPropiedad() + "\\" + imagenFileName.get(i);
+            String rutaBD = ruta + "\\" + imagenFileName.get(i);
             try {
                 FileUtils.copyFile(cadaImagen, new File(directorio, imagenFileName.get(i)));
             } catch (IOException ex) {
@@ -121,21 +143,21 @@ public class PropiedadAction extends ActionSupport {
             imagenPropiedad.setRuta(rutaBD);
             propiedad.addImagenPropiedad(imagenPropiedad);
         }
-
-        controladorPropiedad.guardar(propiedad);;
+        int idPropiedad = controladorPropiedad.guardar(propiedad);
         sesion.put("mensaje", "Propiedad Agregada.");
         return SUCCESS;
     }
 
     public String modificar() {
         if (!validarModificar()) {
-            cargarServiciosINPUT();
-            cargasImagenesINPUT();
+            this.cargarServiciosINPUT();
+            this.cargasImagenesINPUT();
+            this.cargarAmbientesINPUT();
             return INPUT;
         }
 
         //OBTENGO TODAS LAS IMAGENES QUE POSEE LA PROPIEDAD
-        Map<Integer, ImagenPropiedad> mapImagenes = new HashMap<>();
+        Map<Integer, ImagenPropiedad> mapImagenes = new HashMap<Integer, ImagenPropiedad>();
         todosImagenes = controladorImagenPropiedad.getTodos(propiedad.getIdPropiedad());
         for (ImagenPropiedad i : todosImagenes) {
             mapImagenes.put(i.getIdImagenPropiedad(), i);
@@ -144,7 +166,7 @@ public class PropiedadAction extends ActionSupport {
         boolean cambioCodigo = false;
         int codigoOriginal = 0;
         int codigoNuevo = 0;
-        List<ImagenPropiedad> imagenesDeLaPropiedad = new ArrayList<>();
+        List<ImagenPropiedad> imagenesDeLaPropiedad = new ArrayList<ImagenPropiedad>();
 
         //SE TIENEN Q ELIMINAR TODAS LAS IMAGENES DE LA BD...      
         if (imagenesElegidos != null) {
@@ -175,47 +197,50 @@ public class PropiedadAction extends ActionSupport {
 
         }
         propiedad.setImagenes(imagenesDeLaPropiedad);
-
         //PROCEDO A ELIMINAR TODAS LAS IMAGENES QUE EL USUARIO NO "SELECCIONO"
         for (Map.Entry<Integer, ImagenPropiedad> cadaImagen : mapImagenes.entrySet()) {
             ImagenPropiedad imagenPropiedad = cadaImagen.getValue();
-            String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
-            String pathImagen = imagenPropiedad.getRuta().substring(16);
-            ruta += "\\" + pathImagen;
+//            String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
+//            String ruta = STORAGE_PATH + "ImagenPropiedad\\";
+//            String pathImagen = imagenPropiedad.getRuta().substring(16);
+//            ruta += "\\" + pathImagen;
+            String ruta = imagenPropiedad.getRuta();
             controladorImagenPropiedad.eliminarImagen(ruta);
         }
         if (cambioCodigo) {
-            String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
+//            String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
+            String ruta = STORAGE_PATH + "ImagenPropiedad";
             String rutaOriginal = ruta + "\\" + codigoOriginal;
             String rutaNueva = ruta + "\\" + codigoNuevo;
             controladorImagenPropiedad.renombrarCarpeta(rutaOriginal, rutaNueva);
         }
         //AGREGO LAS NUEVAS IMAGENES
 
-        String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
-        ruta += "\\" + propiedad.getCodigoPropiedad();
-
+//        String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
+//        String ruta = STORAGE_PATH + "ImagenPropiedad\\" + propiedad.getCodigoPropiedad();
+//        ruta += "\\" + propiedad.getCodigoPropiedad();
+        String ruta = STORAGE_PATH + "ImagenPropiedad\\" + propiedad.getCodigoPropiedad();
+        sesion.put("ruta", ruta);
         File directorio = new File(ruta);
         if (!directorio.exists()) {
             directorio.mkdirs();
         }
-        if (imagen != null) {
-            for (int i = 0; i < imagen.size(); i++) {
-                File cadaImagen = imagen.get(i);
-                String rutaBD = "ImagenPropiedad\\" + propiedad.getCodigoPropiedad() + "\\" + imagenFileName.get(i);
-                try {
-                    FileUtils.copyFile(cadaImagen, new File(directorio, imagenFileName.get(i)));
-                } catch (IOException ex) {
-                    Logger.getLogger(PropiedadAction.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                ImagenPropiedad imagenPropiedad = new ImagenPropiedad();
-                imagenPropiedad.setRuta(rutaBD);
-                propiedad.addImagenPropiedad(imagenPropiedad);
+        for (int i = 0; i < imagen.size(); i++) {
+            File cadaImagen = imagen.get(i);
+//            String rutaBD = "ImagenPropiedad\\" + propiedad.getCodigoPropiedad() + "\\" + imagenFileName.get(i);
+            String rutaBD = ruta + "\\" + imagenFileName.get(i);
+            try {
+                FileUtils.copyFile(cadaImagen, new File(directorio, imagenFileName.get(i)));
+            } catch (IOException ex) {
+                Logger.getLogger(PropiedadAction.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+            ImagenPropiedad imagenPropiedad = new ImagenPropiedad();
+            imagenPropiedad.setRuta(rutaBD);
+            propiedad.addImagenPropiedad(imagenPropiedad);
         }
         //GUARDO LOS NUEVOS SERVICIOS ELEGIDOS A LA PROPIEDAD
-        List<Servicio> temp = new ArrayList<>();
+        List<Servicio> temp = new ArrayList<Servicio>();
         if (serviciosElegidos != null) {
             for (String cadaServicioElegido : serviciosElegidos) {
                 int id = Integer.parseInt(cadaServicioElegido);
@@ -226,6 +251,19 @@ public class PropiedadAction extends ActionSupport {
         } else {
             propiedad.setServicios(temp);
         }
+        //GUARDO LOS NUEVOS AMBIENTES ELEGIDOS A LA PROPIEDAD
+        List<Ambiente> temp2 = new ArrayList<Ambiente>();
+        if (ambientesElegidos != null) {
+            for (String cadaAmbienteElegido : ambientesElegidos) {
+                int id = Integer.parseInt(cadaAmbienteElegido);
+                Ambiente a = controladorAmbiente.getOne(id);
+                temp2.add(a);
+            }
+            propiedad.setAmbientes(temp2);
+        } else {
+            propiedad.setAmbientes(temp2);
+        }
+
         //ACTUALIZO LOS CAMBIOS
         controladorPropiedad.actualizar(propiedad);
         sesion.put("mensaje", "Propiedad Modificada.");
@@ -236,6 +274,7 @@ public class PropiedadAction extends ActionSupport {
         propiedadLista = controladorPropiedad.getTodos();
         String mensaje = (String) sesion.get("mensaje");
         addActionMessage(mensaje);
+        addActionMessage((String) sesion.get("ruta"));
         sesion.put("mensaje", "");
         try {
             for (Propiedad propiedadLista1 : propiedadLista) {
@@ -263,20 +302,19 @@ public class PropiedadAction extends ActionSupport {
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         propiedad = controladorPropiedad.getOne(Integer.parseInt(request.getParameter("idPropiedad")));
         this.cargarServicios();
-        this.cargarSeleccionados();
+        this.cargarAmbientes();
+        this.cargarServiciosSeleccionados();
+        this.cargarAmbientesSeleccionados();
         this.cargarImagenesSeleccionadas();
         todosImagenes = propiedad.getImagenes();
         sesion.put("propiedadOriginal", propiedad);
         return SUCCESS;
 
     }
-    private List<ImagenPropiedad> todosImagenes = new ArrayList<>();
-    private List<Servicio> todosServicios = new ArrayList<>();
-    private List<String> serviciosDefault = new ArrayList<>();
-    private List<String> imagenesDefault = new ArrayList<>();
 
     public String nuevo() {
         this.cargarServicios();
+        this.cargarAmbientes();
         return "nuevo";
     }
 
@@ -284,7 +322,18 @@ public class PropiedadAction extends ActionSupport {
         todosServicios = controladorServicio.getTodos();
     }
 
-    private void cargarSeleccionados() {
+    private void cargarAmbientes() {
+        todosAmbientes = controladorAmbiente.getTodos();
+    }
+
+    private void cargarAmbientesSeleccionados() {
+        List<Ambiente> ambientesDefault2 = propiedad.getAmbientes();
+        for (Ambiente a : ambientesDefault2) {
+            ambientesDefault.add("" + a.getIdAmbiente());
+        }
+    }
+
+    private void cargarServiciosSeleccionados() {
         List<Servicio> serviciosDefault2 = propiedad.getServicios();
         for (Servicio s : serviciosDefault2) {
             serviciosDefault.add("" + s.getIdServicio());
@@ -295,6 +344,34 @@ public class PropiedadAction extends ActionSupport {
         List<ImagenPropiedad> imagenlista = propiedad.getImagenes();
         for (ImagenPropiedad s : imagenlista) {
             imagenesDefault.add("" + s.getIdImagenPropiedad());
+        }
+    }
+
+    private void cargarServiciosINPUT() {
+        this.cargarServicios();
+        if (serviciosElegidos != null) {
+            for (String cadaServicioElegido : serviciosElegidos) {
+                int id = Integer.parseInt(cadaServicioElegido);
+                serviciosDefault.add("" + id);
+            }
+        }
+    }
+
+    private void cargasImagenesINPUT() {
+        Propiedad p = controladorPropiedad.getOne(propiedad.getIdPropiedad());
+        todosImagenes = p.getImagenes();
+        for (ImagenPropiedad s : todosImagenes) {
+            imagenesDefault.add("" + s.getIdImagenPropiedad());
+        }
+    }
+
+    private void cargarAmbientesINPUT() {
+        this.cargarAmbientes();
+        if (ambientesElegidos != null) {
+            for (String cadaAmbienteElegido : ambientesElegidos) {
+                int id = Integer.parseInt(cadaAmbienteElegido);
+                ambientesDefault.add("" + id);
+            }
         }
     }
 
@@ -366,28 +443,27 @@ public class PropiedadAction extends ActionSupport {
         this.imagenContentType = imagenContentType;
     }
 
-    private void cargarServiciosINPUT() {
-        this.cargarServicios();
-        for (String cadaServicioElegido : serviciosElegidos) {
-            int id = Integer.parseInt(cadaServicioElegido);
-            serviciosDefault.add("" + id);
-        }
+    public String[] getAmbientesElegidos() {
+        return ambientesElegidos;
     }
 
-    private void cargasImagenesINPUT() {
-        Propiedad p = controladorPropiedad.getOne(propiedad.getIdPropiedad());
-        todosImagenes = p.getImagenes();
-        for (ImagenPropiedad s : todosImagenes) {
-            imagenesDefault.add("" + s.getIdImagenPropiedad());
-        }
-//        if (imagenesElegidos.length == 1 && imagenesElegidos[0].equals("false")) {
-//            System.out.println(imagenesElegidos[0]);
-//
-//        } else {
-//            for (String cadaImagenElegida : imagenesElegidos) {
-//                int id = Integer.parseInt(cadaImagenElegida);
-//                imagenesDefault.add("" + id);
-//            }
-//        }
+    public void setAmbientesElegidos(String[] ambientesElegidos) {
+        this.ambientesElegidos = ambientesElegidos;
+    }
+
+    public List<Ambiente> getTodosAmbientes() {
+        return todosAmbientes;
+    }
+
+    public void setTodosAmbientes(List<Ambiente> todosAmbientes) {
+        this.todosAmbientes = todosAmbientes;
+    }
+
+    public List<String> getAmbientesDefault() {
+        return ambientesDefault;
+    }
+
+    public void setAmbientesDefault(List<String> ambientesDefault) {
+        this.ambientesDefault = ambientesDefault;
     }
 }

@@ -20,10 +20,12 @@
         <link rel="stylesheet" href="/Inmobiliaria/css/estilos.css" />
     </head>
     <body>
-        <div class="container-fluid">
-           
-                <tiles:insertAttribute name="body" />
-            
+        <div id="page-content-wrapper">
+            <div class="container">
+                <div class="row">
+                    <tiles:insertAttribute name="body" />
+                </div>
+            </div>
         </div>
         <script src="/Inmobiliaria/js/jquery-2.1.1.min.js"></script>
         <script src="/Inmobiliaria/js/jquery-ui.min.js"></script>

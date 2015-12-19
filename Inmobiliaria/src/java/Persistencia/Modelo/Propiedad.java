@@ -15,19 +15,47 @@ import java.util.List;
 public class Propiedad {
 
     private int idPropiedad;
-    private int codigoPropiedad;
-    private String nombre;
+    private int codigoPropiedad, habitacion;
+    private float terreno, edificado;
+    private String nombre, detalle;
+    private List<Ambiente> ambientes;
     private List<Servicio> servicios;
-    private List<ImagenPropiedad> imagenes = new ArrayList<>();
+    private List<ImagenPropiedad> imagenes = new ArrayList<ImagenPropiedad>();
     private ImagenPropiedad imagenDefault;
 
     public Propiedad() {
     }
 
-    public Propiedad(int idPropiedad, int codigoPropiedad, String nombre) {
-        this.idPropiedad = idPropiedad;
-        this.codigoPropiedad = codigoPropiedad;
-        this.nombre = nombre;
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
+
+    public int getHabitacion() {
+        return habitacion;
+    }
+
+    public void setHabitacion(int habitacion) {
+        this.habitacion = habitacion;
+    }
+
+    public float getTerreno() {
+        return terreno;
+    }
+
+    public void setTerreno(float terreno) {
+        this.terreno = terreno;
+    }
+
+    public float getEdificado() {
+        return edificado;
+    }
+
+    public void setEdificado(float edificado) {
+        this.edificado = edificado;
     }
 
     public ImagenPropiedad getImagenDefault() {
@@ -70,6 +98,14 @@ public class Propiedad {
         this.servicios = servicios;
     }
 
+    public List<Ambiente> getAmbientes() {
+        return ambientes;
+    }
+
+    public void setAmbientes(List<Ambiente> ambientes) {
+        this.ambientes = ambientes;
+    }
+
     public List<ImagenPropiedad> getImagenes() {
         return imagenes;
     }
@@ -83,8 +119,17 @@ public class Propiedad {
         if (servicios != null) {
             this.servicios.add(s);
         } else {
-            servicios = new ArrayList<>();
+            servicios = new ArrayList<Servicio>();
             this.servicios.add(s);
+        }
+    }
+
+    public void addAmbiente(Ambiente a) {
+        if (ambientes != null) {
+            this.ambientes.add(a);
+        } else {
+            ambientes = new ArrayList<Ambiente>();
+            this.ambientes.add(a);
         }
     }
 
@@ -92,7 +137,7 @@ public class Propiedad {
         if (imagenes != null) {
             this.imagenes.add(ip);
         } else {
-            imagenes = new ArrayList<>();
+            imagenes = new ArrayList<ImagenPropiedad>();
             this.imagenes.add(ip);
         }
     }

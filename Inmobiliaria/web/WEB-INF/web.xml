@@ -12,16 +12,15 @@
         <error-code>404</error-code>
         <location>/404.jsp</location>
     </error-page>
-    
     <!--EL FILTRO DE HIBERNATE ANTES QUE EL DE STUTS2!!!!-->
-    <filter>  
-        <filter-name>HibernateFilter</filter-name>  
-        <filter-class>Filtro.HibernateSessionRequestFilter</filter-class>  
-    </filter>    
-    <filter-mapping>  
-        <filter-name>HibernateFilter</filter-name>  
-        <url-pattern>/*</url-pattern>  
-    </filter-mapping> 
+    <filter>
+        <filter-name>HibernateFilter</filter-name>
+        <filter-class>Filtro.HibernateSessionRequestFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HibernateFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <filter>
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -40,5 +39,5 @@
     <context-param>
         <param-name>tilesDefinitions</param-name>
         <param-value>/WEB-INF/tiles.xml</param-value>
-    </context-param>  
+    </context-param>
 </web-app>

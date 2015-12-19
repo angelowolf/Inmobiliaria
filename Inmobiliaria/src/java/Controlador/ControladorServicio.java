@@ -65,4 +65,8 @@ public class ControladorServicio {
         return servicioDAO.buscar(serviciosElegido).get(0);
     }
 
+    public boolean servicioEnUso(int id) {
+        return !servicioDAO.servicioEnUso(id).isEmpty();
+    }
+
 }

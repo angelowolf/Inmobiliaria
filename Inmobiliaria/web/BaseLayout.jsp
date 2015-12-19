@@ -48,6 +48,13 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-flash  fa-stack-1x "></i></span> Ambientes</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a href="<s:url action="listar" namespace="/Ambiente"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
+                        <li><a href="<s:url action="nuevo" namespace="/Ambiente"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-plus fa-stack-1x "></i></span>Nuevo</a></li>
+                    </ul>
+                </li>
+                <li>
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cogs fa-stack-1x "></i></span> Propiedades</a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a href="<s:url action="listar" namespace="/Propiedad"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
@@ -79,6 +86,5 @@
     <script src="/Inmobiliaria/js/asd.js"></script>   
     <script src="/Inmobiliaria/js/es.js"></script>   
     <script src="/Inmobiliaria/js/AddFile.js"></script>   
-
 </body>
 </html>

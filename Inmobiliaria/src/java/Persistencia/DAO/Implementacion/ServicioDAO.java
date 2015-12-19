@@ -22,7 +22,7 @@ public class ServicioDAO extends GenericDAO<Servicio, Integer> implements IServi
     @Override
     public List<Servicio> listar() {
         Session session = getHibernateTemplate();
-        List<Servicio> objetos = new ArrayList();
+        List<Servicio> objetos = new ArrayList<Servicio>();
         Transaction tx = null;
         try {
 
@@ -38,10 +38,23 @@ public class ServicioDAO extends GenericDAO<Servicio, Integer> implements IServi
 
     public List<Servicio> buscar(String nombre) {
         Session session = getHibernateTemplate();
-        List<Servicio> objetos = new ArrayList<>();
+        List<Servicio> objetos = new ArrayList<Servicio>();
         try {
             String sql = "from Servicio where nombre = :nombre";
             objetos = session.createQuery(sql).setParameter("nombre", nombre).list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return objetos;
+    }
+
+    public List<Servicio> servicioEnUso(int id) {
+
+        Session session = getHibernateTemplate();
+        List<Servicio> objetos = new ArrayList<Servicio>();
+        try {
+            String sql = "select * from Servicio s inner join servicios_propiedades sp ON s.id_servicio = sp.id_servicio WHERE s.id_servicio LIKE :id ";
+            objetos = session.createSQLQuery(sql).addEntity(Servicio.class).setParameter("id", id).list();
         } catch (RuntimeException e) {
             e.printStackTrace();
         }

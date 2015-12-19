@@ -29,9 +29,9 @@ public class GenericDAO<Entity, K extends Serializable> implements IGenericDAO<E
     }
 
     @Override
-    public void guardar(Entity t) {
+    public Integer guardar(Entity t) {
         try {
-            getHibernateTemplate().save(t);
+            return (Integer) getHibernateTemplate().save(t);
         } catch (HibernateException e) {
             throw new HibernateException(e);
         }

@@ -10,4 +10,7 @@
     <!--<constant name="struts.multipart.maxSize" value="52428800" />-->
     <include file="struts-servicio.xml"></include>
     <include file="struts-propiedad.xml"></include>
+    <include file="struts-ambiente.xml"></include>
+    <include file="struts-default.xml"></include>
+    <include file="struts-error.xml"></include>
 </struts>

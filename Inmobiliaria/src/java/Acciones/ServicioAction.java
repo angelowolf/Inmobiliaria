@@ -25,7 +25,7 @@ import org.apache.struts2.ServletActionContext;
 public class ServicioAction extends ActionSupport implements ModelDriven<Servicio> {
 
     private Servicio servicio = new Servicio();
-    private List<Servicio> servicioLista = new ArrayList<>();
+    private List<Servicio> servicioLista = new ArrayList<Servicio>();
     private final Controlador.ControladorServicio controladorServicio = new ControladorServicio();
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
 
@@ -39,11 +39,14 @@ public class ServicioAction extends ActionSupport implements ModelDriven<Servici
         if (servicio.getNombre().trim().isEmpty()) {
             addFieldError("servicio.nombre", "Ingrese un nombre.");
             flag = false;
+
+        } else {
+            if (controladorServicio.existe(servicio)) {
+                addFieldError("servicio.nombre", "El servicio ya existe!.");
+                flag = false;
+            }
         }
-        if (controladorServicio.existe(servicio)) {
-            addFieldError("servicio.nombre", "El servicio ya existe!.");
-            flag = false;
-        }
+
         return flag;
     }
 
@@ -65,14 +68,23 @@ public class ServicioAction extends ActionSupport implements ModelDriven<Servici
         servicioLista = controladorServicio.getTodos();
         String mensaje = (String) sesion.get("mensaje");
         addActionMessage(mensaje);
+        String alerta = (String) sesion.get("alerta");
+        addActionError(alerta);
         sesion.put("mensaje", "");
+        sesion.put("alerta", "");
         return SUCCESS;
     }
 
     public String eliminar() {
+
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        controladorServicio.eliminar(Integer.parseInt(request.getParameter("idServicio")));
-        sesion.put("mensaje", "Servicio Eliminado.");
+        int id = Integer.parseInt(request.getParameter("idServicio"));
+        if (controladorServicio.servicioEnUso(id)) {
+            sesion.put("alerta", "El servicio esta siendo utilizado por algunas propiedades, debe eliminar esas propiedades para poder eliminar este servicio!");
+        } else {
+            controladorServicio.eliminar(id);
+            sesion.put("mensaje", "Servicio Eliminado.");
+        }
         return SUCCESS;
     }
 

@@ -7,14 +7,19 @@
 
 $(document).ready(function ()
 {
-    $("#btnAgregar").click(function ()
+    $("#btnAgregar").click(function (event)
     {
+        event.preventDefault();
         var num = $("input[type=file]").length;
         var numeroSiguiente = num + 1;
         var elementoNuevo = $("#imagen" + num).clone().attr('id', 'imagen' + numeroSiguiente).attr("name", "imagen");
         var etiquetaNueva = $("label[for=imagen" + num + "]").clone().attr("for", "imagen" + numeroSiguiente).text("Imagen " + numeroSiguiente + ": ");
         $("#imagen" + num).after(elementoNuevo);
-        elementoNuevo.before(etiquetaNueva);
-        etiquetaNueva.before("<br />");
+        var imagenes = $("#imagenes");
+        imagenes.append("<div class='form-group'></div>");
+        var ultimoForm = imagenes.find('.form-group:last');
+        ultimoForm.append(etiquetaNueva);
+        ultimoForm.append('<div class="col-sm-9 controls"></div>');
+        ultimoForm.find('.controls').append(elementoNuevo);
     });
 });

@@ -7,11 +7,20 @@
             <generator class="identity"/>
         </id>
         <property column="nombre" length="50" name="nombre" type="string"/>
+        <property column="detalle" length="1000" name="detalle" type="string"/>
         <property column="codigoPropiedad" name="codigoPropiedad"/>
+        <property column="habitacion" name="habitacion"/>
+        <property column="terreno" name="terreno"/>
+        <property column="edificado" name="edificado"/>
         <list  name="servicios" table="servicios_propiedades">
             <key column="id_propiedad"/>
             <index column="ORDEN"/>
             <many-to-many class="Persistencia.Modelo.Servicio" column="id_servicio"/>
+        </list>
+        <list  name="ambientes" table="ambientes_propiedades">
+            <key column="id_propiedad"/>
+            <index column="ORDEN"/>
+            <many-to-many class="Persistencia.Modelo.Ambiente" column="id_ambiente"/>
         </list>
         <list cascade="all-delete-orphan"  name="imagenes" table="imagenPropiedad">
             <key column="id_propiedad"/>

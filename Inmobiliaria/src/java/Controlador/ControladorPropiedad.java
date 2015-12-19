@@ -26,9 +26,9 @@ public class ControladorPropiedad {
         propiedadDAO = new PropiedadDAO();
     }
 
-    public void guardar(Propiedad o) {
+    public int guardar(Propiedad o) {
         o.setNombre(Soporte.mayusculaPrimeraLetra(o.getNombre()));
-        propiedadDAO.guardar(o);
+        return propiedadDAO.guardar(o);
     }
 
     public void actualizar(Propiedad o) {

@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public interface IGenericDAO<Entity, PK extends Serializable> {
 
-    void guardar(Entity t);
+    Integer guardar(Entity t);
 
     void actualizar(Entity t);
 
