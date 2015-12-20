@@ -35,6 +35,9 @@
                     <s:textfield name="propiedad.habitacion" label="Habitaciones" placeholder="Ingrese la cantidad de habitaciones" />
                 </div>
                 <div class="col-md-8 col-md-offset-2 input">
+                    <s:textfield name="propiedad.baño" label="Baños" placeholder="Ingrese la cantidad de baños" />
+                </div>
+                <div class="col-md-8 col-md-offset-2 input">
                     <s:textfield name="propiedad.terreno" label="Terreno" placeholder="Ingrese la superficie del terreno" />
                 </div>
                 <div class="col-md-8 col-md-offset-2 input">
@@ -46,7 +49,7 @@
                 <div class="col-md-8 col-md-offset-2 input">
                     <s:checkboxlist label="Servicios" value="serviciosDefault" list="todosServicios" name="serviciosElegidos" listKey="idServicio" listValue="nombre"/>
                 </div> 
-                 <div class="col-md-8 col-md-offset-2 input">
+                <div class="col-md-8 col-md-offset-2 input">
                     <s:checkboxlist label="Ambientes" value="ambientesDefault" list="todosAmbientes" name="ambientesElegidos" listKey="idAmbiente" listValue="nombre"/>
                 </div> 
 
@@ -57,10 +60,8 @@
                             <div class="col-md-8 col-md-offset-2">
                                 <div class="form-group">
                                     <div class="form-inline">
-                                        <s:checkbox cssClass="" name="imagenesElegidos" value="true" fieldValue="%{idImagenPropiedad}" label="Guardar" id="%{#stat.count}">
-                                            <div class="form-group">
-                                                <img width="140" height="79" src="/Inmobiliaria/Imagen?idImagen=<s:url value="%{#imagen.idImagenPropiedad}"/>" />
-                                            </div>
+                                        <img width="140" height="79" src="/Inmobiliaria/Imagen?idImagen=<s:url value="%{#imagen.idImagenPropiedad}"/>" />
+                                        <s:checkbox name="imagenesElegidos" value="true" fieldValue="%{idImagenPropiedad}" label="Guardar" id="%{#stat.count}">
                                         </s:checkbox>
                                     </div>
                                 </div>
@@ -68,20 +69,17 @@
                         </s:iterator>
                     </div>
                 </div>
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-8 col-md-offset-2" id="imagenes">
                     <h3 class="text-center">Imagenes Nuevas</h3>
-                    <!--            <s:label for="imagen1" value="Imagen 1: "/>
-                    <s:file id="imagen1" name="imagen"  /> <br /> -->
-                    <s:file id="imagen1" name="imagen"  label="Imagen 1: "/> <br /> 
+                    <s:file id="imagen1" name="imagen"  label="Imagen 1: "/>
                 </div>
-
+                <div class="col-md-3 col-md-offset-3">
+                    <button id="btnAgregar" class="btn btn-warning ">Agregar Imagen</button>
+                </div>
                 <%--<s:file name="imagen" label="Imagen"/>--%>
                 <s:submit value="Confirmar" cssClass="btn btn-success col-md-offset-9 col-md-3"/>
-                <%--</s:push>--%>            
+                <%--</s:push>--%>         
             </s:form>
-            <div class="form-group col-md-offset-3">
-                <button id="btnAgregar" class="btn btn-warning ">Agregar Imagen</button>
-            </div>
         </div>
     </div>
 </div>

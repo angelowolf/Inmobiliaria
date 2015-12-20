@@ -15,8 +15,9 @@ import java.util.List;
 public class Propiedad {
 
     private int idPropiedad;
-    private int codigoPropiedad, habitacion;
+    private int codigoPropiedad, habitacion, bano;
     private float terreno, edificado;
+    private double latitud,longitud;
     private String nombre, detalle;
     private List<Ambiente> ambientes;
     private List<Servicio> servicios;
@@ -26,8 +27,32 @@ public class Propiedad {
     public Propiedad() {
     }
 
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
+    }
+
     public String getDetalle() {
         return detalle;
+    }
+
+    public int getBano() {
+        return bano;
+    }
+
+    public void setBano(int bano) {
+        this.bano = bano;
     }
 
     public void setDetalle(String detalle) {
@@ -144,7 +169,7 @@ public class Propiedad {
 
     @Override
     public String toString() {
-        return "Propiedad{" + "idPropiedad=" + idPropiedad + ", codigoPropiedad=" + codigoPropiedad + ", nombre=" + nombre + ", servicios=" + servicios + ", imagenes=" + imagenes + '}';
+        return "Propiedad{" + "idPropiedad=" + idPropiedad + ", codigoPropiedad=" + codigoPropiedad + ", habitacion=" + habitacion + ", ba\u00f1o=" + bano + ", terreno=" + terreno + ", edificado=" + edificado + ", nombre=" + nombre + ", detalle=" + detalle + ", ambientes=" + ambientes + ", servicios=" + servicios + ", imagenes=" + imagenes + ", imagenDefault=" + imagenDefault + '}';
     }
 
 }

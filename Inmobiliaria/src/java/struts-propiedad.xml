@@ -38,6 +38,9 @@
         </action>      
         <action name="ver" method="execute" class="Acciones.VerPropiedadAction">
             <result name="success" type="tiles">/Propiedad/Ver.tiles</result>
+        </action>        
+         <action name="asd" method="execute" class="Acciones.Asd">
+            <result name="success">/test.jsp</result>
         </action>              
     </package>
 </struts>

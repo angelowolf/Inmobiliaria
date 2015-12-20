@@ -35,6 +35,8 @@
         <script src="/Inmobiliaria/js/sidebar_menu.js"></script>
         <script src="/Inmobiliaria/js/asd.js"></script>   
         <script src="/Inmobiliaria/js/es.js"></script>   
-        <script src="/Inmobiliaria/js/AddFile.js"></script>   
+        <script src="/Inmobiliaria/js/AddFile.js"></script>
+        <script src="http://maps.googleapis.com/maps/api/js"></script>
+        <script src="/Inmobiliaria/js/mapa-vista.js"></script>   
     </body>
 </html>

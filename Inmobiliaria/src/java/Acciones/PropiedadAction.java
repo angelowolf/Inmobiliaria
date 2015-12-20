@@ -65,7 +65,8 @@ public class PropiedadAction extends ActionSupport {
             addFieldError("", "Ingrese un codigo.");
             flag = false;
         }
-
+        addFieldError("", ""+propiedad.getLatitud());
+        addFieldError("", ""+propiedad.getLongitud());
         return flag;
     }
 
@@ -101,6 +102,7 @@ public class PropiedadAction extends ActionSupport {
         if (!validarGuardar()) {
             this.cargarServiciosINPUT();
             this.cargarAmbientesINPUT();
+            System.out.println(propiedad.toString());
             return INPUT;
         }
         //Agrego los servicios elegidos a la propiedad
@@ -123,7 +125,7 @@ public class PropiedadAction extends ActionSupport {
 
 //        String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
 //        ruta += "\\" + propiedad.getCodigoPropiedad();
-        String ruta = STORAGE_PATH + "ImagenPropiedad\\" + propiedad.getCodigoPropiedad();
+        String ruta = STORAGE_PATH + "ImagenPropiedad/" + propiedad.getCodigoPropiedad();
         sesion.put("ruta", ruta);
         File directorio = new File(ruta);
         if (!directorio.exists()) {
@@ -132,7 +134,7 @@ public class PropiedadAction extends ActionSupport {
         for (int i = 0; i < imagen.size(); i++) {
             File cadaImagen = imagen.get(i);
 //            String rutaBD = "ImagenPropiedad\\" + propiedad.getCodigoPropiedad() + "\\" + imagenFileName.get(i);
-            String rutaBD = ruta + "\\" + imagenFileName.get(i);
+            String rutaBD = ruta + "/" + imagenFileName.get(i);
             try {
                 FileUtils.copyFile(cadaImagen, new File(directorio, imagenFileName.get(i)));
             } catch (IOException ex) {
@@ -210,8 +212,8 @@ public class PropiedadAction extends ActionSupport {
         if (cambioCodigo) {
 //            String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
             String ruta = STORAGE_PATH + "ImagenPropiedad";
-            String rutaOriginal = ruta + "\\" + codigoOriginal;
-            String rutaNueva = ruta + "\\" + codigoNuevo;
+            String rutaOriginal = ruta + "/" + codigoOriginal;
+            String rutaNueva = ruta + "/" + codigoNuevo;
             controladorImagenPropiedad.renombrarCarpeta(rutaOriginal, rutaNueva);
         }
         //AGREGO LAS NUEVAS IMAGENES
@@ -219,25 +221,27 @@ public class PropiedadAction extends ActionSupport {
 //        String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
 //        String ruta = STORAGE_PATH + "ImagenPropiedad\\" + propiedad.getCodigoPropiedad();
 //        ruta += "\\" + propiedad.getCodigoPropiedad();
-        String ruta = STORAGE_PATH + "ImagenPropiedad\\" + propiedad.getCodigoPropiedad();
+        String ruta = STORAGE_PATH + "ImagenPropiedad/" + propiedad.getCodigoPropiedad();
         sesion.put("ruta", ruta);
         File directorio = new File(ruta);
         if (!directorio.exists()) {
             directorio.mkdirs();
         }
-        for (int i = 0; i < imagen.size(); i++) {
-            File cadaImagen = imagen.get(i);
+        if (imagen != null) {
+            for (int i = 0; i < imagen.size(); i++) {
+                File cadaImagen = imagen.get(i);
 //            String rutaBD = "ImagenPropiedad\\" + propiedad.getCodigoPropiedad() + "\\" + imagenFileName.get(i);
-            String rutaBD = ruta + "\\" + imagenFileName.get(i);
-            try {
-                FileUtils.copyFile(cadaImagen, new File(directorio, imagenFileName.get(i)));
-            } catch (IOException ex) {
-                Logger.getLogger(PropiedadAction.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                String rutaBD = ruta + "/" + imagenFileName.get(i);
+                try {
+                    FileUtils.copyFile(cadaImagen, new File(directorio, imagenFileName.get(i)));
+                } catch (IOException ex) {
+                    Logger.getLogger(PropiedadAction.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-            ImagenPropiedad imagenPropiedad = new ImagenPropiedad();
-            imagenPropiedad.setRuta(rutaBD);
-            propiedad.addImagenPropiedad(imagenPropiedad);
+                ImagenPropiedad imagenPropiedad = new ImagenPropiedad();
+                imagenPropiedad.setRuta(rutaBD);
+                propiedad.addImagenPropiedad(imagenPropiedad);
+            }
         }
         //GUARDO LOS NUEVOS SERVICIOS ELEGIDOS A LA PROPIEDAD
         List<Servicio> temp = new ArrayList<Servicio>();
@@ -274,7 +278,6 @@ public class PropiedadAction extends ActionSupport {
         propiedadLista = controladorPropiedad.getTodos();
         String mensaje = (String) sesion.get("mensaje");
         addActionMessage(mensaje);
-        addActionMessage((String) sesion.get("ruta"));
         sesion.put("mensaje", "");
         try {
             for (Propiedad propiedadLista1 : propiedadLista) {
@@ -292,7 +295,7 @@ public class PropiedadAction extends ActionSupport {
         int id = Integer.parseInt(request.getParameter("idPropiedad"));
         Propiedad p = controladorPropiedad.getOne(id);
         String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
-        ruta += "\\" + p.getCodigoPropiedad();
+        ruta += "/" + p.getCodigoPropiedad();
         controladorPropiedad.eliminar(id, ruta);
         sesion.put("mensaje", "Propiedad Eliminada.");
         return SUCCESS;

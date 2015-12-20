@@ -33,7 +33,7 @@
                     <s:hidden name="idPropiedad" value="%{#attr.row.idPropiedad}"/>
                     <s:submit value="Eliminar" action="%{deleteURL}" cssClass="btn btn-danger"/>
                 </s:form>
-                <s:form action="ver" id="verURL" style="display:inline-block;">
+                <s:form action="ver" method="get" id="verURL" style="display:inline-block;">
                     <s:hidden name="idPropiedad" value="%{#attr.row.idPropiedad}"/>
                     <s:submit value="Ver" action="%{verURL}" cssClass="btn btn-warning"/>
                 </s:form>
