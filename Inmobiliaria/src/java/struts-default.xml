@@ -5,8 +5,27 @@
 
 
 <struts>
-    <package name="default" extends="struts-default" namespace="/">       
+    <package name="default" extends="struts-default" namespace="/">     
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>  
         <action name="Imagen" class="Acciones.ImagenAction">
         </action>              
+        <action name="loadIndex" method="nuevo" class="Acciones.LinkAction">
+            <result name="nuevo" type="tiles">/Index.tiles</result>
+        </action>      
+        <action name="loadFind" method="nuevo" class="Acciones.LinkAction">
+            <result name="nuevo" type="tiles">/Buscar.tiles</result>
+        </action>      
+        <action name="loadContact" method="nuevo" class="Acciones.LinkAction">
+            <result name="nuevo" type="tiles">/Contacto.tiles</result>
+        </action>      
+        <action name="" method="nuevo" class="Acciones.LinkAction">
+            <result name="nuevo" type="tiles">/Index.tiles</result>
+        </action>      
+        <!--LOGIN ADMIN-->
+        <action name="admin" method="nuevo" class="Acciones.LinkAction">
+            <result name="nuevo" >/Admin/Login.jsp</result>
+        </action>      
     </package>
 </struts>

@@ -6,9 +6,12 @@
         <id column="id_usuario" name="idUsuario" type="java.lang.Integer">
             <generator class="identity"/>
         </id>
-        <property column="nick" length="50" name="nick" type="string"/>   
-        <property column="clave" length="50" name="clave" type="string"/>      
-        <property column="admin"  name="admin" />    
-      
+        <property column="nick"  name="nick" type="string"/>   
+        <property column="clave"  name="clave" type="string"/>      
+        <property column="nombre"  name="nombre" type="string"/>      
+        <property column="apellido" name="apellido" type="string"/>      
+        <property column="codigo" name="codigo" type="string"/>      
+        <property column="email"  name="email" type="string"/>      
+        <property column="fechaCreacionCodigo" name="fechaCreacionCodigo" />      
     </class>
 </hibernate-mapping>

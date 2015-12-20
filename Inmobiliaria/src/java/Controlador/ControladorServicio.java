@@ -8,6 +8,7 @@ package Controlador;
 import Persistencia.DAO.Implementacion.ServicioDAO;
 import Persistencia.Modelo.Servicio;
 import java.util.List;
+import org.apache.commons.lang.WordUtils;
 
 /**
  *
@@ -22,12 +23,12 @@ public class ControladorServicio {
     }
 
     public void guardar(Servicio o) {
-        o.setNombre(Soporte.mayusculaPrimeraLetra(o.getNombre()));
+        o.setNombre(WordUtils.capitalize(o.getNombre()));
         servicioDAO.guardar(o);
     }
 
     public void actualizar(Servicio o) {
-        o.setNombre(Soporte.mayusculaPrimeraLetra(o.getNombre()));
+        o.setNombre(WordUtils.capitalize(o.getNombre()));
         servicioDAO.actualizar(o);
     }
 
@@ -50,7 +51,7 @@ public class ControladorServicio {
     }
 
     public boolean existe(Servicio o) {
-        o.setNombre(Soporte.mayusculaPrimeraLetra(o.getNombre()));
+        o.setNombre(WordUtils.capitalize(o.getNombre()));
         List<Servicio> lista = servicioDAO.buscar(o.getNombre());
         for (Servicio m : lista) {
             if (m.getNombre().equals(o.getNombre())) {
@@ -61,7 +62,7 @@ public class ControladorServicio {
     }
 
     public Servicio getOne(String serviciosElegido) {
-        serviciosElegido = Soporte.mayusculaPrimeraLetra(serviciosElegido);
+        serviciosElegido = WordUtils.capitalize(serviciosElegido);
         return servicioDAO.buscar(serviciosElegido).get(0);
     }
 

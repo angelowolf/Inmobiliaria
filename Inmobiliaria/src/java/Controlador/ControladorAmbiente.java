@@ -8,6 +8,7 @@ package Controlador;
 import Persistencia.DAO.Implementacion.AmbienteDAO;
 import Persistencia.Modelo.Ambiente;
 import java.util.List;
+import org.apache.commons.lang.WordUtils;
 
 /**
  *
@@ -22,12 +23,12 @@ public class ControladorAmbiente {
     }
 
     public void guardar(Ambiente o) {
-        o.setNombre(Soporte.mayusculaPrimeraLetra(o.getNombre()));
+        o.setNombre(WordUtils.capitalize(o.getNombre()));
         ambienteDAO.guardar(o);
     }
 
     public void actualizar(Ambiente o) {
-        o.setNombre(Soporte.mayusculaPrimeraLetra(o.getNombre()));
+        o.setNombre(WordUtils.capitalize(o.getNombre()));
         ambienteDAO.actualizar(o);
     }
 
@@ -50,7 +51,7 @@ public class ControladorAmbiente {
     }
 
     public boolean existe(Ambiente o) {
-        o.setNombre(Soporte.mayusculaPrimeraLetra(o.getNombre()));
+        o.setNombre(WordUtils.capitalize(o.getNombre()));
         List<Ambiente> lista = ambienteDAO.buscar(o.getNombre());
         for (Ambiente m : lista) {
             if (m.getNombre().equals(o.getNombre())) {

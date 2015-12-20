@@ -20,7 +20,8 @@
         <put-attribute name="title" value="Servicios" />
         <put-attribute name="body" value="/Servicio/Todos.jsp" />
     </definition>
-      <!--Ambientes-->
+    <!--FIN SERVICIOS-->
+    <!--Ambientes-->
     <definition name="/Ambiente/AltaModificacion.tiles" extends="baseLayout">
         <put-attribute name="title" value="Formulario Ambientes" />
         <put-attribute name="body" value="/Ambiente/AltaModificacion.jsp" />
@@ -29,6 +30,7 @@
         <put-attribute name="title" value="Ambientes" />
         <put-attribute name="body" value="/Ambiente/Todos.jsp" />
     </definition>
+    <!--FIN AMBIENTES-->
     <!--Propiedades-->
     <definition name="/Propiedad/Alta.tiles" extends="baseLayout">
         <put-attribute name="title" value="Alta Propiedad" />
@@ -46,4 +48,49 @@
         <put-attribute name="title" value="Propiedad" />
         <put-attribute name="body" value="/Propiedad/Ver.jsp" />
     </definition>  
+    <!--FIN PROPIEDADES-->
+    <!--SITIO PAGINAS--> 
+    <definition name="/Index.tiles" extends="layoutSitio">
+        <put-attribute name="title" value="Inmobiliaria" />
+        <put-attribute name="body" value="/Index.jsp" />
+    </definition>  
+    <definition name="/Buscar.tiles" extends="layoutSitio">
+        <put-attribute name="title" value="Buscar Propiedad" />
+        <put-attribute name="body" value="/Buscar.jsp" />
+    </definition>  
+    <definition name="/Contacto.tiles" extends="layoutSitio">
+        <put-attribute name="title" value="Contacto" />
+        <put-attribute name="body" value="/Contacto.jsp" />
+    </definition>  
+    <!--FIN SITIO PAGINAS-->
+    <!--ADMIN-->
+    <definition name="/Admin/Inicio.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Bienvenido" />
+        <put-attribute name="body" value="/Admin/Inicio.jsp" />
+    </definition>  
+    <definition name="/Admin/Modificar.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Modificar Cuenta" />
+        <put-attribute name="body" value="/Admin/Modificar.jsp" />
+    </definition>  
+    <!--FIN ADMIN-->
+    <!--TIPO MONEDA-->
+     <definition name="/TipoMoneda/AltaModificacion.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Formulario Tipo Monedas" />
+        <put-attribute name="body" value="/TipoMoneda/AltaModificacion.jsp" />
+    </definition>
+    <definition name="/TipoMoneda/Todos.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Tipo Monedas" />
+        <put-attribute name="body" value="/TipoMoneda/Todos.jsp" />
+    </definition>
+    <!--FIN MONEDA-->
+    <!--TIPO PROPIEDAD-->
+     <definition name="/TipoPropiedad/AltaModificacion.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Formulario Tipo Propiedades" />
+        <put-attribute name="body" value="/TipoPropiedad/AltaModificacion.jsp" />
+    </definition>
+    <definition name="/TipoPropiedad/Todos.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Tipo Propiedades" />
+        <put-attribute name="body" value="/TipoPropiedad/Todos.jsp" />
+    </definition>
+    <!--FIN TIPO PROPIEDAD--> 
 </tiles-definitions>

@@ -8,19 +8,28 @@
     }
 </style>
 <div class="form-group">
-    <s:actionmessage theme="bootstrap"/>
-    <s:actionerror theme="bootstrap"/>
+    <div class="text-center">
+        <s:actionerror theme="bootstrap"/>
+        <s:actionmessage theme="bootstrap"/>
+        <s:fielderror theme="bootstrap"/>
+    </div>
     <fieldset>
         <legend>
-            Propiedades
+            Propiedades   
+            <div class="pull-right">
+                <s:form action="nuevo" >
+                    <s:submit value="Nuevo" cssClass="btn btn-info"/>
+                </s:form>
+            </div>
         </legend>
+
     </fieldset>  
     <div class=" col-md-12">
         <display:table name="propiedadLista" pagesize="10" requestURI="${listar}" uid="row">
             <display:column property="idPropiedad" title="Id Propiedad"/>   
             <display:column title="Imagen"><img width="140" height="79" src="/Inmobiliaria/Imagen?idImagen=<s:url value="%{#attr.row.imagenDefault.idImagenPropiedad}"/>" /></display:column>
             <display:column sortable="true" property="codigoPropiedad" title="Codigo"/>
-            <display:column sortable="true" property="nombre" title="Nombre"/>       
+            <display:column sortable="true" property="direccion" title="Direccion"/>       
             <display:column sortable="true" property="habitacion" title="Habitaciones"/>       
             <display:column sortable="true" property="terreno" title="Terreno"/>       
             <display:column sortable="true" property="edificado" title="Edificado"/>       
@@ -33,7 +42,7 @@
                     <s:hidden name="idPropiedad" value="%{#attr.row.idPropiedad}"/>
                     <s:submit value="Eliminar" action="%{deleteURL}" cssClass="btn btn-danger"/>
                 </s:form>
-                <s:form action="ver" id="verURL" style="display:inline-block;">
+                <s:form action="ver" method="get" id="verURL" style="display:inline-block;">
                     <s:hidden name="idPropiedad" value="%{#attr.row.idPropiedad}"/>
                     <s:submit value="Ver" action="%{verURL}" cssClass="btn btn-warning"/>
                 </s:form>

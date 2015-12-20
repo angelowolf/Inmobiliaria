@@ -3,11 +3,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://displaytag.sf.net" prefix="display" %>
 <div class="form-group">
-    <s:actionmessage theme="bootstrap"/>
-    <s:actionerror theme="bootstrap"/>
+    <div class="text-center">
+        <s:actionerror theme="bootstrap"/>
+        <s:actionmessage theme="bootstrap"/>
+        <s:fielderror theme="bootstrap"/>
+    </div>
     <fieldset>
         <legend>
             Ambientes
+            <div class="pull-right">
+                <s:form action="nuevo" >
+                    <s:submit value="Nuevo" cssClass="btn btn-info"/>
+                </s:form>
+            </div>
         </legend>
     </fieldset>  
     <div class=" col-md-12">

@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang.WordUtils;
 
 /**
  *
@@ -27,12 +28,12 @@ public class ControladorPropiedad {
     }
 
     public int guardar(Propiedad o) {
-        o.setNombre(Soporte.mayusculaPrimeraLetra(o.getNombre()));
+       o.setDireccion(WordUtils.capitalize(o.getDireccion()));
         return propiedadDAO.guardar(o);
     }
 
     public void actualizar(Propiedad o) {
-        o.setNombre(Soporte.mayusculaPrimeraLetra(o.getNombre()));
+       o.setDireccion(WordUtils.capitalize(o.getDireccion()));
         propiedadDAO.actualizar(o);
     }
 

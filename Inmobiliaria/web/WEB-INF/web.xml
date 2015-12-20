@@ -6,12 +6,18 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
     <error-page>
         <error-code>404</error-code>
         <location>/404.jsp</location>
     </error-page>
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
     <!--EL FILTRO DE HIBERNATE ANTES QUE EL DE STUTS2!!!!-->
     <filter>
         <filter-name>HibernateFilter</filter-name>
@@ -22,6 +28,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <filter>
+        <!--FIN-->
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
         <init-param>
@@ -36,6 +43,7 @@
     <listener>
         <listener-class>org.apache.struts2.tiles.StrutsTilesListener</listener-class>
     </listener>
+    <!--FIN-->
     <context-param>
         <param-name>tilesDefinitions</param-name>
         <param-value>/WEB-INF/tiles.xml</param-value>

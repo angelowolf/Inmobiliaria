@@ -9,10 +9,14 @@ import Controlador.ControladorAmbiente;
 import Controlador.ControladorImagenPropiedad;
 import Controlador.ControladorPropiedad;
 import Controlador.ControladorServicio;
+import Controlador.ControladorTipoMoneda;
+import Controlador.ControladorTipoPropiedad;
 import Persistencia.Modelo.Ambiente;
 import Persistencia.Modelo.ImagenPropiedad;
 import Persistencia.Modelo.Propiedad;
 import Persistencia.Modelo.Servicio;
+import Persistencia.Modelo.TipoMoneda;
+import Persistencia.Modelo.TipoPropiedad;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -41,6 +45,8 @@ public class PropiedadAction extends ActionSupport {
     private final ControladorServicio controladorServicio = new ControladorServicio();
     private final ControladorAmbiente controladorAmbiente = new ControladorAmbiente();
     private final ControladorImagenPropiedad controladorImagenPropiedad = new ControladorImagenPropiedad();
+    private final ControladorTipoMoneda controladorTipoMoneda = new ControladorTipoMoneda();
+    private final ControladorTipoPropiedad controladorTipoPropiedad = new ControladorTipoPropiedad();
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
     private List<File> imagen;
     private List<String> imagenFileName;
@@ -54,18 +60,31 @@ public class PropiedadAction extends ActionSupport {
     private List<String> serviciosDefault = new ArrayList<String>();
     private List<Ambiente> todosAmbientes = new ArrayList<Ambiente>();
     private List<String> ambientesDefault = new ArrayList<String>();
+    private List<TipoPropiedad> tipoPropiedadLista = new ArrayList<TipoPropiedad>();
+    private List<TipoMoneda> tipoMonedaLista = new ArrayList<TipoMoneda>();
 
     private boolean validar() {
         boolean flag = true;
-        if (propiedad.getNombre().trim().isEmpty()) {
-            addFieldError("", "Ingrese un nombre.");
+        if (propiedad.getDireccion().trim().isEmpty()) {
+            addFieldError("", "Ingrese una direccion.");
             flag = false;
         }
         if (propiedad.getCodigoPropiedad() == 0) {
             addFieldError("", "Ingrese un codigo.");
             flag = false;
         }
-
+        if (propiedad.getLongitud() == 0 || propiedad.getLatitud() == 0) {
+            addFieldError("", "Seleccione una ubicacion en el mapa.");
+            flag = false;
+        }
+        if (propiedad.getTipoMoneda().getIdTipoMoneda() <= 0) {
+            addFieldError("", "Seleccione una moneda.");
+            flag = false;
+        }
+        if (propiedad.getTipoPropiedad().getIdTipoPropiedad()<= 0) {
+            addFieldError("", "Seleccione un tipo de propiedad.");
+            flag = false;
+        }
         return flag;
     }
 
@@ -101,6 +120,8 @@ public class PropiedadAction extends ActionSupport {
         if (!validarGuardar()) {
             this.cargarServiciosINPUT();
             this.cargarAmbientesINPUT();
+            this.cargarTipoMoneda();
+            this.cargarTipoPropiedad();
             return INPUT;
         }
         //Agrego los servicios elegidos a la propiedad
@@ -123,7 +144,7 @@ public class PropiedadAction extends ActionSupport {
 
 //        String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
 //        ruta += "\\" + propiedad.getCodigoPropiedad();
-        String ruta = STORAGE_PATH + "ImagenPropiedad\\" + propiedad.getCodigoPropiedad();
+        String ruta = STORAGE_PATH + "ImagenPropiedad/" + propiedad.getCodigoPropiedad();
         sesion.put("ruta", ruta);
         File directorio = new File(ruta);
         if (!directorio.exists()) {
@@ -132,7 +153,7 @@ public class PropiedadAction extends ActionSupport {
         for (int i = 0; i < imagen.size(); i++) {
             File cadaImagen = imagen.get(i);
 //            String rutaBD = "ImagenPropiedad\\" + propiedad.getCodigoPropiedad() + "\\" + imagenFileName.get(i);
-            String rutaBD = ruta + "\\" + imagenFileName.get(i);
+            String rutaBD = ruta + "/" + imagenFileName.get(i);
             try {
                 FileUtils.copyFile(cadaImagen, new File(directorio, imagenFileName.get(i)));
             } catch (IOException ex) {
@@ -153,6 +174,8 @@ public class PropiedadAction extends ActionSupport {
             this.cargarServiciosINPUT();
             this.cargasImagenesINPUT();
             this.cargarAmbientesINPUT();
+            this.cargarTipoMoneda();
+            this.cargarTipoPropiedad();
             return INPUT;
         }
 
@@ -210,8 +233,8 @@ public class PropiedadAction extends ActionSupport {
         if (cambioCodigo) {
 //            String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
             String ruta = STORAGE_PATH + "ImagenPropiedad";
-            String rutaOriginal = ruta + "\\" + codigoOriginal;
-            String rutaNueva = ruta + "\\" + codigoNuevo;
+            String rutaOriginal = ruta + "/" + codigoOriginal;
+            String rutaNueva = ruta + "/" + codigoNuevo;
             controladorImagenPropiedad.renombrarCarpeta(rutaOriginal, rutaNueva);
         }
         //AGREGO LAS NUEVAS IMAGENES
@@ -219,25 +242,27 @@ public class PropiedadAction extends ActionSupport {
 //        String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
 //        String ruta = STORAGE_PATH + "ImagenPropiedad\\" + propiedad.getCodigoPropiedad();
 //        ruta += "\\" + propiedad.getCodigoPropiedad();
-        String ruta = STORAGE_PATH + "ImagenPropiedad\\" + propiedad.getCodigoPropiedad();
+        String ruta = STORAGE_PATH + "ImagenPropiedad/" + propiedad.getCodigoPropiedad();
         sesion.put("ruta", ruta);
         File directorio = new File(ruta);
         if (!directorio.exists()) {
             directorio.mkdirs();
         }
-        for (int i = 0; i < imagen.size(); i++) {
-            File cadaImagen = imagen.get(i);
+        if (imagen != null) {
+            for (int i = 0; i < imagen.size(); i++) {
+                File cadaImagen = imagen.get(i);
 //            String rutaBD = "ImagenPropiedad\\" + propiedad.getCodigoPropiedad() + "\\" + imagenFileName.get(i);
-            String rutaBD = ruta + "\\" + imagenFileName.get(i);
-            try {
-                FileUtils.copyFile(cadaImagen, new File(directorio, imagenFileName.get(i)));
-            } catch (IOException ex) {
-                Logger.getLogger(PropiedadAction.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                String rutaBD = ruta + "/" + imagenFileName.get(i);
+                try {
+                    FileUtils.copyFile(cadaImagen, new File(directorio, imagenFileName.get(i)));
+                } catch (IOException ex) {
+                    Logger.getLogger(PropiedadAction.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-            ImagenPropiedad imagenPropiedad = new ImagenPropiedad();
-            imagenPropiedad.setRuta(rutaBD);
-            propiedad.addImagenPropiedad(imagenPropiedad);
+                ImagenPropiedad imagenPropiedad = new ImagenPropiedad();
+                imagenPropiedad.setRuta(rutaBD);
+                propiedad.addImagenPropiedad(imagenPropiedad);
+            }
         }
         //GUARDO LOS NUEVOS SERVICIOS ELEGIDOS A LA PROPIEDAD
         List<Servicio> temp = new ArrayList<Servicio>();
@@ -274,7 +299,6 @@ public class PropiedadAction extends ActionSupport {
         propiedadLista = controladorPropiedad.getTodos();
         String mensaje = (String) sesion.get("mensaje");
         addActionMessage(mensaje);
-        addActionMessage((String) sesion.get("ruta"));
         sesion.put("mensaje", "");
         try {
             for (Propiedad propiedadLista1 : propiedadLista) {
@@ -292,7 +316,7 @@ public class PropiedadAction extends ActionSupport {
         int id = Integer.parseInt(request.getParameter("idPropiedad"));
         Propiedad p = controladorPropiedad.getOne(id);
         String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
-        ruta += "\\" + p.getCodigoPropiedad();
+        ruta += "/" + p.getCodigoPropiedad();
         controladorPropiedad.eliminar(id, ruta);
         sesion.put("mensaje", "Propiedad Eliminada.");
         return SUCCESS;
@@ -303,6 +327,8 @@ public class PropiedadAction extends ActionSupport {
         propiedad = controladorPropiedad.getOne(Integer.parseInt(request.getParameter("idPropiedad")));
         this.cargarServicios();
         this.cargarAmbientes();
+        this.cargarTipoMoneda();
+        this.cargarTipoPropiedad();
         this.cargarServiciosSeleccionados();
         this.cargarAmbientesSeleccionados();
         this.cargarImagenesSeleccionadas();
@@ -315,7 +341,17 @@ public class PropiedadAction extends ActionSupport {
     public String nuevo() {
         this.cargarServicios();
         this.cargarAmbientes();
+        this.cargarTipoMoneda();
+        this.cargarTipoPropiedad();
         return "nuevo";
+    }
+
+    private void cargarTipoMoneda() {
+        tipoMonedaLista = controladorTipoMoneda.getTodos();
+    }
+
+    private void cargarTipoPropiedad() {
+        tipoPropiedadLista = controladorTipoPropiedad.getTodos();
     }
 
     private void cargarServicios() {
@@ -373,6 +409,22 @@ public class PropiedadAction extends ActionSupport {
                 ambientesDefault.add("" + id);
             }
         }
+    }
+
+    public List<TipoPropiedad> getTipoPropiedadLista() {
+        return tipoPropiedadLista;
+    }
+
+    public void setTipoPropiedadLista(List<TipoPropiedad> tipoPropiedadLista) {
+        this.tipoPropiedadLista = tipoPropiedadLista;
+    }
+
+    public List<TipoMoneda> getTipoMonedaLista() {
+        return tipoMonedaLista;
+    }
+
+    public void setTipoMonedaLista(List<TipoMoneda> tipoMonedaLista) {
+        this.tipoMonedaLista = tipoMonedaLista;
     }
 
     public List<ImagenPropiedad> getTodosImagenes() {
@@ -466,4 +518,5 @@ public class PropiedadAction extends ActionSupport {
     public void setAmbientesDefault(List<String> ambientesDefault) {
         this.ambientesDefault = ambientesDefault;
     }
+
 }

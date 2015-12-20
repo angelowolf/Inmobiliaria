@@ -15,19 +15,71 @@ import java.util.List;
 public class Propiedad {
 
     private int idPropiedad;
-    private int codigoPropiedad, habitacion;
+    private int codigoPropiedad, habitacion, bano;
     private float terreno, edificado;
-    private String nombre, detalle;
+    private double latitud, longitud;
+    private String direccion, detalle;
     private List<Ambiente> ambientes;
     private List<Servicio> servicios;
     private List<ImagenPropiedad> imagenes = new ArrayList<ImagenPropiedad>();
+    private TipoPropiedad tipoPropiedad;
+    private TipoMoneda tipoMoneda;
     private ImagenPropiedad imagenDefault;
+    private float precio;
 
     public Propiedad() {
     }
 
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public TipoPropiedad getTipoPropiedad() {
+        return tipoPropiedad;
+    }
+
+    public void setTipoPropiedad(TipoPropiedad tipoPropiedad) {
+        this.tipoPropiedad = tipoPropiedad;
+    }
+
+    public TipoMoneda getTipoMoneda() {
+        return tipoMoneda;
+    }
+
+    public void setTipoMoneda(TipoMoneda tipoMoneda) {
+        this.tipoMoneda = tipoMoneda;
+    }
+
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
+    }
+
     public String getDetalle() {
         return detalle;
+    }
+
+    public int getBano() {
+        return bano;
+    }
+
+    public void setBano(int bano) {
+        this.bano = bano;
     }
 
     public void setDetalle(String detalle) {
@@ -82,12 +134,12 @@ public class Propiedad {
         this.idPropiedad = idPropiedad;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public List<Servicio> getServicios() {
@@ -144,7 +196,7 @@ public class Propiedad {
 
     @Override
     public String toString() {
-        return "Propiedad{" + "idPropiedad=" + idPropiedad + ", codigoPropiedad=" + codigoPropiedad + ", nombre=" + nombre + ", servicios=" + servicios + ", imagenes=" + imagenes + '}';
+        return "Propiedad{" + "idPropiedad=" + idPropiedad + ", codigoPropiedad=" + codigoPropiedad + ", habitacion=" + habitacion + ", ba\u00f1o=" + bano + ", terreno=" + terreno + ", edificado=" + edificado + ", nombre=" + direccion + ", detalle=" + detalle + ", ambientes=" + ambientes + ", servicios=" + servicios + ", imagenes=" + imagenes + ", imagenDefault=" + imagenDefault + '}';
     }
 
 }
