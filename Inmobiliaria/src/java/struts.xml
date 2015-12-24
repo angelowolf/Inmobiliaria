@@ -16,4 +16,6 @@
     <include file="struts-error.xml"></include>
     <include file="struts-tipomoneda.xml"></include>
     <include file="struts-tipopropiedad.xml"></include>
+    <include file="struts-contacto.xml"></include>
+    <include file="struts-destacado.xml"></include>
 </struts>

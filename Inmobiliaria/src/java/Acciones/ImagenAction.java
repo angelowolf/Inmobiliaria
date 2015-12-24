@@ -5,7 +5,9 @@
  */
 package Acciones;
 
+import Controlador.ControladorImagen;
 import Controlador.ControladorImagenPropiedad;
+import Persistencia.Modelo.Imagen;
 import Persistencia.Modelo.ImagenPropiedad;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -25,24 +27,34 @@ public class ImagenAction extends ActionSupport {
 
     private final int BUFFER_LENGTH = 4096;
     private static final String STORAGE_PATH = System.getenv("OPENSHIFT_DATA_DIR") == null ? "D:/imagenes/tmp/" : System.getenv("OPENSHIFT_DATA_DIR");
-    ControladorImagenPropiedad controladorImagenPropiedad = new ControladorImagenPropiedad();
+    private final ControladorImagenPropiedad controladorImagenPropiedad = new ControladorImagenPropiedad();
+    private final ControladorImagen controladorImagen = new ControladorImagen();
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
+    private int idImagen;
+    private int idImagenDestacado;
 
     @Override
     public String execute() {
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);
         File file = null;
-        String sss = "gil";
+
         try {
-            int idImagen = Integer.parseInt(request.getParameter("idImagen"));
-            ImagenPropiedad id = controladorImagenPropiedad.getOne(idImagen);
-            String path = id.getRuta();
+            String path = "";
+
+//            int idImagen = Integer.parseInt(request.getParameter("idImagen"));
+            if (idImagen != 0) {
+                ImagenPropiedad id = controladorImagenPropiedad.getOne(idImagen);
+                path = id.getRuta();
+            } else {
+                Imagen imagen = controladorImagen.getOne(idImagenDestacado);
+                path = imagen.getRuta();
+            }
+
             sesion.put("ruta_1", path);
 //            String pathToWeb = "D:/imagenes/tmp/ImagenPropiedad/654/123.jpg";
             response.setContentType("image/jpeg,Image/jpg,Image/png");
             file = new File(path);
-            sss = " " + file.canRead() + " " + file.canExecute() + " " + file.getAbsolutePath() + " " + file.length();
             response.setContentLength((int) file.length());
 
             FileInputStream in = new FileInputStream(file);
@@ -59,11 +71,17 @@ public class ImagenAction extends ActionSupport {
             in.close();
 
         } catch (Exception e) {
-            sesion.put("exito", e.toString());
             e.printStackTrace();
         }
-
-        sesion.put("exito", sss);
         return null;
     }
+
+    public void setIdImagen(int idImagen) {
+        this.idImagen = idImagen;
+    }
+
+    public void setIdImagenDestacado(int idImagenDestacado) {
+        this.idImagenDestacado = idImagenDestacado;
+    }
+
 }

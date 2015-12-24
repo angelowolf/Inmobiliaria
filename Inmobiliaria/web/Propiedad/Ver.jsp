@@ -97,7 +97,7 @@
             </ol>
 
             <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
+            <div class="carousel-inner" role="listbox" >
                 <s:iterator value="propiedad.imagenes" var="imagen" status="stat">
                     <s:if test="#stat.index == 0">
                         <div class="item active">
@@ -190,7 +190,7 @@
                     <input type="text"  name="consulta" placeholder="Mensaje" class="form-control" />
                 </div>
                 <div class="form-group text-center">
-                    <s:submit value="Enviar Consulta" cssClass="btn" style="border-color:#adb2b6;"/>
+                    <s:submit value="Enviar Consulta" cssClass="btn" style="border-color:#adb2b6;" disabled="true"/>
                 </div>
             </s:form>
         </div>

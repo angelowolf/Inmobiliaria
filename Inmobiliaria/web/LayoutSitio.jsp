@@ -14,7 +14,7 @@
         <title><tiles:insertAttribute name="title" ignore="true" /></title>
         <link rel="stylesheet" href="/Inmobiliaria/css/jquery-ui.min.css" />
         <link href="/Inmobiliaria/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/Inmobiliaria/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet"> 
+        <link href="/Inmobiliaria/font-awesome/css/font-awesome.min.css" rel="stylesheet"> 
         <link rel="stylesheet" href="/Inmobiliaria/css/estilos.css" />
         <style type="text/css">
             #body{
@@ -53,10 +53,40 @@
 
     <div id="body">
         <div class="container">
-            <div class="row">
+            <div class="row"  >
                 <tiles:insertAttribute name="body" />
             </div>
         </div>
+    </div>
+    <div class="pie">
+        <div class="container"><!-- Footer -->
+            <div class="row" id="row">
+                <div class="col-xs-12 col-sm-4 col-md-5 col-lg-7">
+                    <p>LOGO INMBO</p>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+                    <hr class="visible-xs"/>
+                    <h5 class="h4">Contactanos</h5>
+                    <p>0123 12345678<br />
+                        0123 12345678<br />
+                        0123 12345678<br />
+                        patitofeo@gmail.com</p>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                    <h5 class="h4">Visitanos</h5>
+                    <p><s:property value="#application.contacto.direccion"  /></p>
+                </div>
+            </div>
+        </div>
+        <!--        <div class="by" >
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p class="text-right">POR MI</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
     </div>
     <script src="/Inmobiliaria/js/jquery-2.1.1.min.js"></script>
     <script src="/Inmobiliaria/js/jquery-ui.min.js"></script>
@@ -69,5 +99,6 @@
     <script src="/Inmobiliaria/js/AddFile.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script src="/Inmobiliaria/js/mapa-vista.js"></script>   
+    <script src="/Inmobiliaria/js/mapa-contacto.js"></script>   
 </body>
 </html>

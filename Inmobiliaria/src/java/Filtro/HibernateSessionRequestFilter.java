@@ -23,7 +23,6 @@ import org.hibernate.StaleObjectStateException;
 public class HibernateSessionRequestFilter implements Filter {
 
 //    private static Log log = LogFactory.getLog(HibernateSessionRequestFilter.class);
-
     private SessionFactory sf;
 
     @Override
@@ -34,9 +33,8 @@ public class HibernateSessionRequestFilter implements Filter {
 
         try {
 //            log.debug("Starting a database transaction");
-            
-            sf.getCurrentSession().beginTransaction();
 
+            sf.getCurrentSession().beginTransaction();
             // Call the next filter (continue request processing)  
             chain.doFilter(request, response);
 

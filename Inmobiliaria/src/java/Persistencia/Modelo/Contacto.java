@@ -11,9 +11,8 @@ package Persistencia.Modelo;
  */
 public class Contacto {
 
-    private String direccion, email;
+    private String direccion, email, telefono;
     private double latitud, longitud;
-    private long telefono;
     private int idContacto;
 
     public Contacto() {
@@ -59,12 +58,17 @@ public class Contacto {
         this.longitud = longitud;
     }
 
-    public long getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(long telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    @Override
+    public String toString() {
+        return "Contacto{" + "direccion=" + direccion + ", email=" + email + ", telefono=" + telefono + ", latitud=" + latitud + ", longitud=" + longitud + ", idContacto=" + idContacto + '}';
     }
 
 }

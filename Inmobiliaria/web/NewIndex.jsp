@@ -1,10 +1,6 @@
-<%-- 
-    Document   : NewIndex
-    Created on : 21/12/2015, 23:19:19
-    Author     : Angelo
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="/struts-tags" prefix="s"%>
+<%@taglib prefix="sb" uri="/struts-bootstrap-tags" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,7 +110,7 @@
                     <div class="row">
 
                         <!-- /.row -->
-
+                        <tiles:insertAttribute name="body" />
                     </div>
                     <!-- /.container-fluid -->
 
@@ -129,7 +125,7 @@
 
             <!-- Bootstrap Core JavaScript -->
             <script src="js2/bootstrap.min.js"></script>
-
+        </div>
     </body>
 
 </html>

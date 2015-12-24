@@ -7,6 +7,10 @@
         <put-attribute name="title" value="" />
         <put-attribute name="body" value="" /> 
     </definition>
+    <!--    <definition name="baseLayout" template="/NewIndex.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="body" value="" /> 
+    </definition>-->
     <definition name="layoutSitio" template="/LayoutSitio.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="body" value="" /> 
@@ -74,7 +78,7 @@
     </definition>  
     <!--FIN ADMIN-->
     <!--TIPO MONEDA-->
-     <definition name="/TipoMoneda/AltaModificacion.tiles" extends="baseLayout">
+    <definition name="/TipoMoneda/AltaModificacion.tiles" extends="baseLayout">
         <put-attribute name="title" value="Formulario Tipo Monedas" />
         <put-attribute name="body" value="/TipoMoneda/AltaModificacion.jsp" />
     </definition>
@@ -84,7 +88,7 @@
     </definition>
     <!--FIN MONEDA-->
     <!--TIPO PROPIEDAD-->
-     <definition name="/TipoPropiedad/AltaModificacion.tiles" extends="baseLayout">
+    <definition name="/TipoPropiedad/AltaModificacion.tiles" extends="baseLayout">
         <put-attribute name="title" value="Formulario Tipo Propiedades" />
         <put-attribute name="body" value="/TipoPropiedad/AltaModificacion.jsp" />
     </definition>
@@ -93,4 +97,24 @@
         <put-attribute name="body" value="/TipoPropiedad/Todos.jsp" />
     </definition>
     <!--FIN TIPO PROPIEDAD--> 
+    <!--DESTACADO-->
+    <definition name="/Destacado/Alta.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Alta Propiedad Destacada" />
+        <put-attribute name="body" value="/Destacado/Alta.jsp" />
+    </definition>
+    <definition name="/Destacado/Modificacion.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Modificar Propiedad Destacada" />
+        <put-attribute name="body" value="/Destacado/Modificacion.jsp" />
+    </definition>
+    <definition name="/Destacado/Todos.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Propiedades Destacadas" />
+        <put-attribute name="body" value="/Destacado/Todos.jsp" />
+    </definition>
+    <!--FIN DESTACADO-->
+    <!--FORMULARIO CONTACTO-->
+    <definition name="/Contacto/Modificar.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Formulario Contacto" />
+        <put-attribute name="body" value="/Contacto/Modificar.jsp" />
+    </definition>
+    <!--FIN FORMULARIO CONTACTO--> 
 </tiles-definitions>

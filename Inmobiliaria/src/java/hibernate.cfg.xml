@@ -11,7 +11,7 @@
         <property name="hibernate.connection.password">IIq_SJVe5k-J</property>   -->
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
-    <property name="show_sql">true</property>
+    <property name="show_sql">false</property>
     <property name="hbm2ddl.auto">update</property>
     <!--Configuracion correspondiente al pool, para que no se caiga la conexion de mysql a las 8 hs sin uso.-->
     <property name="c3p0.min_size">5</property>
@@ -29,5 +29,8 @@
     <mapping package="Persistencia.MapeoHibernate.Usuario.hbm.xml" resource="Persistencia/MapeoHibernate/Usuario.hbm.xml"/>
     <mapping package="Persistencia/MapeoHibernate/TipoMoneda.hbm.xml" resource="Persistencia/MapeoHibernate/TipoMoneda.hbm.xml"/>
     <mapping package="Persistencia/MapeoHibernate/TipoPropiedad.hbm.xml" resource="Persistencia/MapeoHibernate/TipoPropiedad.hbm.xml"/>
+    <mapping package="Persistencia/MapeoHibernate/Contacto.hbm.xml" resource="Persistencia/MapeoHibernate/Contacto.hbm.xml"/>
+    <mapping package="Persistencia/MapeoHibernate/Imagen.hbm.xml" resource="Persistencia/MapeoHibernate/Imagen.hbm.xml"/>
+    <mapping package="Persistencia/MapeoHibernate/Destacado.hbm.xml" resource="Persistencia/MapeoHibernate/Destacado.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

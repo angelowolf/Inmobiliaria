@@ -2,35 +2,35 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 13-sep-2013 15:59:20 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-  <class name="Persistencia.Modelo.Propiedad" table="Propiedad">
-    <id column="id_propiedad" name="idPropiedad">
-      <generator class="identity"/>
-    </id>
-    <property column="direccion" length="50" name="direccion" type="string"/>
-    <property column="detalle" length="1000" name="detalle" type="string"/>
-    <property column="codigoPropiedad" name="codigoPropiedad"/>
-    <property column="habitacion" name="habitacion"/>
-    <property column="latitud" name="latitud"/>
-    <property column="longitud" name="longitud"/>
-    <property column="bano" name="bano"/>
-    <property column="terreno" name="terreno"/>
-    <property column="edificado" name="edificado"/>
-    <list name="servicios" table="servicios_propiedades">
-      <key column="id_propiedad"/>
-      <index column="ORDEN"/>
-      <many-to-many class="Persistencia.Modelo.Servicio" column="id_servicio"/>
-    </list>
-    <list name="ambientes" table="ambientes_propiedades">
-      <key column="id_propiedad"/>
-      <index column="ORDEN"/>
-      <many-to-many class="Persistencia.Modelo.Ambiente" column="id_ambiente"/>
-    </list>
-    <list cascade="all-delete-orphan" name="imagenes" table="imagenPropiedad">
-      <key column="id_propiedad"/>
-      <index column="ORDEN"/>
-      <one-to-many class="Persistencia.Modelo.ImagenPropiedad"/>
-    </list>
-     <many-to-one name="tipoMoneda" />
-      <many-to-one name="tipoPropiedad" />
-  </class>
+    <class name="Persistencia.Modelo.Propiedad" table="Propiedad">
+        <id column="id_propiedad" name="idPropiedad">
+            <generator class="identity"/>
+        </id>
+        <property column="direccion" length="50" name="direccion" type="string"/>
+        <property column="detalle" length="1000" name="detalle" type="string"/>
+        <property column="codigoPropiedad" name="codigoPropiedad"/>
+        <property column="habitacion" name="habitacion"/>
+        <property column="latitud" name="latitud"/>
+        <property column="longitud" name="longitud"/>
+        <property column="bano" name="bano"/>
+        <property column="terreno" name="terreno"/>
+        <property column="edificado" name="edificado"/>
+        <list name="servicios" table="servicios_propiedades">
+            <key column="id_propiedad"/>
+            <index column="ORDEN"/>
+            <many-to-many class="Persistencia.Modelo.Servicio" column="id_servicio"/>
+        </list>
+        <list name="ambientes" table="ambientes_propiedades">
+            <key column="id_propiedad"/>
+            <index column="ORDEN"/>
+            <many-to-many class="Persistencia.Modelo.Ambiente" column="id_ambiente"/>
+        </list>
+        <list cascade="all-delete-orphan" name="imagenes" table="imagenPropiedad">
+            <key column="id_propiedad"/>
+            <index column="ORDEN"/>
+            <one-to-many class="Persistencia.Modelo.ImagenPropiedad"/>
+        </list>
+        <many-to-one name="tipoMoneda" />
+        <many-to-one name="tipoPropiedad" />
+    </class>
 </hibernate-mapping>

@@ -69,6 +69,13 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cogs fa-stack-1x "></i></span> Propiedades Destacadas</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a href="<s:url action="listar" namespace="/Destacado"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
+                        <li><a href="<s:url action="nuevo" namespace="/Destacado"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-plus fa-stack-1x "></i></span>Nuevo</a></li>       
+                    </ul>
+                </li>
+                <li>
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cogs fa-stack-1x "></i></span> Tipo Propiedades</a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a href="<s:url action="listar" namespace="/TipoPropiedad"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
@@ -81,6 +88,9 @@
                         <li><a href="<s:url action="listar" namespace="/TipoMoneda"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
                         <li><a href="<s:url action="nuevo" namespace="/TipoMoneda"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-plus fa-stack-1x "></i></span>Nuevo</a></li>       
                     </ul>
+                </li>
+                <li>
+                    <a href="<s:url action="loadContacto" namespace="/Contacto"/>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cogs fa-stack-1x "></i></span> Contacto</a>                    
                 </li>
             </ul>
         </div>
@@ -110,5 +120,6 @@
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script src="/Inmobiliaria/js/mapa-alta.js"></script>   
     <script src="/Inmobiliaria/js/mapa-edit.js"></script>   
+    <script src="/Inmobiliaria/js/mapa-edit-contacto.js"></script>   
 </body>
 </html>

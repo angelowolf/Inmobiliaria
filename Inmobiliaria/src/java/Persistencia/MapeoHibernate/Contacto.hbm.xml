@@ -10,6 +10,6 @@
         <property column="email" length="50" name="email" type="string"/>      
         <property column="latitud"  name="latitud" />      
         <property column="longitud"  name="longitud" />      
-        <property column="telefono"  name="telefono" />      
+        <property column="telefono"  name="telefono" type="string"/>      
     </class>
 </hibernate-mapping>

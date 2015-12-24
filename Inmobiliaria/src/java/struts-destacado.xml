@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="destacado" extends="struts-default" namespace="/Destacado">
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>
+        <action name="guardar" method="guardar" class="Acciones.DestacadoAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/jpg, image/png,image/jpeg</param>
+            </interceptor-ref> 
+            <interceptor-ref name="defaultStack"/>
+            <result name="success" type="redirect">listar</result>
+            <result name="input" type="tiles">/Destacado/Alta.tiles</result>
+        </action>
+        <action name="modificar" method="modificar" class="Acciones.DestacadoAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/jpg, image/png,image/jpeg</param>
+            </interceptor-ref> 
+            <interceptor-ref name="defaultStack"/>
+            <result name="success" type="redirect">listar</result>
+            <result name="input" type="tiles">/Destacado/Modificacion.tiles</result>
+        </action>
+        <action name="eliminar" method="eliminar" class="Acciones.DestacadoAction">
+            <result name="success" type="redirect">listar</result>
+        </action>
+        <action name="listar" method="list" class="Acciones.DestacadoAction">
+            <result name="success" type="tiles">/Destacado/Todos.tiles</result>
+        </action>
+        <action name="editar" method="editar" class="Acciones.DestacadoAction">
+            <result name="success" type="tiles">/Destacado/Modificacion.tiles</result>
+        </action> 
+        <action name="nuevo" method="nuevo" class="Acciones.DestacadoAction">
+            <result name="nuevo" type="tiles">/Destacado/Alta.tiles</result>
+        </action>                      
+    </package>
+</struts>
