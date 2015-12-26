@@ -41,8 +41,6 @@ public class ImagenAction extends ActionSupport {
 
         try {
             String path = "";
-
-//            int idImagen = Integer.parseInt(request.getParameter("idImagen"));
             if (idImagen != 0) {
                 ImagenPropiedad id = controladorImagenPropiedad.getOne(idImagen);
                 path = id.getRuta();
@@ -50,9 +48,6 @@ public class ImagenAction extends ActionSupport {
                 Imagen imagen = controladorImagen.getOne(idImagenDestacado);
                 path = imagen.getRuta();
             }
-
-            sesion.put("ruta_1", path);
-//            String pathToWeb = "D:/imagenes/tmp/ImagenPropiedad/654/123.jpg";
             response.setContentType("image/jpeg,Image/jpg,Image/png");
             file = new File(path);
             response.setContentLength((int) file.length());
@@ -71,11 +66,8 @@ public class ImagenAction extends ActionSupport {
             in.close();
 
         } catch (Exception e) {
-            sesion.put("exito", e.toString());
             e.printStackTrace();
-        }
-
-        sesion.put("exito", sss);
+        }     
         return null;
     }
 

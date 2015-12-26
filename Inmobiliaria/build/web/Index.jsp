@@ -37,7 +37,7 @@
                             <a href="<s:url action="ver" namespace="/">
                                    <s:param name="idPropiedad"><s:property value="%{#destacado.propiedad.idPropiedad}"/></s:param>
                                </s:url>">
-                                <img src="/Inmobiliaria/Imagen?idImagenDestacado=<s:url value="%{#destacado.imagen.idImagen}"/>">
+                                <img src="/Imagen?idImagenDestacado=<s:url value="%{#destacado.imagen.idImagen}"/>">
                             </a>
                             <div class="carousel-caption">
                                 <h4><a href="<s:url action="ver" namespace="/">
@@ -51,7 +51,7 @@
                             <a href="<s:url action="ver" namespace="/">
                                    <s:param name="idPropiedad"><s:property value="%{#destacado.propiedad.idPropiedad}"/></s:param>
                                </s:url>">
-                                <img src="/Inmobiliaria/Imagen?idImagenDestacado=<s:url value="%{#destacado.imagen.idImagen}"/>">
+                                <img src="/Imagen?idImagenDestacado=<s:url value="%{#destacado.imagen.idImagen}"/>">
                             </a>
                             <div class="carousel-caption">
                                 <h4><a href="<s:url action="ver" namespace="/">
