@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-sep-2013 15:59:20 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Persistencia.Modelo.Contacto" table="contacto">
+        <id column="id_contacto" name="idContacto" type="java.lang.Integer">
+            <generator class="identity"/>
+        </id>
+        <property column="direccion" length="50" name="direccion" type="string"/>   
+        <property column="email" length="50" name="email" type="string"/>      
+        <property column="latitud"  name="latitud" />      
+        <property column="longitud"  name="longitud" />      
+        <property column="telefono"  name="telefono" type="string"/>      
+    </class>
+</hibernate-mapping>

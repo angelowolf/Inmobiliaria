@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-sep-2013 15:59:20 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Persistencia.Modelo.TipoPropiedad" table="tipoPropiedad">
+        <id column="id_tipoPropiedad" name="idTipoPropiedad" type="java.lang.Integer">
+            <generator class="identity"/>
+        </id>          
+        <property column="nombre" length="50" name="nombre" type="string"/>      
+    </class>
+</hibernate-mapping>

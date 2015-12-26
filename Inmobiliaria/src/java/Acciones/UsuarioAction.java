@@ -13,6 +13,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.Date;
 import java.util.Map;
+import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -26,7 +27,7 @@ public class UsuarioAction extends ActionSupport {
     private String password;
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
     private final ControladorUsuario controladorUsuario = new ControladorUsuario();
-    private String email, codigo, clave1, clave2;
+    private String email, codigo, clave0, clave1, clave2;
 
     public boolean validarLogin() {
         boolean flag = true;
@@ -155,28 +156,64 @@ public class UsuarioAction extends ActionSupport {
 
     public boolean validarModificar() {
         boolean flag = true;
-        Usuario user = (Usuario) sesion.get("user");
-        if (user == null || user.getNombre().trim().isEmpty()) {
+        if (StringUtils.isBlank(usuario.getNombre())) {
             addFieldError("", "Ingrese un nombre.");
             flag = false;
         }
-        if (user == null || user.getApellido().trim().isEmpty()) {
+        if (StringUtils.isBlank(usuario.getApellido())) {
             addFieldError("", "Ingrese un apellido.");
             flag = false;
         }
-        if (user == null || user.getNick().trim().isEmpty()) {
+        if (StringUtils.isBlank(usuario.getNick())) {
             addFieldError("", "Ingrese un nick.");
             flag = false;
         }
-        if (user == null || user.getEmail().trim().isEmpty()) {
+        if (StringUtils.isBlank(usuario.getEmail())) {
             addFieldError("", "Ingrese un email.");
             flag = false;
+        }
+        if (StringUtils.isBlank(clave0)) {
+            addFieldError("", "Ingrese su contraseña actual.");
+            flag = false;
+        }
+        if (StringUtils.isBlank(clave1) && StringUtils.isNotBlank(clave2) || StringUtils.isBlank(clave2) || StringUtils.isNotBlank(clave1)) {
+            addFieldError("", "Repita la nueva clave.");
+            flag = false;
+        } else {
+            if (StringUtils.isNotBlank(clave1) && StringUtils.isNotBlank(clave2) && !clave1.equals(clave2)) {
+                addFieldError("", "Las claves no coinciden.");
+                flag = false;
+            }
         }
         return flag;
     }
 
     public String modificar() {
+        if (!validarModificar()) {
+            return INPUT;
+        }
+        Usuario user = (Usuario) sesion.get("user");
+        String claveMD5 = Soporte.Encriptar.encriptaEnMD5(clave0);
+        if (!claveMD5.equals(user.getClave())) {
+            addFieldError("", "Su clave ingresada no es correcta.");
+            return INPUT;
+        }
+        String result = SUCCESS;
+        //esta por cambiar la clave
+        if (StringUtils.isNotBlank(clave1)) {
+            result = "cambiaClave";
+            usuario.setClave(clave1);
+            sesion.put("user", null);
+        } else {
+            usuario.setClave(clave0);
+        }
+        controladorUsuario.actualizar(usuario);
+        return result;
+    }
 
+    public String cargarUsuario() {
+        Usuario user = (Usuario) sesion.get("user");
+        usuario = controladorUsuario.getUsuarioByNick(user.getNick());
         return SUCCESS;
     }
 
@@ -196,16 +233,8 @@ public class UsuarioAction extends ActionSupport {
         this.codigo = codigo;
     }
 
-    public String getClave1() {
-        return clave1;
-    }
-
     public void setClave1(String clave1) {
         this.clave1 = clave1;
-    }
-
-    public String getClave2() {
-        return clave2;
     }
 
     public void setClave2(String clave2) {
@@ -226,6 +255,18 @@ public class UsuarioAction extends ActionSupport {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setClave0(String clave0) {
+        this.clave0 = clave0;
     }
 
 }

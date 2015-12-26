@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-sep-2013 15:59:20 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Persistencia.Modelo.Usuario" table="usuario">
+        <id column="id_usuario" name="idUsuario" type="java.lang.Integer">
+            <generator class="identity"/>
+        </id>
+        <property column="nick"  name="nick" type="string"/>   
+        <property column="clave"  name="clave" type="string"/>      
+        <property column="nombre"  name="nombre" type="string"/>      
+        <property column="apellido" name="apellido" type="string"/>      
+        <property column="codigo" name="codigo" type="string"/>      
+        <property column="email"  name="email" type="string"/>      
+        <property column="fechaCreacionCodigo" name="fechaCreacionCodigo" />      
+    </class>
+</hibernate-mapping>

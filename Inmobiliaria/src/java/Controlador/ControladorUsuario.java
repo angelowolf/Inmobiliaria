@@ -48,6 +48,7 @@ public class ControladorUsuario {
     public void actualizar(Usuario u) {
         u.setApellido(WordUtils.capitalize(u.getNombre()));
         u.setNombre(WordUtils.capitalize(u.getNombre()));
+        u.setClave(Encriptar.encriptaEnMD5(u.getClave()));
         usuarioDAO.actualizar(u);
     }
 
