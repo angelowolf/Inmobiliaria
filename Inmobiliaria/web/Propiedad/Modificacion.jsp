@@ -43,6 +43,9 @@
                     <s:textfield name="propiedad.bano" label="Baños" placeholder="Ingrese la cantidad de baños" />
                 </div>
                 <div class="col-md-8 col-md-offset-2 input">
+                    <s:textfield name="propiedad.baño" label="Baños" placeholder="Ingrese la cantidad de baños" />
+                </div>
+                <div class="col-md-8 col-md-offset-2 input">
                     <s:textfield name="propiedad.terreno" label="Terreno" placeholder="Ingrese la superficie del terreno" />
                 </div>
                 <div class="col-md-8 col-md-offset-2 input">

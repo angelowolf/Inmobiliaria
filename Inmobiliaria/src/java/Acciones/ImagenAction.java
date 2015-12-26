@@ -71,8 +71,11 @@ public class ImagenAction extends ActionSupport {
             in.close();
 
         } catch (Exception e) {
+            sesion.put("exito", e.toString());
             e.printStackTrace();
         }
+
+        sesion.put("exito", sss);
         return null;
     }
 
