@@ -26,8 +26,17 @@ public class Propiedad {
     private TipoMoneda tipoMoneda;
     private ImagenPropiedad imagenDefault;
     private float precio;
+    private boolean oportunidad;
 
     public Propiedad() {
+    }
+
+    public boolean isOportunidad() {
+        return oportunidad;
+    }
+
+    public void setOportunidad(boolean oportunidad) {
+        this.oportunidad = oportunidad;
     }
 
     public float getPrecio() {

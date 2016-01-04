@@ -6,6 +6,7 @@
 package Acciones;
 
 import Controlador.ControladorAmbiente;
+import Controlador.ControladorDestacado;
 import Controlador.ControladorImagenPropiedad;
 import Controlador.ControladorPropiedad;
 import Controlador.ControladorServicio;
@@ -17,6 +18,7 @@ import Persistencia.Modelo.Propiedad;
 import Persistencia.Modelo.Servicio;
 import Persistencia.Modelo.TipoMoneda;
 import Persistencia.Modelo.TipoPropiedad;
+import Soporte.Mensaje;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -42,6 +44,7 @@ public class PropiedadAction extends ActionSupport {
     private Propiedad propiedad = new Propiedad();
     private List<Propiedad> propiedadLista = new ArrayList<Propiedad>();
     private final ControladorPropiedad controladorPropiedad = new ControladorPropiedad();
+    private final ControladorDestacado controladorDestacado = new ControladorDestacado();
     private final ControladorServicio controladorServicio = new ControladorServicio();
     private final ControladorAmbiente controladorAmbiente = new ControladorAmbiente();
     private final ControladorImagenPropiedad controladorImagenPropiedad = new ControladorImagenPropiedad();
@@ -66,23 +69,23 @@ public class PropiedadAction extends ActionSupport {
     private boolean validar() {
         boolean flag = true;
         if (propiedad.getDireccion().trim().isEmpty()) {
-            addFieldError("", "Ingrese una direccion.");
+            addFieldError("", Mensaje.ingreseDireccion);
             flag = false;
         }
         if (propiedad.getCodigoPropiedad() == 0) {
-            addFieldError("", "Ingrese un codigo.");
+            addFieldError("", Mensaje.ingreseUnCodigo);
             flag = false;
         }
         if (propiedad.getLongitud() == 0 || propiedad.getLatitud() == 0) {
-            addFieldError("", "Seleccione una ubicacion en el mapa.");
+            addFieldError("", Mensaje.seleccioneUbicacion);
             flag = false;
         }
         if (propiedad.getTipoMoneda().getIdTipoMoneda() <= 0) {
-            addFieldError("", "Seleccione una moneda.");
+            addFieldError("", Mensaje.seleccioneMoneda);
             flag = false;
         }
-        if (propiedad.getTipoPropiedad().getIdTipoPropiedad()<= 0) {
-            addFieldError("", "Seleccione un tipo de propiedad.");
+        if (propiedad.getTipoPropiedad().getIdTipoPropiedad() <= 0) {
+            addFieldError("", Mensaje.seleccioneTipoPropiedad);
             flag = false;
         }
         return flag;
@@ -91,7 +94,7 @@ public class PropiedadAction extends ActionSupport {
     private boolean validarGuardar() {
         boolean flag = validar();
         if (imagen == null || imagen.isEmpty()) {
-            addFieldError("", "Ingrese al menos una imagen.");
+            addFieldError("", Mensaje.ingreseUnaImagen);
             flag = false;
         }
         return flag;
@@ -102,12 +105,12 @@ public class PropiedadAction extends ActionSupport {
         if (imagen == null || imagen.isEmpty()) {
             if (imagenesElegidos != null) {
                 if (imagenesElegidos.length == 1 && imagenesElegidos[0].equals("false")) {
-                    addActionError("La propiedad debe contar con una imagen como minimo.");
+                    addActionError(Mensaje.imagenMinimo);
                     cargarServiciosINPUT();
                     flag = false;
                 }
             } else {
-                addActionError("La propiedad debe contar con una imagen como minimo.");
+                addActionError(Mensaje.imagenMinimo);
                 cargarServiciosINPUT();
                 flag = false;
             }
@@ -165,7 +168,7 @@ public class PropiedadAction extends ActionSupport {
             propiedad.addImagenPropiedad(imagenPropiedad);
         }
         int idPropiedad = controladorPropiedad.guardar(propiedad);
-        sesion.put("mensaje", "Propiedad Agregada.");
+        sesion.put("mensaje", Mensaje.getAgregada(Mensaje.propiedad));
         return SUCCESS;
     }
 
@@ -243,7 +246,6 @@ public class PropiedadAction extends ActionSupport {
 //        String ruta = STORAGE_PATH + "ImagenPropiedad\\" + propiedad.getCodigoPropiedad();
 //        ruta += "\\" + propiedad.getCodigoPropiedad();
         String ruta = STORAGE_PATH + "ImagenPropiedad/" + propiedad.getCodigoPropiedad();
-        sesion.put("ruta", ruta);
         File directorio = new File(ruta);
         if (!directorio.exists()) {
             directorio.mkdirs();
@@ -291,7 +293,7 @@ public class PropiedadAction extends ActionSupport {
 
         //ACTUALIZO LOS CAMBIOS
         controladorPropiedad.actualizar(propiedad);
-        sesion.put("mensaje", "Propiedad Modificada.");
+        sesion.put("mensaje", Mensaje.getModificada(Mensaje.propiedad));
         return SUCCESS;
     }
 
@@ -300,12 +302,13 @@ public class PropiedadAction extends ActionSupport {
         String mensaje = (String) sesion.get("mensaje");
         addActionMessage(mensaje);
         sesion.put("mensaje", "");
-        try {
-            for (Propiedad propiedadLista1 : propiedadLista) {
-                propiedadLista1.setImagenDefault(propiedadLista1.getImagenes().get(0));
+        for (Propiedad cadaPropiedad : propiedadLista) {
+            try {
+                cadaPropiedad.setImagenDefault(cadaPropiedad.getImagenes().get(0));
+
+            } catch (IndexOutOfBoundsException e) {
+                addActionError("Algunas propiedades no poseen imagenes.");
             }
-        } catch (IndexOutOfBoundsException e) {
-            addActionError("Algunas propiedades no poseen imagenes.");
         }
 
         return SUCCESS;
@@ -314,11 +317,14 @@ public class PropiedadAction extends ActionSupport {
     public String eliminar() {
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         int id = Integer.parseInt(request.getParameter("idPropiedad"));
-        Propiedad p = controladorPropiedad.getOne(id);
-        String ruta = ServletActionContext.getServletContext().getRealPath("ImagenPropiedad");
-        ruta += "/" + p.getCodigoPropiedad();
-        controladorPropiedad.eliminar(id, ruta);
-        sesion.put("mensaje", "Propiedad Eliminada.");
+        if (controladorPropiedad.propiedadEnUso(id)) {
+            sesion.put("alerta", Mensaje.getUsado(Mensaje.propiedad, Mensaje.propiedadDestacada));
+        } else {
+            Propiedad p = controladorPropiedad.getOne(id);
+            String ruta = STORAGE_PATH + "ImagenPropiedad/" + p.getCodigoPropiedad();
+            controladorPropiedad.eliminar(id, ruta);
+            sesion.put("mensaje", Mensaje.getEliminada(Mensaje.propiedad));
+        }
         return SUCCESS;
     }
 
@@ -344,6 +350,19 @@ public class PropiedadAction extends ActionSupport {
         this.cargarTipoMoneda();
         this.cargarTipoPropiedad();
         return "nuevo";
+    }
+
+    public String oportunidad() {
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        propiedad = controladorPropiedad.getOne(Integer.parseInt(request.getParameter("idPropiedad")));
+        if (propiedad.isOportunidad()) {
+            propiedad.setOportunidad(false);
+        } else {
+            propiedad.setOportunidad(true);
+        }
+        controladorPropiedad.actualizar(propiedad);
+        sesion.put("mensaje", "Oportunidad modificada !");
+        return SUCCESS;
     }
 
     private void cargarTipoMoneda() {

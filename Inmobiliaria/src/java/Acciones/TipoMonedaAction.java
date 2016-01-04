@@ -7,6 +7,7 @@ package Acciones;
 
 import Controlador.ControladorTipoMoneda;
 import Persistencia.Modelo.TipoMoneda;
+import Soporte.Mensaje;
 import static com.opensymphony.xwork2.Action.INPUT;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
@@ -37,17 +38,17 @@ public class TipoMonedaAction extends ActionSupport implements ModelDriven<TipoM
     private boolean validar() {
         boolean flag = true;
         if (tipoMoneda.getNombre().trim().isEmpty()) {
-            addFieldError("tipoMoneda.nombre", "Ingrese un nombre.");
+            addFieldError("tipoMoneda.nombre", Mensaje.ingreseNombre);
             flag = false;
 
         } else {
             if (controladorTipoMoneda.existe(tipoMoneda)) {
-                addFieldError("tipoMoneda.nombre", "La moneda ya existe!.");
+                addFieldError("tipoMoneda.nombre", Mensaje.getElExiste(Mensaje.tipoMoneda));
                 flag = false;
             }
         }
         if (tipoMoneda.getSigla().trim().isEmpty()) {
-            addFieldError("tipoMoneda.simbolo", "Ingrese un simbolo.");
+            addFieldError("tipoMoneda.simbolo", Mensaje.ingreseSimbolo);
             flag = false;
 
         }
@@ -61,10 +62,10 @@ public class TipoMonedaAction extends ActionSupport implements ModelDriven<TipoM
         }
         if (tipoMoneda.getIdTipoMoneda() != 0) {
             controladorTipoMoneda.actualizar(tipoMoneda);
-            sesion.put("mensaje", "Moneda Modificada.");
+            sesion.put("mensaje", Mensaje.getModificado(Mensaje.tipoMoneda));
         } else {
             controladorTipoMoneda.guardar(tipoMoneda);;
-            sesion.put("mensaje", "Moneda Agregado.");
+            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.tipoMoneda));
         }
         return SUCCESS;
     }
@@ -85,10 +86,10 @@ public class TipoMonedaAction extends ActionSupport implements ModelDriven<TipoM
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         int id = Integer.parseInt(request.getParameter("idTipoMoneda"));
         if (controladorTipoMoneda.tipoMonedaEnUso(id)) {
-            sesion.put("alerta", "La Moneda esta siendo utilizada por algunas propiedades, debe eliminar esas propiedades para poder eliminar esta moneda!");
+            sesion.put("alerta", Mensaje.getUsado(Mensaje.tipoMoneda, Mensaje.propiedad));
         } else {
             controladorTipoMoneda.eliminar(id);
-            sesion.put("mensaje", "Moneda Eliminada.");
+            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.tipoMoneda));
         }
         return SUCCESS;
     }

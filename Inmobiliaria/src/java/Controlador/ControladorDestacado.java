@@ -7,6 +7,9 @@ package Controlador;
 
 import Persistencia.DAO.Implementacion.DestacadoDAO;
 import Persistencia.Modelo.Destacado;
+import Soporte.Archivo;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import org.apache.commons.lang.WordUtils;
 
@@ -50,4 +53,19 @@ public class ControladorDestacado {
         return destacadoDAO.buscar(id);
     }
 
+    public void eliminar(Destacado d, String ruta) {
+        ControladorImagen ci = new ControladorImagen();
+        int idImagen = d.getImagen().getIdImagen();
+        destacadoDAO.eliminar(d);
+        ci.eliminar(idImagen);
+        //Eliminar archivos.
+        File directory = new File(ruta);
+        if (directory.exists()) {
+            try {
+                Archivo.delete(directory);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

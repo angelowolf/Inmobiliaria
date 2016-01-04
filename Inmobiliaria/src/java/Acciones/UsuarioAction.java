@@ -9,6 +9,7 @@ import Controlador.ControladorEmail;
 import Controlador.ControladorUsuario;
 import Persistencia.Modelo.Usuario;
 import Soporte.Encriptar;
+import Soporte.Mensaje;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.Date;
@@ -32,10 +33,10 @@ public class UsuarioAction extends ActionSupport {
     public boolean validarLogin() {
         boolean flag = true;
         if (password == null || password.trim().isEmpty()) {
-            addFieldError("password", "Ingrese una clave.");
+            addFieldError("password", Mensaje.ingreseClave);
         }
         if (username == null || username.trim().isEmpty()) {
-            addFieldError("username", "Ingrese el usuario.");
+            addFieldError("username", Mensaje.ingreseUsuario);
         }
         return flag;
     }
@@ -48,7 +49,7 @@ public class UsuarioAction extends ActionSupport {
             Usuario u = controladorUsuario.getUsuarioByNick(username);
             sesion.put("user", u);
         } else {
-            addFieldError("", "Usuario o Contraseña incorrectos.");
+            addFieldError("", Mensaje.userClaveIncorrecto);
             return INPUT;
         }
         return SUCCESS;
@@ -57,12 +58,12 @@ public class UsuarioAction extends ActionSupport {
     private boolean validarRecuperar() {
         boolean flag = true;
         if (email == null || email.trim().isEmpty()) {
-            addFieldError("email", "Ingrese un email.");
+            addFieldError("email", Mensaje.ingreseMail);
             flag = false;
         } else {
             usuario = controladorUsuario.getUsuarioByEmail(email);
             if (usuario == null) {
-                addFieldError("email", "Error al validar el usuario.");
+                addFieldError("email", Mensaje.errorValidar);
                 flag = false;
             }
         }
@@ -74,18 +75,25 @@ public class UsuarioAction extends ActionSupport {
             return INPUT;
         }
         Date ahora = new Date();
-        long segundos = (ahora.getTime() - usuario.getFechaCreacionCodigo().getTime()) / 1000;
+        long segundos = 0;
+        boolean flag = false;
+        if (usuario.getFechaCreacionCodigo() == null) {
+            flag = true;
+        } else {
+            segundos = (ahora.getTime() - usuario.getFechaCreacionCodigo().getTime()) / 1000;
+        }
+
         //900 segundos = 15 minutos
         long tiempoMinimo = 60 * minutoMinimo;
-        if (segundos > tiempoMinimo) {
+        if (segundos > tiempoMinimo || flag) {
             String codigoCreado = controladorUsuario.crearCodigoRecuperacion(usuario);
             //enviar codigo al mail
             ControladorEmail ce = new ControladorEmail();
             ce.metodo(usuario.getEmail(), "Recuperar Contraseña", "El codigo para poder cambiar su contraseña es:"
                     + "\n" + codigoCreado + "");
-            addActionMessage("Se ha enviado un email con el codigo a la direccion ingresada. Verifique en la carpeta de SPAM.");
+            addActionMessage(Mensaje.codigoCreado);
         } else {
-            addActionMessage("Ya se ha enviado un email con el codigo a la direccion ingresada. En " + minutoMinimo + " minutos podra generar otro codigo.");
+            addActionMessage(Mensaje.getCodigoYaEnviado(minutoMinimo));
         }
 
         return SUCCESS;
@@ -94,33 +102,33 @@ public class UsuarioAction extends ActionSupport {
     private boolean validarResetear() {
         boolean flag = true;
         if (email == null || email.trim().isEmpty()) {
-            addFieldError("email", "Ingrese un email.");
+            addFieldError("email", Mensaje.ingreseMail);
             flag = false;
         } else {
             usuario = controladorUsuario.getUsuarioByEmail(email);
             if (usuario == null) {
-                addFieldError("email", "Error al validar el usuario.");
+                addFieldError("email", Mensaje.errorValidar);
                 flag = false;
             }
         }
         if (codigo == null || codigo.trim().isEmpty()) {
-            addFieldError("codigo", "Ingrese el codigo.");
+            addFieldError("codigo", Mensaje.ingreseCodigo);
             flag = false;
         }
         if (clave1 == null || clave1.trim().isEmpty()) {
-            addFieldError("clave1", "Ingrese la nueva clave.");
+            addFieldError("clave1", Mensaje.ingreseNuevaClave);
             flag = false;
         } else {
             if (clave1.trim().length() < 5) {
-                addFieldError("clave1", "Minimo 5 caracteres");
+                addFieldError("clave1", Mensaje.minimoCaracteres);
                 flag = false;
             } else {
                 if (clave2 == null || clave2.trim().isEmpty()) {
-                    addFieldError("clave2", "Repita la clave.");
+                    addFieldError("clave2", Mensaje.repitaClave);
                     flag = false;
                 } else {
                     if (clave2.trim().length() < 5) {
-                        addFieldError("clave2", "Minimo 5 caracteres");
+                        addFieldError("clave2", Mensaje.repitaClave);
                         flag = false;
                     }
                 }
@@ -128,7 +136,7 @@ public class UsuarioAction extends ActionSupport {
         }
         if (clave1 != null && clave2 != null && !clave1.isEmpty() && !clave2.isEmpty()) {
             if (!clave1.equals(clave2)) {
-                addFieldError("clave2", "La clave no coincide.");
+                addFieldError("clave2", Mensaje.claveNoCoincide);
                 flag = false;
             }
         }
@@ -144,11 +152,11 @@ public class UsuarioAction extends ActionSupport {
             String claveMD5 = Encriptar.encriptaEnMD5(clave1);
             usuario.setClave(claveMD5);
             controladorUsuario.actualizar(usuario);
-            addActionMessage("Clave cambiada con exito!");
+            addActionMessage(Mensaje.claveCambiada);
             //si se cambia la clave, cambio el codigo por otro..
             controladorUsuario.crearCodigoRecuperacion(usuario);
         } else {
-            addActionError("El codigo ingresado no es correcto.");
+            addActionError(Mensaje.codigoIncorrecto);
             return INPUT;
         }
         return SUCCESS;
@@ -157,31 +165,31 @@ public class UsuarioAction extends ActionSupport {
     public boolean validarModificar() {
         boolean flag = true;
         if (StringUtils.isBlank(usuario.getNombre())) {
-            addFieldError("", "Ingrese un nombre.");
+            addFieldError("", Mensaje.ingreseNombre);
             flag = false;
         }
         if (StringUtils.isBlank(usuario.getApellido())) {
-            addFieldError("", "Ingrese un apellido.");
+            addFieldError("", Mensaje.ingreseApellido);
             flag = false;
         }
         if (StringUtils.isBlank(usuario.getNick())) {
-            addFieldError("", "Ingrese un nick.");
+            addFieldError("", Mensaje.ingreseNick);
             flag = false;
         }
         if (StringUtils.isBlank(usuario.getEmail())) {
-            addFieldError("", "Ingrese un email.");
+            addFieldError("", Mensaje.ingreseMail);
             flag = false;
         }
         if (StringUtils.isBlank(clave0)) {
-            addFieldError("", "Ingrese su contraseña actual.");
+            addFieldError("", Mensaje.ingreseClaveActual);
             flag = false;
         }
         if (StringUtils.isBlank(clave1) && StringUtils.isNotBlank(clave2) || StringUtils.isBlank(clave2) || StringUtils.isNotBlank(clave1)) {
-            addFieldError("", "Repita la nueva clave.");
+            addFieldError("", Mensaje.repitaClave);
             flag = false;
         } else {
             if (StringUtils.isNotBlank(clave1) && StringUtils.isNotBlank(clave2) && !clave1.equals(clave2)) {
-                addFieldError("", "Las claves no coinciden.");
+                addFieldError("", Mensaje.claveNoCoincide);
                 flag = false;
             }
         }
@@ -195,7 +203,7 @@ public class UsuarioAction extends ActionSupport {
         Usuario user = (Usuario) sesion.get("user");
         String claveMD5 = Soporte.Encriptar.encriptaEnMD5(clave0);
         if (!claveMD5.equals(user.getClave())) {
-            addFieldError("", "Su clave ingresada no es correcta.");
+            addFieldError("", Mensaje.claveIngresadaMal);
             return INPUT;
         }
         String result = SUCCESS;

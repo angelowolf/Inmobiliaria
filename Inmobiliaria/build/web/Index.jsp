@@ -1,4 +1,3 @@
-
 <%@taglib uri="/struts-tags" prefix="s"%>
 <style type="text/css">
     .carousel-caption a{
@@ -28,7 +27,6 @@
                 </s:else>
             </s:iterator>
     </ol>-->
-
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox" >
                 <s:iterator value="destacados" var="destacado" status="stat">
@@ -76,6 +74,11 @@
 <div class="container">
     <h2 class="page-header text-center"><br><br>Oportunidades</h2>
     <div class="row">
+        <s:iterator var="oportunidad" value="propiedades">
+            <h4><a href="<s:url action="ver" namespace="/">
+                       <s:param name="idPropiedad"><s:property value="%{#oportunidad.idPropiedad}"/></s:param>
+                   </s:url>"><s:property value="%{#oportunidad.nombre}"/></a></h4>
 
+        </s:iterator>
     </div>
 </div>

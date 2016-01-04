@@ -11,19 +11,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
-        <!--        <link href="/../css/bootstrap.min.css" rel="stylesheet">
+                <link href="/../css/bootstrap.min.css" rel="stylesheet">
                 <link href="/../font-awesome/css/font-awesome.min.css" rel="stylesheet"> 
                 <link href="/../css/animate.min.css" media="all" rel="stylesheet">
                 <link href="/../css/font-google.css" rel="stylesheet" type="text/css">
                 <link href="/../css/stylesLogin.css" media="all" rel="stylesheet">
-                <script src="/../js/modernizr.min.js"></script>-->
+                <script src="/../js/modernizr.min.js"></script>
 
-        <link href="/Inmobiliaria/css/bootstrap.min.css" rel="stylesheet">
+<!--        <link href="/Inmobiliaria/css/bootstrap.min.css" rel="stylesheet">
         <link href="/Inmobiliaria/font-awesome/css/font-awesome.min.css" rel="stylesheet"> 
         <link href="/Inmobiliaria/css/animate.min.css" media="all" rel="stylesheet">
         <link href="/Inmobiliaria/css/font-google.css" rel="stylesheet" type="text/css">
         <link href="/Inmobiliaria/css/stylesLogin.css" media="all" rel="stylesheet">
-        <script src="/Inmobiliaria/js/modernizr.min.js"></script>
+        <script src="/Inmobiliaria/js/modernizr.min.js"></script>-->
     </head>
 
     <body>
@@ -57,17 +57,17 @@
                 </div>
                 <div class="">
                     <!--                    <a href="/../Admin/RecuperarCuenta.jsp">¿Olvidaste la contraseña?</a>-->
-                    <a href="/Inmobiliaria/Admin/RecuperarCuenta.jsp">¿Olvidaste la contraseña?</a>
+                    <a href="/Admin/RecuperarCuenta.jsp">¿Olvidaste la contraseña?</a>
                 </div>
             </s:form>
         </div>
-        <!--        <script src="/../js/jquery-2.1.1.min.js"></script>
+                <script src="/../js/jquery-2.1.1.min.js"></script>
                 <script src="/../js/jquery.validation.js"></script>
                 <script src="/../js/messages_es.js"></script>
-                <script src="/../js/main.js"></script>-->
-        <script src="/Inmobiliaria/js/jquery-2.1.1.min.js"></script>
+                <script src="/../js/main.js"></script>
+<!--        <script src="/Inmobiliaria/js/jquery-2.1.1.min.js"></script>
         <script src="/Inmobiliaria/js/jquery.validation.js"></script>
         <script src="/Inmobiliaria/js/messages_es.js"></script>
-        <script src="/Inmobiliaria/js/main.js"></script>
+        <script src="/Inmobiliaria/js/main.js"></script>-->
     </body>
 </html>

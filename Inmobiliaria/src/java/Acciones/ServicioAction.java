@@ -7,6 +7,7 @@ package Acciones;
 
 import Controlador.ControladorServicio;
 import Persistencia.Modelo.Servicio;
+import Soporte.Mensaje;
 import static com.opensymphony.xwork2.Action.INPUT;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
@@ -37,12 +38,12 @@ public class ServicioAction extends ActionSupport implements ModelDriven<Servici
     private boolean validar() {
         boolean flag = true;
         if (servicio.getNombre().trim().isEmpty()) {
-            addFieldError("servicio.nombre", "Ingrese un nombre.");
+            addFieldError("servicio.nombre", Mensaje.ingreseNombre);
             flag = false;
 
         } else {
             if (controladorServicio.existe(servicio)) {
-                addFieldError("servicio.nombre", "El servicio ya existe!.");
+                addFieldError("servicio.nombre", Mensaje.getElExiste(Mensaje.servicio));
                 flag = false;
             }
         }
@@ -56,10 +57,10 @@ public class ServicioAction extends ActionSupport implements ModelDriven<Servici
         }
         if (servicio.getIdServicio() != 0) {
             controladorServicio.actualizar(servicio);
-            sesion.put("mensaje", "Servicio Modificado.");
+            sesion.put("mensaje", Mensaje.getModificado(Mensaje.servicio));
         } else {
             controladorServicio.guardar(servicio);;
-            sesion.put("mensaje", "Servicio Agregado.");
+            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.servicio));
         }
         return SUCCESS;
     }
@@ -80,10 +81,10 @@ public class ServicioAction extends ActionSupport implements ModelDriven<Servici
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         int id = Integer.parseInt(request.getParameter("idServicio"));
         if (controladorServicio.servicioEnUso(id)) {
-            sesion.put("alerta", "El servicio esta siendo utilizado por algunas propiedades, debe eliminar esas propiedades para poder eliminar este servicio!");
+            sesion.put("alerta", Mensaje.getUsado(Mensaje.servicio, Mensaje.propiedad));
         } else {
             controladorServicio.eliminar(id);
-            sesion.put("mensaje", "Servicio Eliminado.");
+            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.servicio));
         }
         return SUCCESS;
     }

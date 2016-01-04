@@ -16,6 +16,7 @@
         <property column="terreno" name="terreno"/>
         <property column="edificado" name="edificado"/>
         <property column="precio" name="precio"/>
+        <property column="oportunidad" name="oportunidad"/>
         <list name="servicios" table="servicios_propiedades">
             <key column="id_propiedad"/>
             <index column="ORDEN"/>

@@ -33,13 +33,16 @@
         <action name="editar" method="editar" class="Acciones.PropiedadAction">
             <result name="success" type="tiles">/Propiedad/Modificacion.tiles</result>
         </action> 
+        <action name="oportunidad" method="oportunidad" class="Acciones.PropiedadAction">
+            <result name="success" type="redirect">listar</result>
+        </action> 
         <action name="nuevo" method="nuevo" class="Acciones.PropiedadAction">
             <result name="nuevo" type="tiles">/Propiedad/Alta.tiles</result>
         </action>      
         <action name="ver" method="execute" class="Acciones.VerPropiedadAction">
             <result name="success" type="tiles">/Propiedad/Ver.tiles</result>
         </action>        
-         <action name="asd" method="execute" class="Acciones.Asd">
+        <action name="asd" method="execute" class="Acciones.Asd">
             <result name="success">/test.jsp</result>
         </action>              
     </package>

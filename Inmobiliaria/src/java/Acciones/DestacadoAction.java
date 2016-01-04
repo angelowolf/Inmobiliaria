@@ -11,6 +11,7 @@ import Controlador.ControladorPropiedad;
 import Persistencia.Modelo.Destacado;
 import Persistencia.Modelo.Imagen;
 import Persistencia.Modelo.Propiedad;
+import Soporte.Mensaje;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -49,11 +50,11 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
     private boolean validar() {
         boolean flag = true;
         if (destacado.getNombre().trim().isEmpty()) {
-            addFieldError("destacado.nombre", "Ingrese un titulo.");
+            addFieldError("destacado.nombre", Mensaje.ingreseTitulo);
             flag = false;
         }
         if (destacado.getPropiedad().getIdPropiedad() <= 0) {
-            addFieldError("", "Seleccione una propiedad.");
+            addFieldError("", Mensaje.seleccionePropiedad);
             flag = false;
         }
         return flag;
@@ -66,7 +67,7 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
         }
         if (destacado.getIdDestacado() != 0) {
             controladorDestacado.actualizar(destacado);
-            sesion.put("mensaje", "Propiedad Destacada Modificada.");
+            sesion.put("mensaje", Mensaje.getModificada(Mensaje.propiedadDestacada));
         } else {
             int id = destacado.getPropiedad().getIdPropiedad();
             String ruta = STORAGE_PATH + "ImagenDestacada/" + id;
@@ -87,7 +88,7 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
             ControladorImagen ci = new ControladorImagen();
             ci.guardar(im);
             controladorDestacado.guardar(destacado);
-            sesion.put("mensaje", "Propiedad Destacada Agregado.");
+            sesion.put("mensaje", Mensaje.getAgregada(Mensaje.propiedadDestacada));
         }
         return SUCCESS;
     }
@@ -111,8 +112,10 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
 
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         int id = Integer.parseInt(request.getParameter("idDestacado"));
-        controladorDestacado.eliminar(id);
-        sesion.put("mensaje", "Propiedad Destacada Eliminada.");
+        Destacado d = controladorDestacado.getOne(id);
+        String ruta = STORAGE_PATH + "ImagenDestacado/" + d.getIdDestacado();
+        controladorDestacado.eliminar(d, ruta);
+        sesion.put("mensaje", Mensaje.getEliminada(Mensaje.propiedadDestacada));
 
         return SUCCESS;
     }

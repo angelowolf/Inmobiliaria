@@ -7,8 +7,10 @@ package Acciones;
 
 import Controlador.ControladorContacto;
 import Persistencia.Modelo.Contacto;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import java.util.Map;
 
 /**
  *
@@ -18,6 +20,7 @@ public class ContactoAction extends ActionSupport implements ModelDriven<Contact
 
     private Contacto contacto = new Contacto();
     private final ControladorContacto controladorContacto = new ControladorContacto();
+    private final Map<String, Object> application = ActionContext.getContext().getApplication();
 
     @Override
     public Contacto getModel() {
@@ -33,6 +36,7 @@ public class ContactoAction extends ActionSupport implements ModelDriven<Contact
             controladorContacto.guardar(contacto);
             addActionMessage("Contacto Agregado.");
         }
+        application.put("contacto", contacto);
         return SUCCESS;
 
     }

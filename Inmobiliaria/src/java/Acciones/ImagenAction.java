@@ -41,12 +41,16 @@ public class ImagenAction extends ActionSupport {
 
         try {
             String path = "";
-            if (idImagen != 0) {
+            if (idImagen > 0) {
                 ImagenPropiedad id = controladorImagenPropiedad.getOne(idImagen);
                 path = id.getRuta();
             } else {
-                Imagen imagen = controladorImagen.getOne(idImagenDestacado);
-                path = imagen.getRuta();
+                if (idImagenDestacado > 0) {
+                    Imagen imagen = controladorImagen.getOne(idImagenDestacado);
+                    path = imagen.getRuta();
+                } else {
+                    return null;
+                }
             }
             response.setContentType("image/jpeg,Image/jpg,Image/png");
             file = new File(path);
@@ -67,7 +71,7 @@ public class ImagenAction extends ActionSupport {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }     
+        }
         return null;
     }
 

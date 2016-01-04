@@ -7,6 +7,7 @@ package Acciones;
 
 import Controlador.ControladorAmbiente;
 import Persistencia.Modelo.Ambiente;
+import Soporte.Mensaje;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -26,7 +27,7 @@ public class AmbienteAction extends ActionSupport implements ModelDriven<Ambient
     private List<Ambiente> ambienteLista = new ArrayList<Ambiente>();
     private final ControladorAmbiente controladorAmbiente = new ControladorAmbiente();
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
-    
+
     @Override
     public Ambiente getModel() {
         return ambiente;
@@ -35,11 +36,11 @@ public class AmbienteAction extends ActionSupport implements ModelDriven<Ambient
     private boolean validar() {
         boolean flag = true;
         if (ambiente.getNombre().trim().isEmpty()) {
-            addFieldError("ambiente.nombre", "Ingrese un nombre.");
+            addFieldError("ambiente.nombre", Mensaje.ingreseNombre);
             flag = false;
         } else {
             if (controladorAmbiente.existe(ambiente)) {
-                addFieldError("ambiente.nombre", "El ambiente ya existe!.");
+                addFieldError("ambiente.nombre", Mensaje.getElExiste(Mensaje.ambiente));
                 flag = false;
             }
         }
@@ -52,10 +53,10 @@ public class AmbienteAction extends ActionSupport implements ModelDriven<Ambient
         }
         if (ambiente.getIdAmbiente() != 0) {
             controladorAmbiente.actualizar(ambiente);
-            sesion.put("mensaje", "Ambiente Modificado.");
+            sesion.put("mensaje", Mensaje.getModificado(Mensaje.ambiente));
         } else {
             controladorAmbiente.guardar(ambiente);;
-            sesion.put("mensaje", "Ambiente Agregado.");
+            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.ambiente));
         }
         return SUCCESS;
     }
@@ -76,10 +77,10 @@ public class AmbienteAction extends ActionSupport implements ModelDriven<Ambient
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         int id = Integer.parseInt(request.getParameter("idAmbiente"));
         if (controladorAmbiente.ambienteEnUso(id)) {
-            sesion.put("alerta", "El ambiente esta siendo utilizado por algunas propiedades, debe eliminar esas propiedades para poder eliminar este ambiente!");
+            sesion.put("alerta", Mensaje.getUsado(Mensaje.ambiente, Mensaje.propiedad));
         } else {
             controladorAmbiente.eliminar(id);
-            sesion.put("mensaje", "Ambiente Eliminado.");
+            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.ambiente));
         }
         return SUCCESS;
     }

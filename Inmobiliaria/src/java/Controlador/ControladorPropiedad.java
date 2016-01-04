@@ -9,6 +9,7 @@ import Persistencia.DAO.Implementacion.ImagenPropiedadDAO;
 import Persistencia.DAO.Implementacion.PropiedadDAO;
 import Persistencia.Modelo.ImagenPropiedad;
 import Persistencia.Modelo.Propiedad;
+import Soporte.Archivo;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,12 +29,12 @@ public class ControladorPropiedad {
     }
 
     public int guardar(Propiedad o) {
-       o.setDireccion(WordUtils.capitalize(o.getDireccion()));
+        o.setDireccion(WordUtils.capitalize(o.getDireccion()));
         return propiedadDAO.guardar(o);
     }
 
     public void actualizar(Propiedad o) {
-       o.setDireccion(WordUtils.capitalize(o.getDireccion()));
+        o.setDireccion(WordUtils.capitalize(o.getDireccion()));
         propiedadDAO.actualizar(o);
     }
 
@@ -63,7 +64,7 @@ public class ControladorPropiedad {
         File directory = new File(ruta);
         if (directory.exists()) {
             try {
-                delete(directory);
+                Archivo.delete(directory);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -74,36 +75,15 @@ public class ControladorPropiedad {
         return propiedadDAO.buscar(id);
     }
 
-    private static void delete(File file)
-            throws IOException {
+    public List<Propiedad> getOportunidades() {
+        return propiedadDAO.listarOportunidades();
+    }
 
-        if (file.isDirectory()) {
+    public List<Propiedad> buscar(int idTipoPropiedad, int habitacion, int bano) {
+        return propiedadDAO.buscar(idTipoPropiedad, habitacion, bano);
+    }
 
-            //directory is empty, then delete it
-            if (file.list().length == 0) {
-                file.delete();
-            } else {
-
-                //list all the directory contents
-                String files[] = file.list();
-
-                for (String temp : files) {
-                    //construct the file structure
-                    File fileDelete = new File(file, temp);
-
-                    //recursive delete
-                    delete(fileDelete);
-                }
-
-                //check the directory again, if empty then delete it
-                if (file.list().length == 0) {
-                    file.delete();
-                }
-            }
-
-        } else {
-            //if file, then delete it
-            file.delete();
-        }
+    public boolean propiedadEnUso(int id) {
+        return !propiedadDAO.propiedadEnUso(id).isEmpty();
     }
 }

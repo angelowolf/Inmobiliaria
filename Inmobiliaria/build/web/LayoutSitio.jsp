@@ -12,15 +12,15 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title><tiles:insertAttribute name="title" ignore="true" /></title>
-        <!--        <link href="/../css/jquery-ui.min.css" rel="stylesheet" />
+                <link href="/../css/jquery-ui.min.css" rel="stylesheet" />
                 <link href="/../css/bootstrap.min.css" rel="stylesheet">
                 <link href="/../font-awesome/css/font-awesome.min.css" rel="stylesheet"> 
-                <link href="/../css/estilos.css" rel="stylesheet"/>-->
+                <link href="/../css/estilos.css" rel="stylesheet"/>
 
-        <link href="/Inmobiliaria/css/jquery-ui.min.css" rel="stylesheet" />
+<!--        <link href="/Inmobiliaria/css/jquery-ui.min.css" rel="stylesheet" />
         <link href="/Inmobiliaria/css/bootstrap.min.css" rel="stylesheet">
         <link href="/Inmobiliaria/font-awesome/css/font-awesome.min.css" rel="stylesheet"> 
-        <link href="/Inmobiliaria/css/estilos.css" rel="stylesheet"/>
+        <link href="/Inmobiliaria/css/estilos.css" rel="stylesheet"/>-->
         <style type="text/css">
             #body{
                 padding-top:  20px;
@@ -65,17 +65,15 @@
     </div>
     <div class="pie">
         <div class="container"><!-- Footer -->
-            <div class="row" id="row">
+            <div  id="row">
                 <div class="col-xs-12 col-sm-4 col-md-5 col-lg-7">
                     <p>LOGO INMBO</p>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                     <hr class="visible-xs"/>
                     <h5 class="h4">Contactanos</h5>
-                    <p>0123 12345678<br />
-                        0123 12345678<br />
-                        0123 12345678<br />
-                        patitofeo@gmail.com</p>
+                    <p><s:property value="#application.contacto.telefono"  /><br />
+                        <s:property value="#application.contacto.email"  /></p>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
                     <h5 class="h4">Visitanos</h5>
@@ -83,17 +81,15 @@
                 </div>
             </div>
         </div>
-        <!--        <div class="by" >
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <p class="text-right">POR MI</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
+        <div class="by" >
+            <div class="container">
+                <div class="col-sm-12">
+                    <p class="text-right">Wolf Angelo - angelowolf21@gmail.com</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <!--    <script src="/../js/jquery-2.1.1.min.js"></script>
+        <script src="/../js/jquery-2.1.1.min.js"></script>
         <script src="/../js/jquery-ui.min.js"></script>
         <script src="/../js/bootstrap.min.js"></script>
         <script src="/../js/moment.js"></script>
@@ -104,11 +100,11 @@
         <script src="/../js/AddFile.js"></script>
         <script src="http://maps.googleapis.com/maps/api/js"></script>
         <script src="/../js/mapa-vista.js"></script>   
-        <script src="/../js/mapa-contacto.js"></script>   -->
-    
-    <script src="/Inmobiliaria/js/jquery-2.1.1.min.js"></script>
+        <script src="/../js/mapa-contacto.js"></script>   
+
+<!--    <script src="/Inmobiliaria/js/jquery-2.1.1.min.js"></script>
     <script src="/Inmobiliaria/js/jquery-ui.min.js"></script>
-    <script src="/Inmobiliaria./js/bootstrap.min.js"></script>
+    <script src="/Inmobiliaria/js/bootstrap.min.js"></script>
     <script src="/Inmobiliaria/js/moment.js"></script>
     <script src="/Inmobiliaria/js/bootstrap-datetimepicker.min.js"></script>
     <script src="/Inmobiliaria/js/sidebar_menu.js"></script>
@@ -117,7 +113,7 @@
     <script src="/Inmobiliaria/js/AddFile.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script src="/Inmobiliaria/js/mapa-vista.js"></script>   
-    <script src="/Inmobiliaria/js/mapa-contacto.js"></script>
+    <script src="/Inmobiliaria/js/mapa-contacto.js"></script>-->
 
 </body>
 </html>

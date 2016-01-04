@@ -7,6 +7,7 @@ package Acciones;
 
 import Controlador.ControladorTipoPropiedad;
 import Persistencia.Modelo.TipoPropiedad;
+import Soporte.Mensaje;
 import static com.opensymphony.xwork2.Action.INPUT;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
@@ -37,12 +38,12 @@ public class TipoPropiedadAction extends ActionSupport implements ModelDriven<Ti
     private boolean validar() {
         boolean flag = true;
         if (tipoPropiedad.getNombre().trim().isEmpty()) {
-            addFieldError("tipoPropiedad.nombre", "Ingrese un nombre.");
+            addFieldError("tipoPropiedad.nombre", Mensaje.ingreseNombre);
             flag = false;
 
         } else {
             if (controladorTipoPropiedad.existe(tipoPropiedad)) {
-                addFieldError("tipoPropiedad.nombre", "El tipo de propiedad ya existe!.");
+                addFieldError("tipoPropiedad.nombre", Mensaje.getElExiste(Mensaje.tipoPropiedad));
                 flag = false;
             }
         }
@@ -56,10 +57,10 @@ public class TipoPropiedadAction extends ActionSupport implements ModelDriven<Ti
         }
         if (tipoPropiedad.getIdTipoPropiedad() != 0) {
             controladorTipoPropiedad.actualizar(tipoPropiedad);
-            sesion.put("mensaje", "Tipo de propiedad Modificado.");
+            sesion.put("mensaje", Mensaje.getModificado(Mensaje.tipoPropiedad));
         } else {
             controladorTipoPropiedad.guardar(tipoPropiedad);;
-            sesion.put("mensaje", "Tipo de propiedad Agregado.");
+            sesion.put("mensaje", Mensaje.getAgregado(Mensaje.tipoPropiedad));
         }
         return SUCCESS;
     }
@@ -80,10 +81,10 @@ public class TipoPropiedadAction extends ActionSupport implements ModelDriven<Ti
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         int id = Integer.parseInt(request.getParameter("idTipoPropiedad"));
         if (controladorTipoPropiedad.tipoPropiedadEnUso(id)) {
-            sesion.put("alerta", "Este tipo de propiedad esta siendo utilizada por algunas propiedades, debe eliminar esas propiedades para poder eliminar este tipo de propiedad!");
+            sesion.put("alerta", Mensaje.getUsada(Mensaje.tipoPropiedad, Mensaje.propiedad));
         } else {
             controladorTipoPropiedad.eliminar(id);
-            sesion.put("mensaje", "Tipo de propiedad Eliminado.");
+            sesion.put("mensaje", Mensaje.getEliminado(Mensaje.tipoPropiedad));
         }
         return SUCCESS;
     }

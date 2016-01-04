@@ -225,8 +225,7 @@
 #alerta-size { display: none; }
 .by{
     border-top: 1px solid #bdbdbd;
-    /*margin: 10px 0 0;*/
-    padding: 15px 0 5px;
+    padding: 10px;
     padding-bottom: 5px;
 }
 .pie{
@@ -237,6 +236,17 @@
 }
 .row{
     padding-bottom: 25px;
+}
+
+#margen{
+    padding-top: 50px;
+}
+#buscar{
+    background:  #2DA3E7;
+    color:  white;
+}
+.table > tbody > tr > td {
+    vertical-align: middle;
 }
 .carousel-inner .item img {
     width: 100%;

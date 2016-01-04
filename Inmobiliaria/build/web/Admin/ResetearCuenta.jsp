@@ -11,13 +11,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <!--        <link href="/../css/bootstrap.min.css" rel="stylesheet">
+                <link href="/../css/bootstrap.min.css" rel="stylesheet">
                 <link href="/../css/stylesLogin.css" media="all" rel="stylesheet">
-                <link href="/../css/font-google.css" rel="stylesheet" type="text/css">-->
+                <link href="/../css/font-google.css" rel="stylesheet" type="text/css">
 
-        <link href="/Inmobiliaria/css/bootstrap.min.css" rel="stylesheet">
+<!--        <link href="/Inmobiliaria/css/bootstrap.min.css" rel="stylesheet">
         <link href="/Inmobiliaria/css/stylesLogin.css" media="all" rel="stylesheet">
-        <link href="/Inmobiliaria/css/font-google.css" rel="stylesheet" type="text/css">
+        <link href="/Inmobiliaria/css/font-google.css" rel="stylesheet" type="text/css">-->
     </head>
     <body>
 

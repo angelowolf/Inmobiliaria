@@ -119,11 +119,11 @@
                 <s:iterator value="propiedad.imagenes" var="imagen" status="stat">
                     <s:if test="#stat.index == 0">
                         <div class="item active">
-                            <img src="/Inmobiliaria/Imagen?idImagen=<s:url value="%{#imagen.idImagenPropiedad}"/>"/>
+                            <img src="/Imagen?idImagen=<s:url value="%{#imagen.idImagenPropiedad}"/>"/>
                         </div></s:if>
                     <s:else>
                         <div class="item">
-                            <img src="/Inmobiliaria/Imagen?idImagen=<s:url value="%{#imagen.idImagenPropiedad}"/>"/>
+                            <img src="/Imagen?idImagen=<s:url value="%{#imagen.idImagenPropiedad}"/>"/>
                         </div> </s:else>
                 </s:iterator>          
             </div>

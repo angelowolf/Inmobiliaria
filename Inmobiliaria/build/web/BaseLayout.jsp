@@ -8,9 +8,9 @@
     HttpSession sesion = request.getSession();
     Usuario userLogin = (Usuario) sesion.getAttribute("user");
 
-    if (userLogin == null) {
-        response.sendRedirect("/Inmobiliaria/Admin/Login.jsp");
-    }
+//    if (userLogin == null) {
+//        response.sendRedirect("/Inmobiliaria/Admin/Login.jsp");
+//    }
 %>
 <html lang="es">
     <head>
@@ -20,17 +20,17 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title><tiles:insertAttribute name="title" ignore="true" /></title>
-        <!--        <link  href="/../css/jquery-ui.min.css" rel="stylesheet"/>
+                <link  href="/../css/jquery-ui.min.css" rel="stylesheet"/>
                 <link href="/../css/bootstrap.min.css" rel="stylesheet">
                 <link href="/../font-awesome/css/font-awesome.min.css" rel="stylesheet"> 
                 <link href="/../css/simple-sidebar.css" rel="stylesheet">
-                <link  href="/../css/estilos.css" rel="stylesheet"/>-->
+                <link  href="/../css/estilos.css" rel="stylesheet"/>
 
-        <link  href="/Inmobiliaria/css/jquery-ui.min.css" rel="stylesheet"/>
+<!--        <link  href="/Inmobiliaria/css/jquery-ui.min.css" rel="stylesheet"/>
         <link href="/Inmobiliaria/css/bootstrap.min.css" rel="stylesheet">
         <link href="/Inmobiliaria/font-awesome/css/font-awesome.min.css" rel="stylesheet"> 
         <link href="/Inmobiliaria/css/simple-sidebar.css" rel="stylesheet">
-        <link href="/Inmobiliaria/css/estilos.css" rel="stylesheet" />
+        <link href="/Inmobiliaria/css/estilos.css" rel="stylesheet" />-->
     </head>
     <style type="text/css">           
         .navbar-nav li {
@@ -122,7 +122,7 @@
     <!-- /#wrapper -->
     <!-- jQuery -->
 
-<!--    <script src="/../js/jquery-2.1.1.min.js"></script>
+    <script src="/../js/jquery-2.1.1.min.js"></script>
     <script src="/../js/jquery-ui.min.js"></script>
     <script src="/../js/bootstrap.min.js"></script>
     <script src="/../js/moment.js"></script>
@@ -134,9 +134,9 @@
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script src="/../js/mapa-alta.js"></script>   
     <script src="/../js/mapa-edit.js"></script>   
-    <script src="/../js/mapa-edit-contacto.js"></script>   -->
+    <script src="/../js/mapa-edit-contacto.js"></script>   
 
-    <script src="/Inmobiliaria/js/jquery-2.1.1.min.js"></script>
+<!--    <script src="/Inmobiliaria/js/jquery-2.1.1.min.js"></script>
     <script src="/Inmobiliaria/js/jquery-ui.min.js"></script>
     <script src="/Inmobiliaria/js/bootstrap.min.js"></script>
     <script src="/Inmobiliaria/js/moment.js"></script>
@@ -148,6 +148,6 @@
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script src="/Inmobiliaria/js/mapa-alta.js"></script>   
     <script src="/Inmobiliaria/js/mapa-edit.js"></script>   
-    <script src="/Inmobiliaria/js/mapa-edit-contacto.js"></script>   
+    <script src="/Inmobiliaria/js/mapa-edit-contacto.js"></script>   -->
 </body>
 </html>

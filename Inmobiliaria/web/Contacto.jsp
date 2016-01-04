@@ -1,14 +1,9 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <%@taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<style type="text/css">
-    #contacto{
-        padding-top: 50px;
-    }
-</style>
-<s:hidden name="contacto.latitud" id="latitud" />
-<s:hidden name="contacto.longitud" id="longitud" />
-<div id="contacto">
+<s:hidden name="#application.contacto.latitud" id="latitud" />
+<s:hidden name="#application.contacto.longitud" id="longitud" />
+<div id="margen">
     <fieldset>
         <legend>
             CONTACTO
@@ -16,9 +11,9 @@
     </fieldset>
     <div class="col-md-8">
         <p class="lead">
-            <strong>Inmobiliaria Patioto Feo | </strong><s:property value="contacto.direccion"/>
-            <br><s:property value="contacto.email"/>
-            <br><s:property value="contacto.telefono"/>
+            <strong>Inmobiliaria Patioto Feo | </strong><s:property value="#application.contacto.direccion"/>
+            <br><s:property value="#application.contacto.email"/>
+            <br><s:property value="#application.contacto.telefono"/>
         </p>
         <div id="ubicaccion">
             <h2 class="text-center text-info">Ubicacion</h2>
