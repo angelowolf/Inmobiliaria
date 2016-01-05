@@ -39,7 +39,13 @@
             <display:setProperty name="paging.banner.some_items_found" value='<div class="text-center">  <span class="pagebanner">{0} {1} encontradas. Mostrando del {2} al {3}.</span></div>' />
 
             <%--<display:column property="idPropiedad" title="Id Propiedad"/>--%>   
-            <display:column title="Imagen"><img width="140" height="79" src="/Imagen?idImagen=<s:url value="%{#attr.row.imagenDefault.idImagenPropiedad}"/>" /></display:column>
+            <display:column title="Imagen">
+                <a href="<s:url action="ver" namespace="/">
+                       <s:param name="idPropiedad"><s:property value="%{#attr.row.idPropiedad}"/></s:param>
+                   </s:url>">
+                    <img width="140" height="79" src="/Imagen?idImagen=<s:url value="%{#attr.row.imagenDefault.idImagenPropiedad}"/>">
+                </a>
+            </display:column>
             <display:column sortable="true" property="tipoPropiedad.nombre" title="Tipo"/>       
             <display:column sortable="true" property="codigoPropiedad" title="Codigo"/>
             <display:column sortable="false" property="direccion" title="Direccion"/>       

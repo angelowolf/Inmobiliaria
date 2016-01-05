@@ -9,6 +9,9 @@
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>  
+        <action name="mandarEmail" method="execute" class="Acciones.EmailAction">
+            <result name="success">/test.jsp</result>
+        </action>     
         <action name="Imagen" class="Acciones.ImagenAction">
         </action>              
         <action name="loadIndex" method="execute" class="Acciones.IndexAction">

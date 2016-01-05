@@ -11,7 +11,7 @@
         Formulario Tipo Propiedad
     </legend>
 </fieldset>
-<div class="form-group col-md-6 col-md-offset-2">   
+<div class="form-group col-md-8 col-md-offset-2">   
     <div class="panel panel-default">
         <div class="panel-heading">
             <s:form  style="padding-top: 25px;" action="guardarOModificar" validate="true" enctype="multipart/form-data" theme="bootstrap" cssClass="form-horizontal">

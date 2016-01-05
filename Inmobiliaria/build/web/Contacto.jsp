@@ -23,7 +23,7 @@
     <div class="col-md-4">
         <div class="col-md-12" id="formulario-consulta" style="background: #F1F3F6; padding-bottom: 50px;border-radius: 4px;">
             <h3 class="text-center" style="color: black; padding-bottom: 25px; padding-top: 40px">Contacto</h3>
-            <s:form action="asd" validate="true" enctype="multipart/form-data" theme="bootstrap">
+            <s:form action="mandarEmail" validate="true" enctype="multipart/form-data" theme="bootstrap">
                 <div class="form-group">
                     <input type="text" name="nombre" placeholder="Nombre" class="form-control" />
                 </div>

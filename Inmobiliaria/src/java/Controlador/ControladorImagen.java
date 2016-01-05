@@ -7,6 +7,7 @@ package Controlador;
 
 import Persistencia.DAO.Implementacion.ImagenDAO;
 import Persistencia.Modelo.Imagen;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -43,4 +44,12 @@ public class ControladorImagen {
         return imagenDAO.buscar(id);
     }
 
+    public void eliminarImagen(String ruta) {
+        File archivo = new File(ruta);
+        try {
+            archivo.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

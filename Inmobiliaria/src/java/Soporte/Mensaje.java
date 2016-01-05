@@ -31,9 +31,10 @@ public class Mensaje {
     public static final String tipoMoneda = "tipo moneda";
     public static final String tipoPropiedad = "tipo propiedad";
     public static final String imagenMinimo = "La " + propiedad + " debe contar con una imagen como mínimo.";
+    public static final String soloUnaImagen = "La " + propiedadDestacada + " debe contar solo con una imagen.";
     public static final String ingreseNombre = "Ingrese un nombre.";
     public static final String ingreseSimbolo = "Ingrese un simbolo.";
-    public static final String ingreseDireccion = "Ingrese una direccion.";
+    public static final String ingreseDireccion = "Ingrese una dirección.";
     public static final String ingreseUnCodigo = "Ingrese un codigo.";
     public static final String seleccioneUbicacion = "Seleccione una ubicacion en el mapa.";
     public static final String ingreseUnaImagen = "Ingrese al menos una imagen.";

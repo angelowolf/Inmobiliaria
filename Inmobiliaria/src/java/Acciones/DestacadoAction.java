@@ -24,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
 /**
@@ -40,7 +41,7 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
     private final ControladorPropiedad controladorPropiedad = new ControladorPropiedad();
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
     private File upload;
-    private String uploadContentType, uploadFileName;
+    private String uploadContentType, uploadFileName, guardaImagen;
 
     @Override
     public Destacado getModel() {
@@ -49,12 +50,37 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
 
     private boolean validar() {
         boolean flag = true;
-        if (destacado.getNombre().trim().isEmpty()) {
+        if (StringUtils.isBlank(destacado.getNombre())) {
             addFieldError("destacado.nombre", Mensaje.ingreseTitulo);
             flag = false;
         }
         if (destacado.getPropiedad().getIdPropiedad() <= 0) {
             addFieldError("", Mensaje.seleccionePropiedad);
+            flag = false;
+        }
+        if (upload == null) {
+            addFieldError("", Mensaje.ingreseUnaImagen);
+            flag = false;
+        }
+        return flag;
+    }
+
+    private boolean validarModificar() {
+        boolean flag = true;
+        if (StringUtils.isBlank(destacado.getNombre())) {
+            addFieldError("destacado.nombre", Mensaje.ingreseTitulo);
+            flag = false;
+        }
+        if (destacado.getPropiedad().getIdPropiedad() <= 0) {
+            addFieldError("", Mensaje.seleccionePropiedad);
+            flag = false;
+        }
+        if (upload == null && guardaImagen.equals("false")) {
+            addFieldError("", Mensaje.ingreseUnaImagen);
+            flag = false;
+        }
+        if (upload != null & guardaImagen.equals("true")) {
+            addFieldError("", Mensaje.soloUnaImagen);
             flag = false;
         }
         return flag;
@@ -65,17 +91,44 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
             this.cargarPropiedades();
             return INPUT;
         }
-        if (destacado.getIdDestacado() != 0) {
-            controladorDestacado.actualizar(destacado);
-            sesion.put("mensaje", Mensaje.getModificada(Mensaje.propiedadDestacada));
-        } else {
+        int id = destacado.getPropiedad().getIdPropiedad();
+        String ruta = STORAGE_PATH + "ImagenDestacada/" + id;
+        File directorio = new File(ruta);
+        if (!directorio.exists()) {
+            directorio.mkdirs();
+        }
+
+        String rutaBD = ruta + "/" + uploadFileName;
+        try {
+            FileUtils.copyFile(upload, new File(directorio, uploadFileName));
+        } catch (IOException ex) {
+            Logger.getLogger(PropiedadAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Imagen im = new Imagen();
+        im.setRuta(rutaBD);
+        destacado.setImagen(im);
+        ControladorImagen ci = new ControladorImagen();
+        ci.guardar(im);
+        controladorDestacado.guardar(destacado);
+        sesion.put("mensaje", Mensaje.getAgregada(Mensaje.propiedadDestacada));
+        return SUCCESS;
+    }
+
+    public String modificar() {
+
+        if (!validarModificar()) {
+            this.cargarPropiedades();
+            return INPUT;
+        }
+        //elimino la guardada y agrego la nueva...
+        if (guardaImagen.equals("false")) {
+            ControladorImagen ci = new ControladorImagen();
+            Imagen temp = controladorDestacado.getOne(destacado.getIdDestacado()).getImagen();
+            ci.eliminarImagen(temp.getRuta());
+            ci.eliminar(temp.getIdImagen());
             int id = destacado.getPropiedad().getIdPropiedad();
             String ruta = STORAGE_PATH + "ImagenDestacada/" + id;
             File directorio = new File(ruta);
-            if (!directorio.exists()) {
-                directorio.mkdirs();
-            }
-
             String rutaBD = ruta + "/" + uploadFileName;
             try {
                 FileUtils.copyFile(upload, new File(directorio, uploadFileName));
@@ -85,15 +138,10 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
             Imagen im = new Imagen();
             im.setRuta(rutaBD);
             destacado.setImagen(im);
-            ControladorImagen ci = new ControladorImagen();
             ci.guardar(im);
-            controladorDestacado.guardar(destacado);
-            sesion.put("mensaje", Mensaje.getAgregada(Mensaje.propiedadDestacada));
         }
-        return SUCCESS;
-    }
-
-    public String modificar() {
+        controladorDestacado.actualizar(destacado);
+        sesion.put("mensaje", Mensaje.getModificada(Mensaje.propiedadDestacada));
         return SUCCESS;
     }
 
@@ -123,6 +171,7 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
     public String editar() {
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         destacado = controladorDestacado.getOne(Integer.parseInt(request.getParameter("idDestacado")));
+        this.cargarPropiedades();
         return SUCCESS;
     }
 
@@ -169,6 +218,14 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
 
     private void cargarPropiedades() {
         this.propiedadesLista = controladorPropiedad.getTodos();
+    }
+
+    public String getGuardaImagen() {
+        return guardaImagen;
+    }
+
+    public void setGuardaImagen(String guardaImagen) {
+        this.guardaImagen = guardaImagen;
     }
 
 }

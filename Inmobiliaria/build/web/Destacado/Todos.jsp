@@ -21,7 +21,7 @@
     <div class=" col-md-12">
         <display:table name="destacadosLista" pagesize="10" requestURI="${listar}" uid="row">
             <display:column property="idDestacado" title="Numero Destacado"/>
-            <display:column title="Imagen"><img width="140" height="79" src="/Inmobiliaria/Imagen?idImagenDestacado=<s:url value="%{#attr.row.imagen.idImagen}"/>" /></display:column>
+            <display:column title="Imagen"><img width="140" height="79" src="/Imagen?idImagenDestacado=<s:url value="%{#attr.row.imagen.idImagen}"/>" /></display:column>
             <display:column sortable="true" property="nombre" title="Título"/>
             <display:column title="Funciones">
                 <s:form action="editar" id="editURL" style="display:inline-block;">

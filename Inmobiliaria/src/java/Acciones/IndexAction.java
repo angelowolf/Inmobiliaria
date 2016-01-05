@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -33,6 +34,14 @@ public class IndexAction extends ActionSupport {
     public String execute() {
         destacados = cd.getTodos();
         propiedades = controladorPropiedad.getOportunidades();
+        for (Propiedad cadaPropiedad : propiedades) {
+            try {
+                cadaPropiedad.setImagenDefault(cadaPropiedad.getImagenes().get(0));
+
+            } catch (IndexOutOfBoundsException e) {
+                addActionError("Algunas propiedades no poseen imagenes.");
+            }
+        }
         Contacto c = (Contacto) application.get("contacto");
         if (c == null) {
             ControladorContacto cc = new ControladorContacto();

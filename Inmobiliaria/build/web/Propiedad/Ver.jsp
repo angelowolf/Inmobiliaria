@@ -2,69 +2,7 @@
 <%@taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <style type="text/css">
-    #wrap {
-        padding:2em;
-    }
-    .panel.panel-horizontal {
-        display:table;
-        width:100%;
-    }
-    .panel.panel-horizontal > .panel-heading, .panel.panel-horizontal > .panel-body, .panel.panel-horizontal > .panel-footer {
-        display:table-cell;
-    }
-    .panel.panel-horizontal > .panel-heading {
-        /*width: 25%;*/
-        border:0;
-        vertical-align: middle;
-    }.panel.panel-horizontal > .panel-body {
-        /*width: 25%;*/
-        border:0;
-        vertical-align: middle;
-    }
-    .panel.panel-horizontal > .panel-footer{
-        width: 20%;
-        border:0;
-        vertical-align: middle;
-    }
-    .panel.panel-horizontal > .panel-heading {
-        border-right: 1px solid #ddd;
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 4px;
-    }
-    .panel.panel-horizontal > .panel-body {
-        border-right: 1px solid #ddd;
-        /*border-top-right-radius: 0;*/
-        border-bottom-left-radius: 4px;
-    }
-    .panel.panel-horizontal > .panel-footer {
-        /*border-left: 1px solid #ddd;*/
-        /*border-top-left-radius: 0;*/
-        /*border-bottom-right-radius: 4px;*/
-        border-radius: 0px 4px 4px 0px;
-
-    }
-    .panel-body.panel-color{
-        color:white;
-        background: #2EA3E7;
-    }
-    .panel-footer.panel-color{
-        width: 20%;
-        color:white;
-        background: #2EA3E7;
-    }
-    .price {
-        size: 10px;
-        position: absolute;
-        top: 10px;
-        left: -5px;
-        background-color: #2EA3E7;
-        color: #fff;
-        padding: 2px 20px 2px 10px;
-        z-index: 10;
-        -webkit-border-radius: 0 4px 4px 0;
-        -moz-border-radius: 0 4px 4px 0;
-        border-radius: 4px 4px 4px 4px;
-    }
+    
 </style>
 <s:hidden name="propiedad.latitud" id="latitud" />
 <s:hidden name="propiedad.longitud" id="longitud" />
@@ -196,18 +134,19 @@
         </div>
         <div class="col-md-12" id="formulario-consulta" style="background: #F1F3F6; padding-bottom: 50px;border-radius: 4px;">
             <h3 class="text-center" style="color: black; padding-bottom: 25px; padding-top: 40px">Contacto</h3>
-            <s:form action="asd" validate="true" enctype="multipart/form-data" theme="bootstrap">
+            <s:form action="mandarEmail" validate="true" enctype="multipart/form-data" theme="simple">
+                <s:hidden value="propiedad.idPropiedad" name="idPropiedad"/>
                 <div class="form-group">
-                    <input type="text" name="nombre" placeholder="Nombre" class="form-control" />
+                    <s:textfield type="text" name="nombre" placeholder="Nombre" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <input type="text"  name="email" placeholder="Email" class="form-control" />
+                    <s:textfield type="text"  name="email" placeholder="Email" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <input type="text"  name="telefono" placeholder="Teléfono" class="form-control" />
+                    <s:textfield type="text"  name="telefono" placeholder="Teléfono" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <input type="text"  name="consulta" placeholder="Mensaje" class="form-control" />
+                    <s:textfield type="text"  name="consulta" placeholder="Mensaje" class="form-control" />
                 </div>
                 <div class="form-group text-center">
                     <s:submit value="Enviar Consulta" cssClass="btn" style="border-color:#adb2b6;" disabled="true"/>

@@ -1,17 +1,17 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <%@taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<fieldset>
-    <legend>
-        Nueva Propiedad
-    </legend>
-</fieldset>
 <div class="text-center">
     <s:actionerror theme="bootstrap"/>
     <s:actionmessage theme="bootstrap"/>
     <s:fielderror theme="bootstrap"/>
     <div id="alerta-size" class="alert alert-info"></div>
 </div>
+<fieldset>
+    <legend>
+        Nueva Propiedad
+    </legend>
+</fieldset>
 <div class="form-group col-md-8 col-md-offset-2" >
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -63,14 +63,13 @@
                 <div class="col-md-3 col-md-offset-3">
                     <button id="btnAgregar" class="btn btn-warning ">Agregar Imagen</button>
                 </div>
+                <div class="col-md-12" id="ubicaccion">
+                    <h2 class="text-center text-info">Ubicacion</h2>
+                    <div id="mapa-alta" style="width:100%;height:500px;"></div>
+                </div> 
                 <s:submit id="submit" value="Agregar Propiedad" cssClass="btn btn-success col-md-offset-9 col-md-3"/>             
-
             </s:form>
 
         </div>
-    </div>
-    <div id="ubicaccion">
-        <h2 class="text-center text-info">Ubicacion</h2>
-        <div id="mapa-alta" style="width:100%;height:500px;"></div>
-    </div>    
+    </div>   
 </div>
