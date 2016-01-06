@@ -37,7 +37,7 @@
                                </s:url>">
                                 <img src="/Imagen?idImagenDestacado=<s:url value="%{#destacado.imagen.idImagen}"/>">
                             </a>
-                            <div class="carousel-caption">
+                            <div class="carousel-caption" id="titulo-imagen">
                                 <h4><a href="<s:url action="ver" namespace="/">
                                            <s:param name="idPropiedad"><s:property value="%{#destacado.propiedad.idPropiedad}"/></s:param>
                                        </s:url>"><s:property value="%{#destacado.nombre}"/></a></h4>

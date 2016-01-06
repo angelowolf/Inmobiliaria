@@ -223,6 +223,12 @@
 }
 
 #alerta-size { display: none; }
+#titulo-imagen{
+    left: 0%; 
+    right: 0%; 
+    padding-bottom: 0px; 
+    bottom: 0px;
+}
 .by{
     border-top: 1px solid #bdbdbd;
     padding: 10px;
