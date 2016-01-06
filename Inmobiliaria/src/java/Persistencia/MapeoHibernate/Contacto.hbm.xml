@@ -8,6 +8,7 @@
         </id>
         <property column="direccion" length="50" name="direccion" type="string"/>   
         <property column="email" length="50" name="email" type="string"/>      
+        <property column="nombre" length="100" name="nombre" type="string"/>      
         <property column="latitud"  name="latitud" />      
         <property column="longitud"  name="longitud" />      
         <property column="telefono"  name="telefono" type="string"/>      

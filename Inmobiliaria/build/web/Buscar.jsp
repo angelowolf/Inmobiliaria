@@ -37,7 +37,7 @@
             <display:setProperty name="paging.banner.one_item_found" value='<div class="text-center">  <span class="pagebanner">Una {0} encontrada. </span></div>' />
             <display:setProperty name="paging.banner.all_items_found" value='<div class="text-center">  <span class="pagebanner">{0} {1} encontradas. Mostrando {0}.</span></div>' />
             <display:setProperty name="paging.banner.some_items_found" value='<div class="text-center">  <span class="pagebanner">{0} {1} encontradas. Mostrando del {2} al {3}.</span></div>' />
-
+            <display:setProperty name="basic.msg.empty_list" value="No se han encontrado propiedades"/>
             <%--<display:column property="idPropiedad" title="Id Propiedad"/>--%>   
             <display:column title="Imagen">
                 <a href="<s:url action="ver" namespace="/">
@@ -48,12 +48,11 @@
             </display:column>
             <display:column sortable="true" property="tipoPropiedad.nombre" title="Tipo"/>       
             <display:column sortable="true" property="codigoPropiedad" title="Codigo"/>
-            <display:column sortable="false" property="direccion" title="Direccion"/>       
-            <display:column sortable="true" property="habitacion" title="Habitaciones"/>       
-            <display:column sortable="true" property="bano" title="Baños"/>       
+            <display:column sortable="false" property="direccion" title="Dirección"/>       
             <display:column sortable="true" property="terreno" title="Terreno"/>       
             <display:column sortable="true" property="edificado" title="Edificado"/>       
-            <%--<display:column sortable="true" property="oportunidad" title="Oportunidad"/>--%>       
+            <display:column sortable="true" property="habitacion" title="Habitaciones"/>       
+            <display:column sortable="true" property="bano" title="Baños"/>       
         </display:table>
 
     </div>

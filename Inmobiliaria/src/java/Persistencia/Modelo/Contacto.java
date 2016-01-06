@@ -11,11 +11,19 @@ package Persistencia.Modelo;
  */
 public class Contacto {
 
-    private String direccion, email, telefono;
+    private String direccion, email, telefono, nombre;
     private double latitud, longitud;
     private int idContacto;
 
     public Contacto() {
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getIdContacto() {

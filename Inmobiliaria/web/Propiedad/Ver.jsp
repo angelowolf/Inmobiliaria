@@ -2,7 +2,7 @@
 <%@taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <style type="text/css">
-    
+
 </style>
 <s:hidden name="propiedad.latitud" id="latitud" />
 <s:hidden name="propiedad.longitud" id="longitud" />
@@ -19,10 +19,6 @@
                 <s:property value="propiedad.terreno"/>m<sup>2</sup>
             </div>           
             <div class="panel-body">
-                <i class="icon-bathrooms"></i>
-                <s:property value="propiedad.bano"/>
-            </div>           
-            <div class="panel-body">
                 <i class="glyphicon glyphicon-resize-small fa-1x"></i>
                 <s:property value="propiedad.edificado"/>m<sup>2</sup>
             </div>
@@ -30,6 +26,10 @@
                 <i class="fa fa-bed fa-1x"></i>
                 <s:property value="propiedad.habitacion"/>
             </div>
+            <div class="panel-body">
+                <i class="icon-bathrooms"></i>
+                <s:property value="propiedad.bano"/>
+            </div>           
             <div class="panel-footer panel-color">
                 Codigo: <s:property value="propiedad.codigoPropiedad"/>
             </div>

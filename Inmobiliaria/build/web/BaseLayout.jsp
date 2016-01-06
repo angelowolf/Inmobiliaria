@@ -20,17 +20,17 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title><tiles:insertAttribute name="title" ignore="true" /></title>
-                <link  href="/../css/jquery-ui.min.css" rel="stylesheet"/>
-                <link href="/../css/bootstrap.min.css" rel="stylesheet">
-                <link href="/../font-awesome/css/font-awesome.min.css" rel="stylesheet"> 
-                <link href="/../css/simple-sidebar.css" rel="stylesheet">
-                <link  href="/../css/estilos.css" rel="stylesheet"/>
+        <link  href="/../css/jquery-ui.min.css" rel="stylesheet"/>
+        <link href="/../css/bootstrap.min.css" rel="stylesheet">
+        <link href="/../font-awesome/css/font-awesome.min.css" rel="stylesheet"> 
+        <link href="/../css/simple-sidebar.css" rel="stylesheet">
+        <link  href="/../css/estilos.css" rel="stylesheet"/>
 
-<!--        <link  href="/Inmobiliaria/css/jquery-ui.min.css" rel="stylesheet"/>
-        <link href="/Inmobiliaria/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/Inmobiliaria/font-awesome/css/font-awesome.min.css" rel="stylesheet"> 
-        <link href="/Inmobiliaria/css/simple-sidebar.css" rel="stylesheet">
-        <link href="/Inmobiliaria/css/estilos.css" rel="stylesheet" />-->
+        <!--        <link  href="/Inmobiliaria/css/jquery-ui.min.css" rel="stylesheet"/>
+                <link href="/Inmobiliaria/css/bootstrap.min.css" rel="stylesheet">
+                <link href="/Inmobiliaria/font-awesome/css/font-awesome.min.css" rel="stylesheet"> 
+                <link href="/Inmobiliaria/css/simple-sidebar.css" rel="stylesheet">
+                <link href="/Inmobiliaria/css/estilos.css" rel="stylesheet" />-->
     </head>
     <style type="text/css">           
         .navbar-nav li {
@@ -62,49 +62,49 @@
             <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
 
                 <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-flash  fa-stack-1x "></i></span> Servicios</a>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-tint  fa-stack-1x "></i></span> Servicios</a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a href="<s:url action="listar" namespace="/Servicio"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
                         <li><a href="<s:url action="nuevo" namespace="/Servicio"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-plus fa-stack-1x "></i></span>Nuevo</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-flash  fa-stack-1x "></i></span> Ambientes</a>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-check  fa-stack-1x "></i></span> Ambientes</a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a href="<s:url action="listar" namespace="/Ambiente"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
                         <li><a href="<s:url action="nuevo" namespace="/Ambiente"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-plus fa-stack-1x "></i></span>Nuevo</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cogs fa-stack-1x "></i></span> Propiedades</a>
-                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                        <li><a href="<s:url action="listar" namespace="/Propiedad"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
-                        <li><a href="<s:url action="nuevo" namespace="/Propiedad"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-plus fa-stack-1x "></i></span>Nuevo</a></li>       
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cogs fa-stack-1x "></i></span> Propiedades Destacadas</a>
-                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                        <li><a href="<s:url action="listar" namespace="/Destacado"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
-                        <li><a href="<s:url action="nuevo" namespace="/Destacado"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-plus fa-stack-1x "></i></span>Nuevo</a></li>       
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cogs fa-stack-1x "></i></span> Tipo Propiedades</a>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-star fa-stack-1x "></i></span> Tipo Propiedades</a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a href="<s:url action="listar" namespace="/TipoPropiedad"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
                         <li><a href="<s:url action="nuevo" namespace="/TipoPropiedad"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-plus fa-stack-1x "></i></span>Nuevo</a></li>       
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cogs fa-stack-1x "></i></span> Tipo monedas</a>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-usd fa-stack-1x "></i></span> Tipo monedas</a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a href="<s:url action="listar" namespace="/TipoMoneda"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
                         <li><a href="<s:url action="nuevo" namespace="/TipoMoneda"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-plus fa-stack-1x "></i></span>Nuevo</a></li>       
                     </ul>
                 </li>
                 <li>
-                    <a href="<s:url action="loadContacto" namespace="/Contacto"/>"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cogs fa-stack-1x "></i></span> Contacto</a>                    
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-home fa-stack-1x "></i></span> Propiedades</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a href="<s:url action="listar" namespace="/Propiedad"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
+                        <li><a href="<s:url action="nuevo" namespace="/Propiedad"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-plus fa-stack-1x "></i></span>Nuevo</a></li>       
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-thumbs-up fa-stack-1x "></i></span> Propiedades Destacadas</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a href="<s:url action="listar" namespace="/Destacado"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-list fa-stack-1x "></i></span>Todos</a></li>
+                        <li><a href="<s:url action="nuevo" namespace="/Destacado"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-plus fa-stack-1x "></i></span>Nuevo</a></li>       
+                    </ul>
+                </li>
+                <li>
+                    <a href="<s:url action="loadContacto" namespace="/Contacto"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-user fa-stack-1x "></i></span> Contacto</a>                    
                 </li>
             </ul>
         </div>
@@ -136,18 +136,18 @@
     <script src="/../js/mapa-edit.js"></script>   
     <script src="/../js/mapa-edit-contacto.js"></script>   
 
-<!--    <script src="/Inmobiliaria/js/jquery-2.1.1.min.js"></script>
-    <script src="/Inmobiliaria/js/jquery-ui.min.js"></script>
-    <script src="/Inmobiliaria/js/bootstrap.min.js"></script>
-    <script src="/Inmobiliaria/js/moment.js"></script>
-    <script src="/Inmobiliaria/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="/Inmobiliaria/js/sidebar_menu.js"></script>
-    <script src="/Inmobiliaria/js/asd.js"></script>   
-    <script src="/Inmobiliaria/js/es.js"></script>   
-    <script src="/Inmobiliaria/js/AddFile.js"></script>   
-    <script src="http://maps.googleapis.com/maps/api/js"></script>
-    <script src="/Inmobiliaria/js/mapa-alta.js"></script>   
-    <script src="/Inmobiliaria/js/mapa-edit.js"></script>   
-    <script src="/Inmobiliaria/js/mapa-edit-contacto.js"></script>   -->
+    <!--    <script src="/Inmobiliaria/js/jquery-2.1.1.min.js"></script>
+        <script src="/Inmobiliaria/js/jquery-ui.min.js"></script>
+        <script src="/Inmobiliaria/js/bootstrap.min.js"></script>
+        <script src="/Inmobiliaria/js/moment.js"></script>
+        <script src="/Inmobiliaria/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="/Inmobiliaria/js/sidebar_menu.js"></script>
+        <script src="/Inmobiliaria/js/asd.js"></script>   
+        <script src="/Inmobiliaria/js/es.js"></script>   
+        <script src="/Inmobiliaria/js/AddFile.js"></script>   
+        <script src="http://maps.googleapis.com/maps/api/js"></script>
+        <script src="/Inmobiliaria/js/mapa-alta.js"></script>   
+        <script src="/Inmobiliaria/js/mapa-edit.js"></script>   
+        <script src="/Inmobiliaria/js/mapa-edit-contacto.js"></script>   -->
 </body>
 </html>

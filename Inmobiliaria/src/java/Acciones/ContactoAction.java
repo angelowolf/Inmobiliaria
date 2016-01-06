@@ -28,7 +28,6 @@ public class ContactoAction extends ActionSupport implements ModelDriven<Contact
     }
 
     public String guardarOModificar() {
-        System.out.println(contacto.toString());
         if (contacto.getIdContacto() != 0) {
             controladorContacto.actualizar(contacto);
             addActionMessage("Contacto Modificado.");

@@ -11,7 +11,7 @@
     </fieldset>
     <div class="col-md-8">
         <p class="lead">
-            <strong>Inmobiliaria Patioto Feo | </strong><s:property value="#application.contacto.direccion"/>
+            <strong><s:property value="#application.contacto.nombre"/> | </strong><s:property value="#application.contacto.direccion"/>
             <br><s:property value="#application.contacto.email"/>
             <br><s:property value="#application.contacto.telefono"/>
         </p>

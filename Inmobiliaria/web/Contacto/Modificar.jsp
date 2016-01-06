@@ -21,6 +21,7 @@
                 <s:hidden name="contacto.longitud" id="longitud"/>
                 <div class="col-md-8 col-md-offset-2">
 
+                    <s:textfield name="contacto.nombre" label="Nombre" placeholder="Ingrese el nombre de la inmobiliaria" />
                     <s:textfield name="contacto.direccion" label="Dirección" placeholder="Ingrese la dirección" />
 
                     <s:textfield name="contacto.telefono" label="Teléfono" placeholder="Ingrese el teléfono" />
