@@ -77,7 +77,7 @@
                             <div class="col-md-8 col-md-offset-2">
                                 <div class="form-group">
                                     <div class="form-inline">
-                                        <img width="140" height="79" src="/Inmobiliaria/Imagen?idImagen=<s:url value="%{#imagen.idImagenPropiedad}"/>" />
+                                        <img width="140" height="79" src="/Imagen?idImagen=<s:url value="%{#imagen.idImagenPropiedad}"/>" />
                                         <s:checkbox name="imagenesElegidos" value="true" fieldValue="%{idImagenPropiedad}" label="Guardar" id="%{#stat.count}">
                                         </s:checkbox>
                                     </div>

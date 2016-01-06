@@ -73,32 +73,79 @@
 </div>
 <div class="container">
     <h2 class="page-header text-center"><br><br>Oportunidades</h2>
-    <div class="row">
-        <s:iterator var="oportunidad" value="propiedades">
-            <div id="novedad" class="col-sm-6 col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-body" style="border:1px solid #ddd;">
-                        <a  class="" href="<s:url action="ver" namespace="/">
-                                <s:param name="idPropiedad"><s:property value="%{#oportunidad.idPropiedad}"/></s:param>
-                            </s:url>">
-                            <img class="box img-responsive" src="/Imagen?idImagen=<s:url value="%{#oportunidad.imagenDefault.idImagenPropiedad}"/>">
-                        </a>
-                        <div class="panel panel-horizontal" style="border:1px solid #ddd;">
-                            <div class="panel-body">
+        <s:iterator var="oportunidad" value="propiedades" status="stat">
+            <s:if test="#stat.index % 3 == 0">
+            <div class="row form-group">
+                <div class="col-xs-12 col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-image hide-panel-body">
+                            <a  class="" href="<s:url action="ver" namespace="/">
+                                    <s:param name="idPropiedad"><s:property value="%{#oportunidad.idPropiedad}"/></s:param>
+                                </s:url>">
+                                <img class="box panel-image-preview" src="/Imagen?idImagen=<s:url value="%{#oportunidad.imagenDefault.idImagenPropiedad}"/>">
+                            </a>
+                        </div>
+                        <div class="panel-footer text-center">
+                            <i class="fa fa-bed fa-1x"></i>
+                            <s:property value="%{#oportunidad.habitacion}"/>
+                            <span class="">|</span>
+                            <i class="icon-bathrooms"></i>
+                            <s:property value="%{#oportunidad.bano}"/>
+                            <span class="">|</span>
+                            Codigo: <s:property value="%{#oportunidad.codigoPropiedad}"/>
+                        </div>
+                    </div>
+                </div>
+            </s:if>
+            <s:else>
+                <s:if test="#stat.index % 3 == 1">
+                    <div class="col-xs-12 col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-image hide-panel-body">
+                                <a  class="" href="<s:url action="ver" namespace="/">
+                                        <s:param name="idPropiedad"><s:property value="%{#oportunidad.idPropiedad}"/></s:param>
+                                    </s:url>">
+                                    <img class="box panel-image-preview" src="/Imagen?idImagen=<s:url value="%{#oportunidad.imagenDefault.idImagenPropiedad}"/>">
+                                </a>
+                            </div>
+                            <div class="panel-footer text-center">
                                 <i class="fa fa-bed fa-1x"></i>
                                 <s:property value="%{#oportunidad.habitacion}"/>
-                            </div>
-                            <div class="panel-body">
+                                <span class="">|</span>
                                 <i class="icon-bathrooms"></i>
                                 <s:property value="%{#oportunidad.bano}"/>
+                                <span class="">|</span>
+                                Codigo: <s:property value="%{#oportunidad.codigoPropiedad}"/>
                             </div>
-                            <div class="panel-body panel-color">
+                        </div>
+                    </div>
+                </s:if>
+                <s:else>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-image hide-panel-body">
+                                <a  class="" href="<s:url action="ver" namespace="/">
+                                        <s:param name="idPropiedad"><s:property value="%{#oportunidad.idPropiedad}"/></s:param>
+                                    </s:url>">
+                                    <img class="box panel-image-preview" src="/Imagen?idImagen=<s:url value="%{#oportunidad.imagenDefault.idImagenPropiedad}"/>">
+                                </a>
+                            </div>
+                            <div class="panel-footer text-center">
+                                <i class="fa fa-bed fa-1x"></i>
+                                <s:property value="%{#oportunidad.habitacion}"/>
+                                <span class="">|</span>
+                                <i class="icon-bathrooms"></i>
+                                <s:property value="%{#oportunidad.bano}"/>
+                                <span class="">|</span>
                                 Codigo: <s:property value="%{#oportunidad.codigoPropiedad}"/>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </s:iterator>
-    </div>
+            </s:else>
+        </s:else>
+        <s:if test="#stat.last == true && (#stat.index % 3 == 0 || #stat.index % 3 == 1)">
+        </div>
+    </s:if>
+</s:iterator>
 </div>
