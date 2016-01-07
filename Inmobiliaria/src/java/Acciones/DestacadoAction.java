@@ -6,26 +6,18 @@
 package Acciones;
 
 import Controlador.ControladorDestacado;
-import Controlador.ControladorImagen;
 import Controlador.ControladorPropiedad;
 import Persistencia.Modelo.Destacado;
-import Persistencia.Modelo.Imagen;
 import Persistencia.Modelo.Propiedad;
 import Soporte.Mensaje;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.struts2.ServletActionContext;
 
 /**
  *
@@ -33,7 +25,6 @@ import org.apache.struts2.ServletActionContext;
  */
 public class DestacadoAction extends ActionSupport implements ModelDriven<Destacado> {
 
-    private static final String STORAGE_PATH = System.getenv("OPENSHIFT_DATA_DIR") == null ? "D:/imagenes/tmp/" : System.getenv("OPENSHIFT_DATA_DIR");
     private Destacado destacado = new Destacado();
     private List<Destacado> destacadosLista = new ArrayList<Destacado>();
     private List<Propiedad> propiedadesLista = new ArrayList<Propiedad>();
@@ -91,56 +82,17 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
             this.cargarPropiedades();
             return INPUT;
         }
-        int id = destacado.getPropiedad().getIdPropiedad();
-        String ruta = STORAGE_PATH + "ImagenDestacada/" + id;
-        File directorio = new File(ruta);
-        if (!directorio.exists()) {
-            directorio.mkdirs();
-        }
-
-        String rutaBD = ruta + "/" + uploadFileName;
-        try {
-            FileUtils.copyFile(upload, new File(directorio, uploadFileName));
-        } catch (IOException ex) {
-            Logger.getLogger(PropiedadAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Imagen im = new Imagen();
-        im.setRuta(rutaBD);
-        destacado.setImagen(im);
-        ControladorImagen ci = new ControladorImagen();
-        ci.guardar(im);
-        controladorDestacado.guardar(destacado);
+        controladorDestacado.guardar(destacado, upload, uploadFileName);
         sesion.put("mensaje", Mensaje.getAgregada(Mensaje.propiedadDestacada));
         return SUCCESS;
     }
 
     public String modificar() {
-
         if (!validarModificar()) {
             this.cargarPropiedades();
             return INPUT;
         }
-        //elimino la guardada y agrego la nueva...
-        if (guardaImagen.equals("false")) {
-            ControladorImagen ci = new ControladorImagen();
-            Imagen temp = controladorDestacado.getOne(destacado.getIdDestacado()).getImagen();
-            ci.eliminarImagen(temp.getRuta());
-            ci.eliminar(temp.getIdImagen());
-            int id = destacado.getPropiedad().getIdPropiedad();
-            String ruta = STORAGE_PATH + "ImagenDestacada/" + id;
-            File directorio = new File(ruta);
-            String rutaBD = ruta + "/" + uploadFileName;
-            try {
-                FileUtils.copyFile(upload, new File(directorio, uploadFileName));
-            } catch (IOException ex) {
-                Logger.getLogger(PropiedadAction.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Imagen im = new Imagen();
-            im.setRuta(rutaBD);
-            destacado.setImagen(im);
-            ci.guardar(im);
-        }
-        controladorDestacado.actualizar(destacado);
+        controladorDestacado.actualizar(Boolean.parseBoolean(guardaImagen), destacado, upload, uploadFileName);
         sesion.put("mensaje", Mensaje.getModificada(Mensaje.propiedadDestacada));
         return SUCCESS;
     }
@@ -157,20 +109,13 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
     }
 
     public String eliminar() {
-
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        int id = Integer.parseInt(request.getParameter("idDestacado"));
-        Destacado d = controladorDestacado.getOne(id);
-        String ruta = STORAGE_PATH + "ImagenDestacado/" + d.getIdDestacado();
-        controladorDestacado.eliminar(d, ruta);
+        controladorDestacado.eliminar(destacado.getIdDestacado());
         sesion.put("mensaje", Mensaje.getEliminada(Mensaje.propiedadDestacada));
-
         return SUCCESS;
     }
 
     public String editar() {
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        destacado = controladorDestacado.getOne(Integer.parseInt(request.getParameter("idDestacado")));
+        destacado = controladorDestacado.getOne(destacado.getIdDestacado());
         this.cargarPropiedades();
         return SUCCESS;
     }

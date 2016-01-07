@@ -18,6 +18,7 @@ import Persistencia.Modelo.Propiedad;
 import Persistencia.Modelo.Servicio;
 import Persistencia.Modelo.TipoMoneda;
 import Persistencia.Modelo.TipoPropiedad;
+import Soporte.Archivo;
 import Soporte.Mensaje;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
@@ -238,7 +239,7 @@ public class PropiedadAction extends ActionSupport {
             String ruta = STORAGE_PATH + "ImagenPropiedad";
             String rutaOriginal = ruta + "/" + codigoOriginal;
             String rutaNueva = ruta + "/" + codigoNuevo;
-            controladorImagenPropiedad.renombrarCarpeta(rutaOriginal, rutaNueva);
+            Archivo.renombrarCarpeta(rutaOriginal, rutaNueva);
         }
         //AGREGO LAS NUEVAS IMAGENES
 

@@ -16,7 +16,17 @@ import java.io.IOException;
  */
 public class Archivo {
 
-   
+    public static void renombrarCarpeta(String rutaOriginal, String rutaNueva) {
+        // File (or directory) with old name
+        File file = new File(rutaOriginal);
+        System.out.println("1");
+        // File (or directory) with new name
+        File file2 = new File(rutaNueva);
+        System.out.println("2");
+        // Rename file (or directory)
+        file.renameTo(file2);
+        System.out.println("3");
+    }
 
     public static void delete(File file)
             throws IOException {
