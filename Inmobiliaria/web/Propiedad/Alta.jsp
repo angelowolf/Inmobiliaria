@@ -60,9 +60,9 @@
                 <div id="imagenes" class="col-md-8 col-md-offset-2 input">
                     <s:file id="imagen1" name="imagen" label="Imagen 1:" />
                 </div>
-                <div class="col-md-3 col-md-offset-3">
+<!--                <div class="col-md-3 col-md-offset-3">
                     <button id="btnAgregar" class="btn btn-warning ">Agregar Imagen</button>
-                </div>
+                </div>-->
                 <div class="col-md-12" id="ubicaccion">
                     <h2 class="text-center text-info">Ubicacion</h2>
                     <div id="mapa-alta" style="width:100%;height:500px;"></div>

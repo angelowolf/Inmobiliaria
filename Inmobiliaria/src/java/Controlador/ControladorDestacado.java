@@ -40,9 +40,9 @@ public class ControladorDestacado {
      */
     public int guardar(Destacado destacado, File upload, String uploadFileName) {
         int id = destacado.getPropiedad().getIdPropiedad();
-        String ruta = SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenDestacada/" + id;
+        String ruta = SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenDestacada/id_propiedad_" + id;
         Imagen im = new Imagen();
-        im.setRuta(crearImagen(ruta, upload, uploadFileName));
+        im.setRuta(Archivo.crearImagen(ruta, upload, uploadFileName));
         destacado.setImagen(im);
         ControladorImagen ci = new ControladorImagen();
         ci.guardar(im);
@@ -68,25 +68,25 @@ public class ControladorDestacado {
         if (!guardaImagen) {
             Imagen temp = this.getOne(destacadoCambiado.getIdDestacado()).getImagen();
             //elimino del disco
-            String ruta = SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenDestacada/" + destacadoOriginal.getPropiedad().getIdPropiedad();
+            String ruta = SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenDestacada/id_propiedad_" + destacadoOriginal.getPropiedad().getIdPropiedad();
             ci.eliminarImagen(ruta);
             //elimino de la bd
             ci.eliminar(temp.getIdImagen());
             //creo el nuevo
             int idNuevaPropiedad = destacadoCambiado.getPropiedad().getIdPropiedad();
-            ruta = SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenDestacada/" + idNuevaPropiedad;
+            ruta = SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenDestacada/id_propiedad_" + idNuevaPropiedad;
             Imagen imagen = new Imagen();
-            imagen.setRuta(crearImagen(ruta, upload, uploadFileName));
+            imagen.setRuta(Archivo.crearImagen(ruta, upload, uploadFileName));
             destacadoCambiado.setImagen(imagen);
             ci.guardar(imagen);
             flag = true;
         }
         //si esto cambia tengo q renombrar la carpeta
         if (destacadoOriginal.getPropiedad().getIdPropiedad() != destacadoCambiado.getPropiedad().getIdPropiedad() && !flag) {
-            String rutaOriginal = SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenDestacada/" + destacadoOriginal.getPropiedad().getIdPropiedad();
-            String rutaCambiada = SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenDestacada/" + destacadoCambiado.getPropiedad().getIdPropiedad();
+            String rutaOriginal = SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenDestacada/id_propiedad_" + destacadoOriginal.getPropiedad().getIdPropiedad();
+            String rutaCambiada = SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenDestacada/id_propiedad_" + destacadoCambiado.getPropiedad().getIdPropiedad();
             Archivo.renombrarCarpeta(rutaOriginal, rutaCambiada);
-            String rutamodificada = destacadoOriginal.getImagen().getRuta().replaceFirst("" + destacadoOriginal.getPropiedad().getIdPropiedad(), "" + destacadoCambiado.getPropiedad().getIdPropiedad());
+            String rutamodificada = destacadoOriginal.getImagen().getRuta().replaceFirst("id_propiedad_" + destacadoOriginal.getPropiedad().getIdPropiedad(), "id_propiedad_" + destacadoCambiado.getPropiedad().getIdPropiedad());
             destacadoCambiado.getImagen().setRuta(rutamodificada);
             ci.actualizar(destacadoCambiado.getImagen());
         }
@@ -94,29 +94,7 @@ public class ControladorDestacado {
         destacadoDAO.actualizar(destacadoCambiado);
     }
 
-    /**
-     * Crea un archivo en el disco del sistema, y devuelve la ruta del archivo
-     * para poder ser guardaro en la base de datos.
-     *
-     * @param ruta La ruta del archivo donde sera creado.
-     * @param upload EL archivo.
-     * @param uploadFileName El nombre del archivo.
-     * @return La ruta para la BD.
-     */
-    private String crearImagen(String ruta, File upload, String uploadFileName) {
-        File directorio = new File(ruta);
-        String rutaBD = ruta + "/" + uploadFileName;
-        if (!directorio.exists()) {
-            directorio.mkdirs();
-        }
-        try {
-            FileUtils.copyFile(upload, new File(directorio, uploadFileName));
-        } catch (IOException ex) {
-            Logger.getLogger(PropiedadAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return rutaBD;
-    }
-
+    
     /**
      * Devuelve una lista con todas las propiedades destacadas que existen.
      *

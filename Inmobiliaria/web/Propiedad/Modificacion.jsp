@@ -1,7 +1,6 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <%@taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<s:actionerror theme="bootstrap"/>
 <style type="text/css">
     .form-inline .form-group{
         margin-left: 0;
@@ -41,9 +40,6 @@
                 </div>
                 <div class="col-md-8 col-md-offset-2 input">
                     <s:textfield name="propiedad.bano" label="Baños" placeholder="Ingrese la cantidad de baños" />
-                </div>
-                <div class="col-md-8 col-md-offset-2 input">
-                    <s:textfield name="propiedad.baño" label="Baños" placeholder="Ingrese la cantidad de baños" />
                 </div>
                 <div class="col-md-8 col-md-offset-2 input">
                     <s:textfield name="propiedad.terreno" label="Terreno" placeholder="Ingrese la superficie del terreno" />
@@ -87,20 +83,19 @@
                     </div>
                 </div>
                 <div class="col-md-8 col-md-offset-2" id="imagenes">
-                    <h3 class="text-center">Imagenes Nuevas</h3>
-                    <s:file id="imagen1" name="imagen"  label="Imagen 1: "/>
+                    <h3 class="text-center" style="padding-bottom: 15px;">Imagenes Nuevas</h3>
+                    <s:file multiple="true" id="imagen1" name="imagen"  label="Imagen 1: "/>
                 </div>
-                <div class="col-md-3 col-md-offset-3">
+<!--                <div class="col-md-3 col-md-offset-3" style="padding-top: 15px;">
                     <button id="btnAgregar" class="btn btn-warning ">Agregar Imagen</button>
-                </div>
-                <%--<s:file name="imagen" label="Imagen"/>--%>
+                </div>-->
+                                <div id="ubicaccion">
+                    <h2 class="col-md-12 text-center text-info">Ubicacion</h2>
+                    <div id="mapa-edit" style="width:100%;height:500px;"></div>
+                </div>    
                 <s:submit value="Confirmar" cssClass="btn btn-success col-md-offset-9 col-md-3"/>
                 <%--</s:push>--%>         
             </s:form>
         </div>
     </div>
-    <div id="ubicaccion">
-        <h2 class="text-center text-info">Ubicacion</h2>
-        <div id="mapa-edit" style="width:100%;height:500px;"></div>
-    </div>    
 </div>

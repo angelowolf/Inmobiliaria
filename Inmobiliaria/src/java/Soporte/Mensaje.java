@@ -59,6 +59,7 @@ public class Mensaje {
     public static final String claveNoCoincide = "La clave no coincide.";
     public static final String claveCambiada = "Clave cambiada con exito.";
     public static final String claveIngresadaMal = "Su clave ingresada no es correcta.";
+    public static final String codigoEnUso = "El codigo ingresado ya se encuentra en uso.";
 
     public static String getCodigoYaEnviado(long arg) {
         return String.format(codigoYaEnviado, arg);

@@ -99,4 +99,16 @@ public class PropiedadDAO extends GenericDAO<Propiedad, Integer> implements IPro
         return objetos;
     }
 
+    public List<Propiedad> buscarCodigo(int codigoPropiedad) {
+        Session session = getHibernateTemplate();
+        List<Propiedad> objetos = new ArrayList<Propiedad>();
+        try {
+            String sql = "from Propiedad where codigoPropiedad = :codigoPropiedad";
+            objetos = session.createQuery(sql).setParameter("codigoPropiedad", codigoPropiedad).list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return objetos;
+    }
+
 }
