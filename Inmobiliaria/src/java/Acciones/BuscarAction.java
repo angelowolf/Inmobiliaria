@@ -5,13 +5,17 @@
  */
 package Acciones;
 
+import Controlador.ControladorContacto;
 import Controlador.ControladorPropiedad;
 import Controlador.ControladorTipoPropiedad;
+import Persistencia.Modelo.Contacto;
 import Persistencia.Modelo.Propiedad;
 import Persistencia.Modelo.TipoPropiedad;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -19,6 +23,7 @@ import java.util.List;
  */
 public class BuscarAction extends ActionSupport {
 
+    private final Map<String, Object> application = ActionContext.getContext().getApplication();
     private final ControladorPropiedad cp = new ControladorPropiedad();
     private final ControladorTipoPropiedad ctp = new ControladorTipoPropiedad();
     private List<Propiedad> propiedades = new ArrayList<Propiedad>();
@@ -38,8 +43,13 @@ public class BuscarAction extends ActionSupport {
                 addActionError("Algunas propiedades no poseen imagenes.");
             }
         }
-
         tiposPropiedades = ctp.getTodos();
+        Contacto c = (Contacto) application.get("contacto");
+        if (c == null) {
+            ControladorContacto cc = new ControladorContacto();
+            c = cc.getOne(1);
+            application.put("contacto", c);
+        }
         return SUCCESS;
     }
 
@@ -55,6 +65,12 @@ public class BuscarAction extends ActionSupport {
         }
 //        propiedades = cp.getTodos();
         tiposPropiedades = ctp.getTodos();
+        Contacto c = (Contacto) application.get("contacto");
+        if (c == null) {
+            ControladorContacto cc = new ControladorContacto();
+            c = cc.getOne(1);
+            application.put("contacto", c);
+        }
         return SUCCESS;
     }
 

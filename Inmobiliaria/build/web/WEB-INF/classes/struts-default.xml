@@ -14,17 +14,17 @@
         </action>     
         <action name="Imagen" class="Acciones.ImagenAction">
         </action>              
-        <action name="loadIndex" method="execute" class="Acciones.IndexAction">
+        <action name="index" method="execute" class="Acciones.IndexAction">
             <result name="success" type="tiles">/Index.tiles</result>
         </action>      
-        <action name="loadFind" method="cargarPagina" class="Acciones.BuscarAction">
+        <action name="find" method="cargarPagina" class="Acciones.BuscarAction">
             <result name="success" type="tiles">/Buscar.tiles</result>
         </action>      
         <action name="buscar" method="buscar" class="Acciones.BuscarAction">
             <result name="success" type="tiles">/Buscar.tiles</result>
         </action>      
-        <action name="loadContact" method="nuevo" class="Acciones.LinkAction">
-            <result name="nuevo" type="tiles">/Contacto.tiles</result>
+        <action name="contacto" method="cargar" class="Acciones.ContactoAction">
+            <result name="success" type="tiles">/Contacto.tiles</result>
         </action>      
         <action name="" method="nuevo" class="Acciones.LinkAction">
             <result name="nuevo" type="tiles">/Index.tiles</result>

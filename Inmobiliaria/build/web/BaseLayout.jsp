@@ -8,9 +8,9 @@
     HttpSession sesion = request.getSession();
     Usuario userLogin = (Usuario) sesion.getAttribute("user");
 
-//    if (userLogin == null) {
-//        response.sendRedirect("/Inmobiliaria/Admin/Login.jsp");
-//    }
+    if (userLogin == null) {
+        response.sendRedirect("/Admin/Login.jsp");
+    }
 %>
 <html lang="es">
     <head>

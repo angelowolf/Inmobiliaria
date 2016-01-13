@@ -38,17 +38,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<s:url action="loadIndex" namespace="/"/>">Inmobiliaria</a>          
+                <a class="navbar-brand" href="<s:url action="index" namespace="/"/>">Inmobiliaria</a>          
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a  href="<s:url action="loadFind" namespace="/"/>">Buscar Propiedades</a>
+                        <a  href="<s:url action="find" namespace="/"/>">Buscar Propiedades</a>
                     </li>
                     <li>
-                        <a  href="<s:url action="loadContact" namespace="/"/>">Contacto</a>
+                        <a  href="<s:url action="contacto" namespace="/"/>">Contacto</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->

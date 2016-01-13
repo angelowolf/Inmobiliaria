@@ -5,8 +5,10 @@
  */
 package Acciones;
 
+import Controlador.ControladorContacto;
 import Controlador.ControladorPropiedad;
 import Persistencia.Modelo.Ambiente;
+import Persistencia.Modelo.Contacto;
 import Persistencia.Modelo.Propiedad;
 import Persistencia.Modelo.Servicio;
 import Soporte.ServicioDoble;
@@ -14,6 +16,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 
@@ -23,6 +26,7 @@ import org.apache.struts2.ServletActionContext;
  */
 public class VerPropiedadAction extends ActionSupport {
 
+    private final Map<String, Object> application = ActionContext.getContext().getApplication();
     private Propiedad propiedad;
     private final ControladorPropiedad controladorPropiedad = new ControladorPropiedad();
     private int idPropiedad;
@@ -60,7 +64,12 @@ public class VerPropiedadAction extends ActionSupport {
                 flag2 = true;
             }
         }
-
+        Contacto c = (Contacto) application.get("contacto");
+        if (c == null) {
+            ControladorContacto cc = new ControladorContacto();
+            c = cc.getOne(1);
+            application.put("contacto", c);
+        }
         return SUCCESS;
     }
 

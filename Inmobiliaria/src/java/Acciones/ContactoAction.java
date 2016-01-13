@@ -40,6 +40,16 @@ public class ContactoAction extends ActionSupport implements ModelDriven<Contact
 
     }
 
+    public String cargar() {
+        Contacto c = (Contacto) application.get("contacto");
+        if (c == null) {
+            ControladorContacto cc = new ControladorContacto();
+            c = cc.getOne(1);
+            application.put("contacto", c);
+        }
+        return SUCCESS;
+    }
+
     public String loadContacto() {
         contacto = controladorContacto.getOne(1);
         return SUCCESS;
