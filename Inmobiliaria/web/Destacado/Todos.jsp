@@ -20,6 +20,7 @@
     </fieldset>  
     <div class=" col-md-12">
         <display:table name="destacadosLista" pagesize="10" requestURI="${listar}" uid="row">
+            <display:setProperty name="basic.msg.empty_list" >Aún no hay propiedades destacadas registradas. Puede agregar una desde <a href="<s:url action='nuevo' namespace='/Destacado'/>">aquí</a>.</display:setProperty>
             <display:column property="idDestacado" title="Numero Destacado"/>
             <display:column title="Imagen"><img width="140" height="79" src="/Imagen?idImagenDestacado=<s:url value="%{#attr.row.imagen.idImagen}"/>" /></display:column>
             <display:column sortable="true" property="nombre" title="Título"/>

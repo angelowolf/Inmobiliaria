@@ -54,7 +54,7 @@ public class AmbienteDAO extends GenericDAO<Ambiente, Integer> implements IAmbie
         List<Ambiente> objetos = new ArrayList<Ambiente>();
         try {
             String sql = "select * from Ambiente s inner join ambientes_propiedades sp ON s.id_ambiente = sp.id_ambiente WHERE s.id_ambiente LIKE :id ";
-            objetos = session.createSQLQuery(sql).addEntity(Servicio.class).setParameter("id", id).list();
+            objetos = session.createSQLQuery(sql).addEntity(Ambiente.class).setParameter("id", id).list();
         } catch (RuntimeException e) {
             e.printStackTrace();
         }

@@ -9,7 +9,6 @@ import java.io.Serializable;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import java.lang.reflect.ParameterizedType;
-import org.hibernate.Transaction;
 
 public class GenericDAO<Entity, K extends Serializable> implements IGenericDAO<Entity, K> {
 

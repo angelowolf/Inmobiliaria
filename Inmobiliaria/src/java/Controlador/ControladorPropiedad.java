@@ -34,7 +34,17 @@ public class ControladorPropiedad {
         propiedadDAO = new PropiedadDAO();
     }
 
-    public int guardar(Propiedad propiedad, List<String> serviciosElegidos, List<String> ambientesElegidos,
+    /**
+     * Guarda una propiedad, crea las imagenes que tendra en el disco.
+     *
+     * @param propiedad La propiedad a guardar.
+     * @param serviciosElegidos Los servicios que tendra.
+     * @param ambientesElegidos Los ambientes que tendra.
+     * @param imagenFileName El nombre de las distintas imagenes.
+     * @param imagen Las imagenes.
+     * @return El id de la propiedad creada.
+     */
+    public int guardar(Propiedad propiedad, String[] serviciosElegidos, String[] ambientesElegidos,
             List<String> imagenFileName, List<File> imagen) {
         //Agrego los servicios elegidos a la propiedad
         if (serviciosElegidos != null) {
@@ -63,10 +73,28 @@ public class ControladorPropiedad {
         return propiedadDAO.guardar(propiedad);
     }
 
+    /**
+     * Actualiza los datos de una propiedad.
+     *
+     * @param p La propiedad.
+     */
     public void actualizar(Propiedad p) {
         propiedadDAO.actualizar(p);
     }
 
+    /**
+     * Actualiza los datos de una propiedad y crea las nuevas imagenes que
+     * tendra, tambien elimina las imagenes que el usuario decidio eliminar.
+     *
+     * @param propiedad La propiedad a actualizar con sus datos.
+     * @param todosImagenes Todas las imagenes que posee la propiedad(actuales).
+     * @param imagenesElegidos Las imagenes elegidas para guardar.
+     * @param ambientesElegidos Los ambientes elegidos para guardar.
+     * @param serviciosElegidos Los servicios elegidos para guardar-
+     * @param sesion La sesion actual
+     * @param imagen Las imagenes nuevas.
+     * @param imagenFileName El nombre de las nuevas imagenes.
+     */
     public void actualizar(Propiedad propiedad, List<ImagenPropiedad> todosImagenes, String[] imagenesElegidos,
             String[] ambientesElegidos, String[] serviciosElegidos, Map<String, Object> sesion,
             List<File> imagen, List<String> imagenFileName) {
@@ -160,10 +188,20 @@ public class ControladorPropiedad {
         propiedadDAO.actualizar(propiedad);
     }
 
+    /**
+     * Busca todas las propiedades que existen.
+     *
+     * @return Las propiedades.
+     */
     public List<Propiedad> getTodos() {
         return propiedadDAO.listar();
     }
 
+    /**
+     * Elimina una propiedad y sus imagenes del disco.
+     *
+     * @param id El id de la propiedad.
+     */
     public void eliminar(int id) {
         Propiedad p = getOne(id);
         ControladorImagenPropiedad cip = new ControladorImagenPropiedad();
@@ -172,6 +210,11 @@ public class ControladorPropiedad {
         Archivo.delete(SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenPropiedad/codigo_" + p.getCodigoPropiedad());
     }
 
+    /**
+     * Elimina una propiedad y sus imagenes del disco.
+     *
+     * @param p La propiedad a eliminar.
+     */
     public void eliminar(Propiedad p) {
         ControladorImagenPropiedad cip = new ControladorImagenPropiedad();
         cip.eliminarTodos(p.getIdPropiedad());
@@ -179,29 +222,85 @@ public class ControladorPropiedad {
         Archivo.delete(SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenPropiedad/codigo_" + p.getCodigoPropiedad());
     }
 
+    /**
+     * Busca una propiedad.
+     *
+     * @param id El id de la propiedad.
+     * @return La propiedad.
+     */
     public Propiedad getOne(int id) {
         return propiedadDAO.buscar(id);
     }
 
+    /**
+     * Busca todas las propiedades que estan marcadas como oportunidades.
+     *
+     * @return Las propiedades.
+     */
     public List<Propiedad> getOportunidades() {
         return propiedadDAO.listarOportunidades();
     }
 
+    /**
+     * Busca propiedades por distintos criterios.
+     *
+     * @param idTipoPropiedad El id del tipo de propiedad.
+     * @param habitacion Cantidad de habitaciones.
+     * @param bano Cantidad de baños.
+     * @return Las propiedades.
+     */
     public List<Propiedad> buscar(int idTipoPropiedad, int habitacion, int bano) {
         return propiedadDAO.buscar(idTipoPropiedad, habitacion, bano);
     }
 
+    /**
+     * Verifica si la propiedad esta siendo utilizada por otra entidad, como
+     * propiedad destacada.
+     *
+     * @param id El id de la propiedad.
+     * @return True si esta siendo utilizada.
+     */
     public boolean propiedadEnUso(int id) {
         return !propiedadDAO.propiedadEnUso(id).isEmpty();
     }
 
+    /**
+     * Verifica si el codigo de la propiedad esta ya en uso...
+     *
+     * @param propiedad La propiedad
+     * @return True si el codigo ya esta siendo utilizado.
+     */
     public boolean existe(Propiedad propiedad) {
         List<Propiedad> lista = propiedadDAO.buscarCodigo(propiedad.getCodigoPropiedad());
         for (Propiedad m : lista) {
             if (m.getCodigoPropiedad() == propiedad.getCodigoPropiedad()) {
-                return m.getIdPropiedad()!= propiedad.getIdPropiedad();
+                return m.getIdPropiedad() != propiedad.getIdPropiedad();
             }
         }
         return false;
+    }
+
+    /**
+     * Busca una propiedad por su codigo.
+     *
+     * @param codigoPropiedad El codigo.
+     * @return La propiedad.
+     */
+    public Propiedad getOneCodigoPropiedad(int codigoPropiedad) {
+        List<Propiedad> lp = propiedadDAO.buscarCodigo(codigoPropiedad);
+        if (!lp.isEmpty()) {
+            return lp.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Busca todas las propiedades que no estan destacadas.
+     *
+     * @return Las propiedades.
+     */
+    public List<Propiedad> getTodosSinDestacar() {
+        return propiedadDAO.todosSinDestacar();
     }
 }

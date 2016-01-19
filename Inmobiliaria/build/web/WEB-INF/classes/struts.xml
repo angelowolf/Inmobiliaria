@@ -4,10 +4,10 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <constant name="struts.devMode" value="true"/>        
+    <constant name="struts.devMode" value="false"/>        
     <constant name="struts.custom.i18n.resources" value="struts-mensajes" />
     <constant name="struts.multipart.maxSize" value="10485760" />
-    <!--<constant name="struts.multipart.maxSize" value="52428800" />-->
+    <!--<constant name="struts.multipart.maxSize" value="52428800" />-->      
     <include file="struts-servicio.xml"></include>
     <include file="struts-propiedad.xml"></include>
     <include file="struts-ambiente.xml"></include>

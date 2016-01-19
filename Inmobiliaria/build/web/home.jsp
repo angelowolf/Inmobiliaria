@@ -1,2 +1,2 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
-<s:action name="loadIndex" namespace="/" executeResult="true"/>
+<s:action name="index" namespace="/" executeResult="true"/>

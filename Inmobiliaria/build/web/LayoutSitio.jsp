@@ -42,7 +42,7 @@
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right">
+            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
                         <a  href="<s:url action="find" namespace="/"/>">Buscar Propiedades</a>
@@ -100,6 +100,7 @@
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script src="/../js/mapa-vista.js"></script>   
     <script src="/../js/mapa-contacto.js"></script>   
+    <script src="/../js/email-ajax.js"></script>   
 
     <!--    <script src="/Inmobiliaria/js/jquery-2.1.1.min.js"></script>
         <script src="/Inmobiliaria/js/jquery-ui.min.js"></script>

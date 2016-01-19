@@ -47,13 +47,13 @@
                     <div class="input-group-addon">
                         <div class="glyphicon glyphicon-lock"></div>
                     </div>
-                    <input class="form-control" id="username" name="clave1" placeholder="Ingrese una nueva contraseña"  type="text">
+                    <input  class="form-control" id="username" name="clave1" placeholder="Ingrese una nueva contraseña"  type="password">
                 </div>
                 <div class="form-group has-feedback">
                     <div class="input-group-addon">
                         <div class="glyphicon glyphicon-lock"></div>
                     </div>
-                    <input class="form-control" id="username" name="clave2" placeholder="Repita la contraseña"  type="text">
+                    <input class="form-control" id="username" name="clave2" placeholder="Repita la contraseña"  type="password">
                 </div>           
                 <div class="form-group submit">
                     <input class="btn btn-lg" type="submit" value="ENVIAR">

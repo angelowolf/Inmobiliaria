@@ -20,6 +20,7 @@
     </fieldset>  
     <div class=" col-md-12">
         <display:table name="tipoMonedaLista" pagesize="10" requestURI="${listar}" uid="row">
+            <display:setProperty name="basic.msg.empty_list" >Aún no hay tipos de moneda registrados. Puede crear uno desde <a href="<s:url action='nuevo' namespace='/TipoMoneda'/>">aquí</a>.</display:setProperty>
             <display:column property="idTipoMoneda" title="Numero Tipo Moneda"/>
             <display:column sortable="true" property="nombre" title="Nombre"/>
             <display:column sortable="true" property="sigla" title="Sigla"/>

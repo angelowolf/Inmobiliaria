@@ -50,6 +50,12 @@ public class ControladorServicio {
         return servicioDAO.buscar(id);
     }
 
+    /**
+     * Verifica si existe un servicio con el nombre..
+     *
+     * @param o El servicio a consultar.
+     * @return True si ya existe.
+     */
     public boolean existe(Servicio o) {
         o.setNombre(WordUtils.capitalize(o.getNombre()));
         List<Servicio> lista = servicioDAO.buscar(o.getNombre());
@@ -61,11 +67,23 @@ public class ControladorServicio {
         return false;
     }
 
-    public Servicio getOne(String serviciosElegido) {
-        serviciosElegido = WordUtils.capitalize(serviciosElegido);
-        return servicioDAO.buscar(serviciosElegido).get(0);
+    /**
+     * Busca un servicio por su nombre.
+     *
+     * @param nombre
+     * @return El servicio
+     */
+    public Servicio getOne(String nombre) {
+        nombre = WordUtils.capitalize(nombre);
+        return servicioDAO.buscar(nombre).get(0);
     }
 
+    /**
+     * Verifica si el servicio esta siendo utilizado por alguna propiedad.
+     *
+     * @param id
+     * @return True si esta siendo utilizada.
+     */
     public boolean servicioEnUso(int id) {
         return !servicioDAO.servicioEnUso(id).isEmpty();
     }

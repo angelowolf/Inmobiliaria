@@ -8,7 +8,7 @@
 </div>
 <fieldset>   
     <legend>
-        Formulario Propiedades Destacadas
+        Formulario Propiedades Destacadas - Codigo Propiedad: <s:property value="destacado.propiedad.codigoPropiedad" />
     </legend>
 </fieldset>
 <div class="form-group col-md-8 col-md-offset-2">   
@@ -17,17 +17,18 @@
             <s:form id="form" style="padding-top: 25px;" action="modificar" method="POST" validate="true" enctype="multipart/form-data" theme="bootstrap" cssClass="form-horizontal">
                 <s:hidden name="destacado.idDestacado"/>
                 <s:hidden name="destacado.imagen.idImagen"/>
+                <s:hidden name="destacado.propiedad.idPropiedad"/>
                 <div class="col-md-8 col-md-offset-2">
-                    <s:textfield name="destacado.nombre" label="Título" placeholder="Ingrese el título" />
-                    <s:select value="destacado.propiedad.idPropiedad" label="Propiedad" name="destacado.propiedad.idPropiedad" headerKey="-1" headerValue="Seleccione" list="propiedadesLista" listKey="idPropiedad" listValue="idPropiedad"/>
+                    <s:textfield name="destacado.nombre" label="Título" placeholder="Ingrese el título" />                    
+                    <%--<s:select value="destacado.propiedad.idPropiedad" label="Propiedad" name="destacado.propiedad.idPropiedad" headerKey="-1" headerValue="Seleccione" list="propiedadesLista" listKey="idPropiedad" listValue="codigoPropiedad"/>--%>
                     <h3 class="text-center">Imagen Guardada</h3>
                     <div id="contenedor-checks">
                         <div class="col-md-8 col-md-offset-2">
                             <div class="form-group">
-                                <div class="form-inline">
+                                <div class="elems">
                                     <img width="140" height="79" src="/Imagen?idImagenDestacado=<s:property value="destacado.imagen.idImagen"/>" />
-                                    <s:checkbox name="guardaImagen" value="true" label="Guardar">
-                                    </s:checkbox>
+                                    <s:checkbox name="guardaImagen" value="true" theme="simple">
+                                    </s:checkbox> Guardar
                                 </div>
                             </div>
                         </div>

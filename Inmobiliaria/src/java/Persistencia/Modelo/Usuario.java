@@ -84,4 +84,9 @@ public class Usuario {
         this.clave = clave;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nick=" + nick + ", clave=" + clave + ", nombre=" + nombre + ", apellido=" + apellido + ", codigo=" + codigo + ", email=" + email + ", fechaCreacionCodigo=" + fechaCreacionCodigo + '}';
+    }
+
 }

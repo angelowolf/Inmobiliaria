@@ -21,26 +21,54 @@ public class ControladorContacto {
         contactoDAO = new ContactoDAO();
     }
 
+    /**
+     * Guarda un contacto.
+     *
+     * @param o El contacto.
+     */
     public void guardar(Contacto o) {
         o.setDireccion(WordUtils.capitalize(o.getDireccion()));
         contactoDAO.guardar(o);
     }
 
+    /**
+     * Actualiza el contacto. Convierte a mayuscula la primera letra de la
+     * direccion y el nombre.
+     *
+     * @param o El contacto.
+     */
     public void actualizar(Contacto o) {
         o.setDireccion(WordUtils.capitalize(o.getDireccion()));
+        o.setNombre(WordUtils.capitalize(o.getNombre()));
         contactoDAO.actualizar(o);
     }
 
+    /**
+     * Elimina el contacto.
+     *
+     * @param o El contacto.
+     */
     public void eliminar(Contacto o) {
         contactoDAO.eliminar(o);
     }
 
+    /**
+     * Elimina el contacto.
+     *
+     * @param id El id del contacto.
+     */
     public void eliminar(int id) {
         Contacto m = new Contacto();
         m.setIdContacto(id);
         contactoDAO.eliminar(m);
     }
 
+    /**
+     * Retorna el contacto solicitado.
+     *
+     * @param id El id del contacto.
+     * @return El contacto.
+     */
     public Contacto getOne(int id) {
         return contactoDAO.buscar(id);
     }

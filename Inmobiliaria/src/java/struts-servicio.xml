@@ -8,6 +8,19 @@
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>
+          <interceptors>
+            <interceptor name="mylogging"
+                         class="Interceptor.in">
+            </interceptor>
+            <interceptor-stack name="loggingStack">
+                <interceptor-ref name="mylogging" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="loggingStack"/>  
+        <global-results>
+            <result name="login">/Admin/Login.jsp</result>
+        </global-results>
         <action name="guardarOModificar" method="guardarOModificar" class="Acciones.ServicioAction">
             <result name="success" type="redirect">listar</result>
             <result name="input" type="tiles">/Servicio/AltaModificacion.tiles</result>

@@ -8,7 +8,6 @@ package Controlador;
 import Persistencia.DAO.Implementacion.ImagenPropiedadDAO;
 import Persistencia.Modelo.ImagenPropiedad;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -23,51 +22,69 @@ public class ControladorImagenPropiedad {
         imagenPropiedadDAO = new ImagenPropiedadDAO();
     }
 
+    /**
+     * Guarda una Imagen.
+     *
+     * @param o La imagen.
+     */
     public void guardar(ImagenPropiedad o) {
         imagenPropiedadDAO.guardar(o);
     }
 
+    /**
+     * Actualzia una imagen.
+     *
+     * @param o La imagen.
+     */
     public void actualizar(ImagenPropiedad o) {
         imagenPropiedadDAO.actualizar(o);
     }
 
+    /**
+     * Elimina una imagen.
+     *
+     * @param o La imagen.
+     */
     public void eliminar(ImagenPropiedad o) {
         imagenPropiedadDAO.eliminar(o);
     }
 
+    /**
+     * Elimina todas las imagenes de una propiedad.
+     *
+     * @param id El id de la propiedad.
+     */
     public void eliminarTodos(int id) {
         imagenPropiedadDAO.eliminarTodos(id);
     }
 
+    /**
+     * Todas las imagenes que existen.
+     *
+     * @return Las imagenes.
+     */
     public List<ImagenPropiedad> getTodos() {
         return imagenPropiedadDAO.listar();
     }
 
+    /**
+     * Todas las imagenes de una propiedad.
+     *
+     * @param idPropiedad EL id de la propiedad.
+     * @return Las imagenes.
+     */
     public List<ImagenPropiedad> getTodos(int idPropiedad) {
         return imagenPropiedadDAO.listar(idPropiedad);
     }
 
+    /**
+     * Busca una imagen por el id.
+     *
+     * @param id El id de la imagen.
+     * @return La imagen.
+     */
     public ImagenPropiedad getOne(int id) {
         return imagenPropiedadDAO.buscar(id);
     }
 
-    public void eliminarImagen(String ruta) {
-        File archivo = new File(ruta);
-        try {
-            archivo.delete();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void renombrarCarpeta(String rutaOriginal, String rutaNueva) {
-        // File (or directory) with old name
-        File file = new File(rutaOriginal);
-
-// File (or directory) with new name
-        File file2 = new File(rutaNueva);
-
-// Rename file (or directory)
-        file.renameTo(file2);
-    }
 }

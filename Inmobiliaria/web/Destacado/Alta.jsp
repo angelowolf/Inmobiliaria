@@ -18,7 +18,7 @@
                 <s:hidden name="destacado.idDestacado"/>
                 <div class="col-md-8 col-md-offset-2">
                     <s:textfield name="destacado.nombre" label="Título" placeholder="Ingrese el título" />
-                    <s:select value="destacado.propiedad.idPropiedad" label="Propiedad" name="destacado.propiedad.idPropiedad" headerKey="-1" headerValue="Seleccione" list="propiedadesLista" listKey="idPropiedad" listValue="idPropiedad"/>
+                    <s:select value="destacado.propiedad.idPropiedad" label="Propiedad" name="destacado.propiedad.idPropiedad" headerKey="-1" headerValue="Seleccione" list="propiedadesLista" listKey="idPropiedad" listValue="codigoPropiedad"/>
                     <s:file name="upload" label="Imagen:" />
                 </div>
                 <s:submit value="Confirmar" cssClass="btn btn-success col-md-offset-9 col-md-3"/>

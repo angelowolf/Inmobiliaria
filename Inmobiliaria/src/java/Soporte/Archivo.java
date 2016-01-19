@@ -18,6 +18,12 @@ import org.apache.commons.io.FileUtils;
  */
 public class Archivo {
 
+    /**
+     * Renombra una carpeta o un archivo.
+     *
+     * @param rutaOriginal Nombre original.
+     * @param rutaNueva Nuevo nombre.
+     */
     public static void renombrarCarpeta(String rutaOriginal, String rutaNueva) {
         // File (or directory) with old name
         File file = new File(rutaOriginal);
@@ -50,9 +56,13 @@ public class Archivo {
         return rutaBD;
     }
 
+    /**
+     * Elimina todos los archivos que contenga una carpeta, o el archivo en si.
+     *
+     * @param ruta La ruta de una carpeta o un archivo.
+     */
     public static void delete(String ruta) {
         try {
-
             File f = new File(ruta);
             delete(f);
         } catch (Exception e) {
@@ -60,35 +70,42 @@ public class Archivo {
         }
     }
 
+    /**
+     * Elimina todos los archivos que contenga una carpeta, o el archivo en si.
+     *
+     * @param file Una carpeta o un archivo.
+     */
     public static void delete(File file) {
         try {
-            if (file.isDirectory()) {
+            if (file.exists()) {
+                if (file.isDirectory()) {
 
-                //directory is empty, then delete it
-                if (file.list().length == 0) {
-                    file.delete();
-                } else {
-
-                    //list all the directory contents
-                    String files[] = file.list();
-
-                    for (String temp : files) {
-                        //construct the file structure
-                        File fileDelete = new File(file, temp);
-
-                        //recursive delete
-                        delete(fileDelete);
-                    }
-
-                    //check the directory again, if empty then delete it
+                    //directory is empty, then delete it
                     if (file.list().length == 0) {
                         file.delete();
-                    }
-                }
+                    } else {
 
-            } else {
-                //if file, then delete it
-                file.delete();
+                        //list all the directory contents
+                        String files[] = file.list();
+
+                        for (String temp : files) {
+                            //construct the file structure
+                            File fileDelete = new File(file, temp);
+
+                            //recursive delete
+                            delete(fileDelete);
+                        }
+
+                        //check the directory again, if empty then delete it
+                        if (file.list().length == 0) {
+                            file.delete();
+                        }
+                    }
+
+                } else {
+                    //if file, then delete it
+                    file.delete();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

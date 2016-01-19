@@ -85,9 +85,9 @@
             <div id="mapa-vista" style="width:100%;height:500px;"></div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div id="servicios" style="padding-top: 150px">
-            <s:if test="!serviciosUno.isEmpty">               
+    <div class="col-md-4" style="padding-top: 150px">  
+        <s:if test="!serviciosUno.isEmpty()">        
+            <div id="servicios">
                 <h3 class="text-center text-info col-md-12">Servicios</h3>
                 <div class="col-md-6">
                     <s:iterator value="serviciosUno" var="servicio" status="stat">                  
@@ -106,11 +106,11 @@
                             </div>                       
                         </div>              
                     </s:iterator>
-                </div>
-            </s:if>
-        </div>
-        <div id="ambientes">          
-            <s:if test="!ambientesUno.isEmpty">
+                </div> 
+            </div>  
+        </s:if> 
+        <s:if test="!ambientesUno.isEmpty()">
+            <div id="ambientes">
                 <h3 class="text-center text-info col-md-12">Ambientes</h3>    
                 <div class="col-md-6">               
                     <s:iterator value="ambientesUno" var="ambiente" >
@@ -130,28 +130,36 @@
                         </div>              
                     </s:iterator>
                 </div>
-            </s:if>
+
+            </div>
+        </s:if>
+        <div class="text-center col-md-12">
+            <s:actionerror theme="bootstrap"/>
+            <s:actionmessage theme="bootstrap"/>
         </div>
-        <div class="col-md-12" id="formulario-consulta" style="background: #F1F3F6; padding-bottom: 50px;border-radius: 4px;">
-            <h3 class="text-center" style="color: black; padding-bottom: 25px; padding-top: 40px">Contacto</h3>
-            <s:form action="mandarEmail" validate="true" enctype="multipart/form-data" theme="simple">
-                <s:hidden value="propiedad.idPropiedad" name="idPropiedad"/>
-                <div class="form-group">
-                    <s:textfield type="text" name="nombre" placeholder="Nombre" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <s:textfield type="text"  name="email" placeholder="Email" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <s:textfield type="text"  name="telefono" placeholder="Teléfono" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <s:textfield type="text"  name="consulta" placeholder="Mensaje" class="form-control" />
-                </div>
-                <div class="form-group text-center">
-                    <s:submit value="Enviar Consulta" cssClass="btn" style="border-color:#adb2b6;" disabled="true"/>
-                </div>
-            </s:form>
+        <div class="col-md-12" id="formulario-consulta" style="background: #F1F3F6; padding-bottom: 0px;border-radius: 4px; margin-top: 50px;">
+            <div id="alerta-mail" class="hidden alert alert-info text-center" style="margin-top: 15px"><p>El mensaje ha sido enviado.</p></div>
+            <div id="contenedor-contacto">
+                <h3 class="text-center" style="color: black; padding-bottom: 25px; padding-top: 10px">Contacto</h3>
+                <form id="form-contact" validate="true" enctype="multipart/form-data" theme="simple">
+                    <s:hidden name="propiedad.idPropiedad" id="idpropiedad" />
+                    <div class="form-group">
+                        <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="email"  name="email" id="email" placeholder="Email" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel"  name="telefono" id="telefono" placeholder="Teléfono" class="form-control" required/>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="consulta" placeholder="Mensaje" id="consulta" class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn" style="border-color:#adb2b6;" >Enviar Consulta</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 

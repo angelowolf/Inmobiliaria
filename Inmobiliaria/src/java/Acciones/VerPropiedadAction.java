@@ -91,18 +91,10 @@ public class VerPropiedadAction extends ActionSupport {
 
     public List<Ambiente> getAmbientesUno() {
         return ambientesUno;
-    }
-
-    public void setAmbientesUno(List<Ambiente> ambientesUno) {
-        this.ambientesUno = ambientesUno;
-    }
+    }  
 
     public List<Ambiente> getAmbientesDos() {
         return ambientesDos;
     }
-
-    public void setAmbientesDos(List<Ambiente> ambientesDos) {
-        this.ambientesDos = ambientesDos;
-    }
-
+    
 }

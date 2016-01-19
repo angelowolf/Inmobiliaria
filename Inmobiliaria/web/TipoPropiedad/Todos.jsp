@@ -20,6 +20,7 @@
     </fieldset>  
     <div class=" col-md-12">
         <display:table name="tipoPropiedadLista" pagesize="10" requestURI="${listar}" uid="row">
+            <display:setProperty name="basic.msg.empty_list" >Aún no hay tipos de propiedad registrados. Puede crear uno desde <a href="<s:url action='nuevo' namespace='/TipoPropiedad'/>">aquí</a>.</display:setProperty>
             <display:column property="idTipoPropiedad" title="Numero Tipo Propiedad"/>
             <display:column sortable="true" property="nombre" title="Nombre"/>
             <display:column title="Funciones">

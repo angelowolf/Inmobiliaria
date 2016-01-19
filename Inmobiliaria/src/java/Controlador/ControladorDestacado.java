@@ -5,18 +5,14 @@
  */
 package Controlador;
 
-import Acciones.PropiedadAction;
 import Persistencia.DAO.Implementacion.DestacadoDAO;
 import Persistencia.Modelo.Destacado;
 import Persistencia.Modelo.Imagen;
+import Persistencia.Modelo.Propiedad;
 import Soporte.Archivo;
 import Soporte.SingletonRuta;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.WordUtils;
 
 /**
@@ -32,6 +28,7 @@ public class ControladorDestacado {
     }
 
     /**
+     * Guarda una propiedad destacada, crea las imagenes en el disco.
      *
      * @param destacado La propiedad destacada a crear.
      * @param upload El archivo de la imagen a guardar.
@@ -69,7 +66,7 @@ public class ControladorDestacado {
             Imagen temp = this.getOne(destacadoCambiado.getIdDestacado()).getImagen();
             //elimino del disco
             String ruta = SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenDestacada/id_propiedad_" + destacadoOriginal.getPropiedad().getIdPropiedad();
-            ci.eliminarImagen(ruta);
+            Archivo.delete(ruta);
             //elimino de la bd
             ci.eliminar(temp.getIdImagen());
             //creo el nuevo
@@ -94,7 +91,6 @@ public class ControladorDestacado {
         destacadoDAO.actualizar(destacadoCambiado);
     }
 
-    
     /**
      * Devuelve una lista con todas las propiedades destacadas que existen.
      *
@@ -113,7 +109,7 @@ public class ControladorDestacado {
     public void eliminar(int id) {
         Destacado d = this.getOne(id);
         ControladorImagen ci = new ControladorImagen();
-        ci.eliminarImagen(d.getImagen().getRuta());
+        Archivo.delete(d.getImagen().getRuta());
         ci.eliminar(d.getImagen().getIdImagen());
         destacadoDAO.eliminar(d);
     }
@@ -126,7 +122,7 @@ public class ControladorDestacado {
      */
     public void eliminar(Destacado d) {
         ControladorImagen ci = new ControladorImagen();
-        ci.eliminarImagen(d.getImagen().getRuta());
+        Archivo.delete(d.getImagen().getRuta());
         ci.eliminar(d.getImagen().getIdImagen());
         destacadoDAO.eliminar(d);
     }
@@ -139,5 +135,29 @@ public class ControladorDestacado {
      */
     public Destacado getOne(int id) {
         return destacadoDAO.buscar(id);
+    }
+
+    /**
+     * Verifica si la propiedad destacada ya existe, tiene algun problema en la
+     * validacion.
+     *
+     * @param destacado
+     * @return True si una propiedad ya posee una propiedad destacada.
+     */
+    public boolean existe(Destacado destacado) {
+        ControladorPropiedad controladorPropiedad = new ControladorPropiedad();
+        Propiedad p = controladorPropiedad.getOneCodigoPropiedad(destacado.getPropiedad().getCodigoPropiedad());
+        if (p == null) {
+            return false;
+        }
+        List<Destacado> lista = destacadoDAO.buscarIdPropiedad(p.getIdPropiedad());
+        Destacado m;
+        if (!lista.isEmpty()) {
+            m = lista.get(0);
+            if (m.getPropiedad().getCodigoPropiedad() == destacado.getPropiedad().getCodigoPropiedad()) {
+                return m.getIdDestacado() != destacado.getIdDestacado();
+            }
+        }
+        return false;
     }
 }

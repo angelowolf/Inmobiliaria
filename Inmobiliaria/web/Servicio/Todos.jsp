@@ -20,6 +20,7 @@
     </fieldset>  
     <div class=" col-md-12">
         <display:table name="servicioLista" pagesize="10" requestURI="${listar}" uid="row">
+            <display:setProperty name="basic.msg.empty_list" >Aún no hay servicios registrados. Puede crear uno desde <a href="<s:url action='nuevo' namespace='/Servicio'/>">aquí</a>.</display:setProperty>
             <display:column property="idServicio" title="Numero Servicio"/>
             <display:column sortable="true" property="nombre" title="Nombre"/>
             <display:column title="Funciones">

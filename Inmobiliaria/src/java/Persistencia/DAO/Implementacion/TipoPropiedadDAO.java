@@ -52,7 +52,7 @@ public class TipoPropiedadDAO extends GenericDAO<TipoPropiedad, Integer> impleme
         Session session = getHibernateTemplate();
         List<TipoPropiedad> objetos = new ArrayList<TipoPropiedad>();
         try {
-            String sql = "select * from TipoPropiedad s inner join propiedad sp ON s.id_tipoPropiedad = sp.id_tipoPropiedad WHERE s.id_tipoPropiedad LIKE :id ";
+            String sql = "select * from TipoPropiedad s inner join propiedad sp ON s.id_tipoPropiedad = sp.tipoPropiedad WHERE s.id_tipoPropiedad LIKE :id ";
             objetos = session.createSQLQuery(sql).addEntity(TipoPropiedad.class).setParameter("id", id).list();
         } catch (RuntimeException e) {
             e.printStackTrace();

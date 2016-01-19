@@ -56,9 +56,9 @@ public class PropiedadDAO extends GenericDAO<Propiedad, Integer> implements IPro
         boolean h = false;
         boolean b = false;
         try {
-            String sql = "from Propiedad WHERE 1=1 ";
+            String sql = "select * from Propiedad WHERE 1=1 ";
             if (idTipoPropiedad > 0) {
-                sql += "and idTipoPropiedad = :idTipoPropiedad ";
+                sql += "and tipoPropiedad = :idTipoPropiedad ";
                 tp = true;
             }
             if (habitacion > 0) {
@@ -69,7 +69,7 @@ public class PropiedadDAO extends GenericDAO<Propiedad, Integer> implements IPro
                 sql += "and bano = :bano";
                 b = true;
             }
-            Query sqlq = session.createQuery(sql);
+            SQLQuery sqlq = session.createSQLQuery(sql).addEntity(Propiedad.class);
             if (tp) {
                 sqlq.setParameter("idTipoPropiedad", idTipoPropiedad);
             }
@@ -87,11 +87,10 @@ public class PropiedadDAO extends GenericDAO<Propiedad, Integer> implements IPro
     }
 
     public List<Propiedad> propiedadEnUso(int id) {
-    
         Session session = getHibernateTemplate();
         List<Propiedad> objetos = new ArrayList<Propiedad>();
         try {
-            String sql = "select * from Propiedad s inner join destacado sp ON s.id_propiedad = sp.id_propiedad WHERE s.id_propiedad LIKE :id ";
+            String sql = "select * from Propiedad s inner join destacado sp ON s.id_propiedad = sp.propiedad WHERE s.id_propiedad LIKE :id ";
             objetos = session.createSQLQuery(sql).addEntity(Propiedad.class).setParameter("id", id).list();
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -111,4 +110,15 @@ public class PropiedadDAO extends GenericDAO<Propiedad, Integer> implements IPro
         return objetos;
     }
 
+    public List<Propiedad> todosSinDestacar() {
+        Session session = getHibernateTemplate();
+        List<Propiedad> objetos = new ArrayList<Propiedad>();
+        try {
+            String sql = "select * from Propiedad s left join destacado sp ON s.id_propiedad = sp.propiedad WHERE sp.propiedad is null ";
+            objetos = session.createSQLQuery(sql).addEntity(Propiedad.class).list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return objetos;
+    }
 }

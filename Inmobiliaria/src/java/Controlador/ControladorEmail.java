@@ -16,7 +16,14 @@ import javax.mail.internet.MimeMessage;
 
 public class ControladorEmail {
 
-    public void metodo(String destino, String titulo, String mensaje) {
+    /**
+     * Envia un email con la cuenta detallada dentro de este metodo.
+     *
+     * @param destino El email al que se le enviara el email.
+     * @param titulo El titulo del email.
+     * @param mensaje El mensaje del email.
+     */
+    public void enviarEmail(String destino, String titulo, String mensaje) {
 
         final String username = "angelowolf21@gmail.com";
         final String password = "telacreiste";
@@ -31,11 +38,11 @@ public class ControladorEmail {
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
-                    @Override
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
 
         try {
             Message message = new MimeMessage(session);

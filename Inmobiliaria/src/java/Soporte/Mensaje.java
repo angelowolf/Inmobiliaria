@@ -20,9 +20,10 @@ public class Mensaje {
     private static final String elExiste = "El %s ya existe!";
     private static final String laExiste = "La %s ya existe!";
     private static final String usado = "El %s esta siendo utilizado por alguna %s, debe eliminarla o desvincularlas para poder eliminar este %s!";
-    private static final String usada = "La %s esta siendo utilizada por alguna %s, debe eliminarla o desvincularlas para poder eliminar ests %s!";
+    private static final String usada = "La %s esta siendo utilizada por alguna %s, debe eliminarla o desvincularlas para poder eliminar esta %s!";
     private static final String codigoYaEnviado = "Ya se ha enviado un email con el codigo a la direccion ingresada. En %l minutos podra generar otro codigo.";
 
+    public static final String usuario = "usuario";
     public static final String propiedad = "propiedad";
     public static final String ambiente = "ambiente";
     public static final String servicio = "servicio";
@@ -60,6 +61,10 @@ public class Mensaje {
     public static final String claveCambiada = "Clave cambiada con exito.";
     public static final String claveIngresadaMal = "Su clave ingresada no es correcta.";
     public static final String codigoEnUso = "El codigo ingresado ya se encuentra en uso.";
+    public static final String emailNoEnviado = "Lo sentimos pero su consulta no ha sido enviado.";
+    public static final String emailEnviado = "Su consulta a sido enviada.";
+    public static final String ingreseTelefono = "Ingrese un teléfono.";
+    public static final String ingreseConsulta = "Ingrese su consulta.";
 
     public static String getCodigoYaEnviado(long arg) {
         return String.format(codigoYaEnviado, arg);

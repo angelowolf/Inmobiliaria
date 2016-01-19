@@ -21,14 +21,15 @@
     </fieldset>  
     <div class=" col-md-12">
         <display:table name="propiedadLista" pagesize="10" requestURI="${listar}" uid="row">
-            <display:column property="idPropiedad" title="Id Propiedad"/>   
+            <display:setProperty name="basic.msg.empty_list" >Aún no hay propiedades registradas. Puede crear una desde <a href="<s:url action='nuevo' namespace='/Propiedad'/>">aquí</a>.</display:setProperty>
+            <display:column property="idPropiedad" title="Id Propiedad"/>
             <display:column title="Imagen"><img width="140" height="79" src="/Imagen?idImagen=<s:url value="%{#attr.row.imagenDefault.idImagenPropiedad}"/>" /></display:column>
             <display:column sortable="true" property="codigoPropiedad" title="Codigo"/>
             <display:column sortable="true" property="direccion" title="Direccion"/>       
             <display:column sortable="true" property="habitacion" title="Habitaciones"/>       
             <display:column sortable="true" property="terreno" title="Terreno"/>       
             <display:column sortable="true" property="edificado" title="Edificado"/>       
-            <display:column sortable="true" title="s" title="Oportunidad">
+            <display:column sortable="true" title="Oportunidad">
                 <s:if test="%{#attr.row.oportunidad}">
                     <input type="checkbox" checked="checked" disabled="true"/>
                 </s:if>

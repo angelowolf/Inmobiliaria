@@ -28,7 +28,7 @@ public class ControladorTipoPropiedad {
     }
 
     public void actualizar(TipoPropiedad o) {
-          o.setNombre(WordUtils.capitalize(o.getNombre()));
+        o.setNombre(WordUtils.capitalize(o.getNombre()));
         tipoPropiedadDAO.actualizar(o);
     }
 
@@ -50,8 +50,14 @@ public class ControladorTipoPropiedad {
         return tipoPropiedadDAO.buscar(id);
     }
 
+    /**
+     * Verifica si el nombre del tipo de propiedad ya existe.
+     *
+     * @param o
+     * @return True si el nombre ya esta en uso.
+     */
     public boolean existe(TipoPropiedad o) {
-         o.setNombre(WordUtils.capitalize(o.getNombre()));
+        o.setNombre(WordUtils.capitalize(o.getNombre()));
         List<TipoPropiedad> lista = tipoPropiedadDAO.buscar(o.getNombre());
         for (TipoPropiedad m : lista) {
             if (m.getNombre().equals(o.getNombre())) {
@@ -61,11 +67,17 @@ public class ControladorTipoPropiedad {
         return false;
     }
 
-    public TipoPropiedad getOne(String serviciosElegido) {
-        serviciosElegido = Soporte.mayusculaPrimeraLetra(serviciosElegido);
-        return tipoPropiedadDAO.buscar(serviciosElegido).get(0);
+    public TipoPropiedad getOne(String nombre) {
+        nombre = WordUtils.capitalize(nombre);
+        return tipoPropiedadDAO.buscar(nombre).get(0);
     }
 
+    /**
+     * Verifica si alguna propiedad usa este tipo de propiedad.
+     *
+     * @param id
+     * @return True si esta siendo utilizado.
+     */
     public boolean tipoPropiedadEnUso(int id) {
         return !tipoPropiedadDAO.tipoPropiedadEnUso(id).isEmpty();
     }

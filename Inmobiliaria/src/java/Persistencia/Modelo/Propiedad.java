@@ -205,7 +205,7 @@ public class Propiedad {
 
     @Override
     public String toString() {
-        return "Propiedad{" + "idPropiedad=" + idPropiedad + ", codigoPropiedad=" + codigoPropiedad + ", habitacion=" + habitacion + ", ba\u00f1o=" + bano + ", terreno=" + terreno + ", edificado=" + edificado + ", nombre=" + direccion + ", detalle=" + detalle + ", ambientes=" + ambientes + ", servicios=" + servicios + ", imagenes=" + imagenes + ", imagenDefault=" + imagenDefault + '}';
+        return "Propiedad{" + "idPropiedad=" + idPropiedad + ", codigoPropiedad=" + codigoPropiedad + ", habitacion=" + habitacion + ", bano=" + bano + ", terreno=" + terreno + ", edificado=" + edificado + ", latitud=" + latitud + ", longitud=" + longitud + ", direccion=" + direccion + ", detalle=" + detalle + ", ambientes=" + ambientes + ", servicios=" + servicios + ", imagenes=" + imagenes + ", tipoPropiedad=" + tipoPropiedad + ", tipoMoneda=" + tipoMoneda + ", imagenDefault=" + imagenDefault + ", precio=" + precio + ", oportunidad=" + oportunidad + '}';
     }
 
 }

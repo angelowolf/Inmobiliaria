@@ -81,7 +81,7 @@ public class TipoPropiedadAction extends ActionSupport implements ModelDriven<Ti
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         int id = Integer.parseInt(request.getParameter("idTipoPropiedad"));
         if (controladorTipoPropiedad.tipoPropiedadEnUso(id)) {
-            sesion.put("alerta", Mensaje.getUsada(Mensaje.tipoPropiedad, Mensaje.propiedad));
+            sesion.put("alerta", Mensaje.getUsado(Mensaje.tipoPropiedad, Mensaje.propiedad));
         } else {
             controladorTipoPropiedad.eliminar(id);
             sesion.put("mensaje", Mensaje.getEliminado(Mensaje.tipoPropiedad));

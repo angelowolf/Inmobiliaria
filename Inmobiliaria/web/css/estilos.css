@@ -214,10 +214,22 @@
     content: "e";
 }
 
+body {
+    min-width: 360px;
+}
+#main-navbar{
+    border-radius: 0;
+}
+
+.nav-pills .nav-pills.nav-stacked {
+    display: none;
+}
 
 #imagenes label { padding-top: 0; }
 #contenedor-checks .checkbox { min-width: 86px; }
-#contenedor-checks .col-sm-3 { display: none; }
+#contenedor-checks img { display: block; margin: auto;}
+#contenedor-checks .elems { text-align: center; }
+
 .help-block {
     display: inline;
 }
@@ -227,7 +239,9 @@
     left: 0%; 
     right: 0%; 
     padding-bottom: 0px; 
-    bottom: 0px;
+    bottom: 0;
+    /*position: absolute;*/
+    /*top: 391px;*/
 }
 .by{
     border-top: 1px solid #bdbdbd;
@@ -248,7 +262,8 @@
     padding-top: 50px;
 }
 #buscar{
-    background:  #2DA3E7;
+    /*
+    background:  #2DA3E7;*/
     color:  white;
 }
 .box-pie{
@@ -334,8 +349,13 @@
     vertical-align: middle;
 }
 .carousel-inner .item img {
-    width: 100%;
-    height: 100%;
+/*    width: 100%;
+    height: 100%;*/
+}
+
+#myCarousel {/*
+    height: 460px;
+    overflow: hidden;*/
 }
 
 @media (min-width: 992px) {
@@ -349,16 +369,36 @@
         height: 200px;
         width: 345px;
     }
-    /*    #panel-index{
-            width: 315px;
-            margin-left: 15px;
-        }*/
-}
-@media (min-width: 360px) {
-    .carousel-inner .item img {
-    }
 }
 
+@media (max-width: 768px) {/*
+    #myCarousel {
+        height: 290px;
+        margin: auto;
+    }
+    #titulo-imagen {
+        top: 221px;
+    }*/
+}
+@media (max-width: 480px) {
+    /*
+    #myCarousel {
+        height: 220px;
+        margin: auto;
+    }
+    #titulo-imagen {
+        top: 151px;
+    }*/
+    /* reinicia el teamaño del carousel
+    #myCarousel {
+        height: initial;
+        overflow: auto;
+    }
+    #titulo-imagen {
+        bottom: 0;
+        top:initial;
+    }*/
+}
 
 /*cajas imagenes index.*/
 

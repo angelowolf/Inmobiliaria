@@ -30,7 +30,7 @@ import java.util.Map;
  *
  * @author Angelo
  */
-public class PropiedadAction extends ActionSupport  implements ModelDriven<Propiedad>{
+public class PropiedadAction extends ActionSupport implements ModelDriven<Propiedad> {
 
     private Propiedad propiedad = new Propiedad();
     private List<Propiedad> propiedadLista = new ArrayList<Propiedad>();
@@ -64,11 +64,9 @@ public class PropiedadAction extends ActionSupport  implements ModelDriven<Propi
         if (propiedad.getCodigoPropiedad() == 0) {
             addFieldError("", Mensaje.ingreseUnCodigo);
             flag = false;
-        }else{
-            if(controladorPropiedad.existe(propiedad)){
-                addFieldError("", Mensaje.codigoEnUso);
-                flag = false;
-            }
+        } else if (controladorPropiedad.existe(propiedad)) {
+            addFieldError("", Mensaje.codigoEnUso);
+            flag = false;
         }
         if (propiedad.getLongitud() == 0 || propiedad.getLatitud() == 0) {
             addFieldError("", Mensaje.seleccioneUbicacion);
@@ -120,7 +118,7 @@ public class PropiedadAction extends ActionSupport  implements ModelDriven<Propi
             this.cargarTipoPropiedad();
             return INPUT;
         }
-        controladorPropiedad.guardar(propiedad, serviciosDefault, ambientesDefault, imagenFileName, imagen);
+        controladorPropiedad.guardar(propiedad, serviciosElegidos, ambientesElegidos, imagenFileName, imagen);
         sesion.put("mensaje", Mensaje.getAgregada(Mensaje.propiedad));
         return SUCCESS;
     }
@@ -144,6 +142,9 @@ public class PropiedadAction extends ActionSupport  implements ModelDriven<Propi
         String mensaje = (String) sesion.get("mensaje");
         addActionMessage(mensaje);
         sesion.put("mensaje", "");
+        String alerta = (String) sesion.get("alerta");
+        addActionError(alerta);
+        sesion.put("alerta", "");
         for (Propiedad cadaPropiedad : propiedadLista) {
             try {
                 cadaPropiedad.setImagenDefault(cadaPropiedad.getImagenes().get(0));
@@ -157,7 +158,7 @@ public class PropiedadAction extends ActionSupport  implements ModelDriven<Propi
 
     public String eliminar() {
         if (controladorPropiedad.propiedadEnUso(propiedad.getIdPropiedad())) {
-            sesion.put("alerta", Mensaje.getUsado(Mensaje.propiedad, Mensaje.propiedadDestacada));
+            sesion.put("alerta", Mensaje.getUsada(Mensaje.propiedad, Mensaje.propiedadDestacada));
         } else {
             Propiedad p = controladorPropiedad.getOne(propiedad.getIdPropiedad());
             controladorPropiedad.eliminar(p);

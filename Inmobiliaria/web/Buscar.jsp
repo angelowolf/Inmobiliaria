@@ -3,15 +3,24 @@
 <%@taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div id="margen">
-    <fieldset>
-        <legend>
-            BUSCADOR
-        </legend>
-    </fieldset>
-    <div class="panel panel-primary">
-        <div class="panel-body" id="buscar">
-            <div class="form-inline text-center">
-                <s:form theme="simple" action="buscar">
+    
+    <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+              <a class="navbar-brand" href="#">Criterios de búsqueda</a>
+
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      <s:form cssClass="navbar-form" theme="simple" action="buscar">
                     <div class="form-group">
                         <label>Habitaciones</label>
                         <s:select cssClass="form-control" value="habitacion" name="habitacion" headerKey="-1" headerValue="Todos" list="{1,2,3,4,5}"/>
@@ -24,11 +33,14 @@
                         <label>Tipo Propiedad</label>
                         <s:select cssClass="form-control" label="Tipo Propiedad" value="tipoPropiedad.idTipoPropiedad" name="tipoPropiedad.idTipoPropiedad" headerKey="-1" headerValue="Todos" list="tiposPropiedades" listKey="idTipoPropiedad" listValue="nombre"/>
                     </div>
-                    <s:submit value="Buscar" cssClass="btn btn-default"/>
+                    <div class="form-group pull-right">
+                        <s:submit value="Buscar" cssClass="btn btn-default"/>
+                    </div>
                 </s:form>
-            </div>
-        </div>
-    </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+    
     <div class=" col-md-12">
         <display:table name="propiedades" pagesize="10" requestURI="${buscar}" uid="row">
             <display:setProperty name="paging.banner.placement" value="bottom" />

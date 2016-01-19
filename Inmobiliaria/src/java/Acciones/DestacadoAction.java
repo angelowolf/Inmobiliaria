@@ -48,7 +48,12 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
         if (destacado.getPropiedad().getIdPropiedad() <= 0) {
             addFieldError("", Mensaje.seleccionePropiedad);
             flag = false;
-        }
+        }else{
+             if (controladorDestacado.existe(destacado)) {
+                addFieldError("", Mensaje.getElExiste(Mensaje.propiedadDestacada));
+                flag = false;
+            }
+        }            
         if (upload == null) {
             addFieldError("", Mensaje.ingreseUnaImagen);
             flag = false;
@@ -162,7 +167,7 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
     }
 
     private void cargarPropiedades() {
-        this.propiedadesLista = controladorPropiedad.getTodos();
+        this.propiedadesLista = controladorPropiedad.getTodosSinDestacar();
     }
 
     public String getGuardaImagen() {

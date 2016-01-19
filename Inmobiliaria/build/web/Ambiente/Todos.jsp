@@ -20,6 +20,7 @@
     </fieldset>  
     <div class=" col-md-12">
         <display:table name="ambienteLista" pagesize="10" requestURI="${listar}" uid="row">
+            <display:setProperty name="basic.msg.empty_list" >Aún no hay ambientes registrados. Puede crear uno desde <a href="<s:url action='nuevo' namespace='/Ambiente'/>">aquí</a>.</display:setProperty>
             <display:column property="idAmbiente" title="Numero Ambiente"/>
             <display:column sortable="true" property="nombre" title="Nombre"/>
             <display:column title="Funciones">

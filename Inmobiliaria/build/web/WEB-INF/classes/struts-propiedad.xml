@@ -8,6 +8,19 @@
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>
+        <interceptors>
+            <interceptor name="mylogging"
+                         class="Interceptor.in">
+            </interceptor>
+            <interceptor-stack name="loggingStack">
+                <interceptor-ref name="mylogging" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="loggingStack"/>  
+        <global-results>
+            <result name="login">/Admin/Login.jsp</result>
+        </global-results>
         <action name="guardar" method="guardar" class="Acciones.PropiedadAction">
             <interceptor-ref name="fileUpload">
                 <param name="allowedTypes">image/jpg, image/png,image/jpeg</param>
@@ -41,9 +54,6 @@
         </action>      
         <action name="ver" method="execute" class="Acciones.VerPropiedadAction">
             <result name="success" type="tiles">/Propiedad/Ver.tiles</result>
-        </action>        
-        <action name="mandarEmail" method="execute" class="Acciones.EmailAction">
-            <result name="success">/test.jsp</result>
-        </action>              
+        </action>                         
     </package>
 </struts>

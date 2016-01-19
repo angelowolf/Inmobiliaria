@@ -38,23 +38,45 @@
         }
     </style>
     <body>
-    <nav class="navbar navbar-default no-margin" >
+    <nav class="navbar navbar-default no-margin" id="main-navbar" >
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header fixed-brand">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"  id="menu-toggle">
                 <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
             </button>
-            <a class="navbar-brand" href="<s:url action="loadIndex" namespace="/"/>"><i class="fa fa-home fa-4"></i> Inmobiliaria</a>        
+            <a class="navbar-brand" href="<s:url action="index" namespace="/"/>"><i class="fa fa-home fa-4"></i> Inmobiliaria</a>        
         </div><!-- navbar-header-->
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active" ><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></li>
-            </ul>
-            <ul class="nav navbar-nav  navbar-right">
-                <li><a href="<s:url action="loadEdit" namespace="/Admin"/>"><s:property value="#session.user.apellido"/> <s:property value="#session.user.nombre"/></a></li>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        </li>
+                        <li><a href="<s:url action="loadEdit" namespace="/Admin"/>"><i class="fa fa-gear fa-fw"></i> Configuración</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="<s:url action="logout" namespace="/Admin"/>"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
             </ul>
         </div><!-- bs-example-navbar-collapse-1 -->
+
+
+
+        <!--
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active" ><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></li>
+                    </ul>
+                    <ul class="nav navbar-nav  navbar-right">
+                        <li><a href="<s:url action="loadEdit" namespace="/Admin"/>"><s:property value="#session.user.apellido"/> <s:property value="#session.user.nombre"/></a></li>
+                    </ul>
+                </div> bs-example-navbar-collapse-1 -->
     </nav>
     <div id="wrapper">
         <!-- Sidebar -->

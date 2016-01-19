@@ -3,14 +3,13 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
-
 <struts>
-    <package name="default" extends="struts-default" namespace="/">     
+    <package name="todo" extends="struts-default" namespace="/">           
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
-        </result-types>  
+        </result-types>        
         <action name="mandarEmail" method="execute" class="Acciones.EmailAction">
-            <result name="success">/test.jsp</result>
+            <result name="success" type="tiles">/Contacto.tiles</result>
         </action>     
         <action name="Imagen" class="Acciones.ImagenAction">
         </action>              
@@ -31,7 +30,7 @@
         </action>      
         <action name="ver" method="execute" class="Acciones.VerPropiedadAction">
             <result name="success" type="tiles">/Propiedad/Ver.tiles</result>
-        </action> 
+        </action>        
         <!--LOGIN ADMIN-->
         <action name="admin" method="nuevo" class="Acciones.LinkAction">
             <result name="nuevo" >/Admin/Login.jsp</result>

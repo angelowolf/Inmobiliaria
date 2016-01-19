@@ -51,7 +51,7 @@ public class TipoMonedaDAO extends GenericDAO<TipoMoneda, Integer> implements IT
         Session session = getHibernateTemplate();
         List<TipoMoneda> objetos = new ArrayList<TipoMoneda>();
         try {
-            String sql = "select * from TipoMoneda s inner join propiedad sp ON s.id_tipoMoneda = sp.id_tipoMoneda WHERE s.id_tipoMoneda LIKE :id ";
+            String sql = "select * from TipoMoneda s inner join propiedad sp ON s.id_tipoMoneda = sp.tipoMoneda WHERE s.id_tipoMoneda LIKE :id ";
             objetos = session.createSQLQuery(sql).addEntity(TipoMoneda.class).setParameter("id", id).list();
         } catch (RuntimeException e) {
             e.printStackTrace();

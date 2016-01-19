@@ -29,7 +29,7 @@
                     <s:textfield name="contacto.email" label="EMail" placeholder="Ingrese el email" />
                 </div>
                 <div id="ubicaccion">
-                    <h2 class="text-center text-info">Ubicacion</h2>
+                    <h2 class="text-center text-info col-md-12">Ubicacion</h2>
                     <div id="mapa-edit-contacto" style="width:100%;height:500px;"></div>
                 </div>    
                 <s:submit value="Confirmar" cssClass="btn btn-success col-md-offset-9 col-md-3"/>

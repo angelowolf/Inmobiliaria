@@ -15,6 +15,7 @@ import org.apache.commons.lang.WordUtils;
  * @author Angelo
  */
 public class ControladorTipoMoneda {
+
     private final TipoMonedaDAO tipoMonedaDAO;
 
     public ControladorTipoMoneda() {
@@ -27,7 +28,7 @@ public class ControladorTipoMoneda {
     }
 
     public void actualizar(TipoMoneda o) {
-         o.setNombre(WordUtils.capitalize(o.getNombre()));
+        o.setNombre(WordUtils.capitalize(o.getNombre()));
         tipoMonedaDAO.actualizar(o);
     }
 
@@ -49,8 +50,14 @@ public class ControladorTipoMoneda {
         return tipoMonedaDAO.buscar(id);
     }
 
+    /**
+     * Verifica si existe un tipo de moneda con este nombre.
+     *
+     * @param o EL tipo de moneda.
+     * @return True si ya existe.
+     */
     public boolean existe(TipoMoneda o) {
-         o.setNombre(WordUtils.capitalize(o.getNombre()));
+        o.setNombre(WordUtils.capitalize(o.getNombre()));
         List<TipoMoneda> lista = tipoMonedaDAO.buscar(o.getNombre());
         for (TipoMoneda m : lista) {
             if (m.getNombre().equals(o.getNombre())) {
@@ -60,11 +67,18 @@ public class ControladorTipoMoneda {
         return false;
     }
 
-    public TipoMoneda getOne(String serviciosElegido) {
-        serviciosElegido = Soporte.mayusculaPrimeraLetra(serviciosElegido);
-        return tipoMonedaDAO.buscar(serviciosElegido).get(0);
+    public TipoMoneda getOne(String nombre) {
+        nombre = WordUtils.capitalize(nombre);
+        return tipoMonedaDAO.buscar(nombre).get(0);
     }
 
+    /**
+     * Verifica si este tipo de moneda esta siendo utilizada por alguna
+     * propiedad
+     *
+     * @param id
+     * @return True si esta siendo utilizada.
+     */
     public boolean tipoMonedaEnUso(int id) {
         return !tipoMonedaDAO.tipoMonedaEnUso(id).isEmpty();
     }

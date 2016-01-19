@@ -13,22 +13,9 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <title>Error :(</title>
     </head>
-    <body>
-        
+    <body>        
         <div class="container text-center">
-            <h1>OOPS!! SE PRODUJO UN ERROR :(</h1>           
-
-<!--            Message:-->
-            <%--<%=exception.getMessage()%>--%>
-            <!--StackTrace:-->
-            <%
-//                StringWriter stringWriter = new StringWriter();
-//                PrintWriter printWriter = new PrintWriter(stringWriter);
-//                exception.printStackTrace(printWriter);
-//                out.println(stringWriter);
-//                printWriter.close();
-//                stringWriter.close();
-            %>
+            <h1>OOPS!! SE PRODUJO UN ERROR :(</h1>      
         </div>                    
     </body>
 </html>

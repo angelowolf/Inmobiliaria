@@ -33,4 +33,16 @@ public class DestacadoDAO extends GenericDAO<Destacado, Integer> implements IDes
         return objetos;
     }
 
+    public List<Destacado> buscarIdPropiedad(int idPropiedad) {
+        Session session = getHibernateTemplate();
+        List<Destacado> objetos = new ArrayList<Destacado>();
+        try {
+            String sql = "from Destacado where propiedad = :idPropiedad";
+            objetos = session.createQuery(sql).setParameter("idPropiedad", idPropiedad).list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return objetos;
+    }
+
 }

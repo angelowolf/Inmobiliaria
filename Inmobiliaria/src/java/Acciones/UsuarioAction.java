@@ -23,7 +23,7 @@ import org.apache.commons.lang.StringUtils;
 public class UsuarioAction extends ActionSupport {
 
     private final int minutoMinimo = 15;
-    private Usuario usuario;
+    private Usuario usuario = new Usuario();
     private String username;
     private String password;
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
@@ -89,7 +89,7 @@ public class UsuarioAction extends ActionSupport {
             String codigoCreado = controladorUsuario.crearCodigoRecuperacion(usuario);
             //enviar codigo al mail
             ControladorEmail ce = new ControladorEmail();
-            ce.metodo(usuario.getEmail(), "Recuperar Contraseña", "El codigo para poder cambiar su contraseña es:"
+            ce.enviarEmail(usuario.getEmail(), "Recuperar Contraseña", "El codigo para poder cambiar su contraseña es:"
                     + "\n" + codigoCreado + "");
             addActionMessage(Mensaje.codigoCreado);
         } else {
@@ -118,21 +118,15 @@ public class UsuarioAction extends ActionSupport {
         if (clave1 == null || clave1.trim().isEmpty()) {
             addFieldError("clave1", Mensaje.ingreseNuevaClave);
             flag = false;
-        } else {
-            if (clave1.trim().length() < 5) {
-                addFieldError("clave1", Mensaje.minimoCaracteres);
-                flag = false;
-            } else {
-                if (clave2 == null || clave2.trim().isEmpty()) {
-                    addFieldError("clave2", Mensaje.repitaClave);
-                    flag = false;
-                } else {
-                    if (clave2.trim().length() < 5) {
-                        addFieldError("clave2", Mensaje.repitaClave);
-                        flag = false;
-                    }
-                }
-            }
+        } else if (clave1.trim().length() < 5) {
+            addFieldError("clave1", Mensaje.minimoCaracteres);
+            flag = false;
+        } else if (clave2 == null || clave2.trim().isEmpty()) {
+            addFieldError("clave2", Mensaje.repitaClave);
+            flag = false;
+        } else if (clave2.trim().length() < 5) {
+            addFieldError("clave2", Mensaje.repitaClave);
+            flag = false;
         }
         if (clave1 != null && clave2 != null && !clave1.isEmpty() && !clave2.isEmpty()) {
             if (!clave1.equals(clave2)) {
@@ -151,7 +145,7 @@ public class UsuarioAction extends ActionSupport {
         if (usuario.getCodigo().equals(codigo)) {
             String claveMD5 = Encriptar.encriptaEnMD5(clave1);
             usuario.setClave(claveMD5);
-            controladorUsuario.actualizar(usuario);
+            controladorUsuario.recuperarClave(usuario);
             addActionMessage(Mensaje.claveCambiada);
             //si se cambia la clave, cambio el codigo por otro..
             controladorUsuario.crearCodigoRecuperacion(usuario);
@@ -163,7 +157,7 @@ public class UsuarioAction extends ActionSupport {
     }
 
     public boolean validarModificar() {
-        boolean flag = true;
+        boolean flag = true;       
         if (StringUtils.isBlank(usuario.getNombre())) {
             addFieldError("", Mensaje.ingreseNombre);
             flag = false;
@@ -184,14 +178,12 @@ public class UsuarioAction extends ActionSupport {
             addFieldError("", Mensaje.ingreseClaveActual);
             flag = false;
         }
-        if (StringUtils.isBlank(clave1) && StringUtils.isNotBlank(clave2) || StringUtils.isBlank(clave2) || StringUtils.isNotBlank(clave1)) {
+        if ((StringUtils.isBlank(clave1) && StringUtils.isNotBlank(clave2)) || (StringUtils.isBlank(clave2) && StringUtils.isNotBlank(clave1))) {
             addFieldError("", Mensaje.repitaClave);
             flag = false;
-        } else {
-            if (StringUtils.isNotBlank(clave1) && StringUtils.isNotBlank(clave2) && !clave1.equals(clave2)) {
-                addFieldError("", Mensaje.claveNoCoincide);
-                flag = false;
-            }
+        } else if (StringUtils.isNotBlank(clave1) && StringUtils.isNotBlank(clave2) && !clave1.equals(clave2)) {
+            addFieldError("", Mensaje.claveNoCoincide);
+            flag = false;
         }
         return flag;
     }
@@ -214,14 +206,21 @@ public class UsuarioAction extends ActionSupport {
             sesion.put("user", null);
         } else {
             usuario.setClave(clave0);
+            sesion.put("user", usuario);
         }
         controladorUsuario.actualizar(usuario);
+        addActionMessage(Mensaje.getModificado(Mensaje.usuario));
         return result;
     }
 
     public String cargarUsuario() {
         Usuario user = (Usuario) sesion.get("user");
         usuario = controladorUsuario.getUsuarioByNick(user.getNick());
+        return SUCCESS;
+    }
+
+    public String logout() {
+        sesion.put("user", null);
         return SUCCESS;
     }
 
@@ -276,5 +275,6 @@ public class UsuarioAction extends ActionSupport {
     public void setClave0(String clave0) {
         this.clave0 = clave0;
     }
+
 
 }

@@ -7,9 +7,6 @@ package Controlador;
 
 import Persistencia.DAO.Implementacion.ImagenDAO;
 import Persistencia.Modelo.Imagen;
-import Soporte.Archivo;
-import java.io.File;
-import java.util.List;
 
 /**
  *
@@ -23,36 +20,52 @@ public class ControladorImagen {
         imagenDAO = new ImagenDAO();
     }
 
+    /**
+     * Guarda una imagen.
+     *
+     * @param o La imagen.
+     */
     public void guardar(Imagen o) {
         imagenDAO.guardar(o);
     }
 
+    /**
+     * Actualiza una imagen.
+     *
+     * @param o La imagen.
+     */
     public void actualizar(Imagen o) {
         imagenDAO.actualizar(o);
     }
 
+    /**
+     * Elimina una imagen.
+     *
+     * @param o La imagen.
+     */
     public void eliminar(Imagen o) {
         imagenDAO.eliminar(o);
     }
 
+    /**
+     * Elimina una imagen.
+     *
+     * @param id El id de la imagen.
+     */
     public void eliminar(int id) {
         Imagen m = new Imagen();
         m.setIdImagen(id);
         imagenDAO.eliminar(m);
     }
 
+    /**
+     * Retorna una imagen.
+     *
+     * @param id El id de la imagen.
+     * @return La imagen.
+     */
     public Imagen getOne(int id) {
         return imagenDAO.buscar(id);
     }
 
-    public void eliminarImagen(String ruta) {
-        File archivo = new File(ruta);
-        if (archivo.exists()) {
-            try {
-                Archivo.delete(archivo);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
