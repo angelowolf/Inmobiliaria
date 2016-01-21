@@ -21,8 +21,9 @@ public class Mensaje {
     private static final String laExiste = "La %s ya existe!";
     private static final String usado = "El %s esta siendo utilizado por alguna %s, debe eliminarla o desvincularlas para poder eliminar este %s!";
     private static final String usada = "La %s esta siendo utilizada por alguna %s, debe eliminarla o desvincularlas para poder eliminar esta %s!";
-    private static final String codigoYaEnviado = "Ya se ha enviado un email con el codigo a la direccion ingresada. En %l minutos podra generar otro codigo.";
-
+    private static final String codigoYaEnviado = "Ya se ha enviado un email con el codigo a la direccion ingresada. En %d minutos podra generar otro codigo.";
+    private static final String tamañoDisponible = "Actualmente existen %d imagenes, utilizando un espacio de %d MB de 800 MB disponibles.";
+    
     public static final String usuario = "usuario";
     public static final String propiedad = "propiedad";
     public static final String ambiente = "ambiente";
@@ -62,10 +63,15 @@ public class Mensaje {
     public static final String claveIngresadaMal = "Su clave ingresada no es correcta.";
     public static final String codigoEnUso = "El codigo ingresado ya se encuentra en uso.";
     public static final String emailNoEnviado = "Lo sentimos pero su consulta no ha sido enviado.";
-    public static final String emailEnviado = "Su consulta a sido enviada.";
+    public static final String emailEnviado = "Recibimos tu consulta correctamente.<br>Nos comunicaremos a la brevedad.";
     public static final String ingreseTelefono = "Ingrese un teléfono.";
     public static final String ingreseConsulta = "Ingrese su consulta.";
 
+
+    public static String getTamañoDisponible(long archivos, long size){
+        return String.format(tamañoDisponible, archivos,size);
+    }
+    
     public static String getCodigoYaEnviado(long arg) {
         return String.format(codigoYaEnviado, arg);
     }

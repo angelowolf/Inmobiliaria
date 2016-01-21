@@ -40,6 +40,7 @@ public class ControladorDestacado {
         String ruta = SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenDestacada/id_propiedad_" + id;
         Imagen im = new Imagen();
         im.setRuta(Archivo.crearImagen(ruta, upload, uploadFileName));
+        im.setSize(upload.length());
         destacado.setImagen(im);
         ControladorImagen ci = new ControladorImagen();
         ci.guardar(im);
@@ -74,6 +75,7 @@ public class ControladorDestacado {
             ruta = SingletonRuta.getInstancia().getSTORAGE_PATH() + "ImagenDestacada/id_propiedad_" + idNuevaPropiedad;
             Imagen imagen = new Imagen();
             imagen.setRuta(Archivo.crearImagen(ruta, upload, uploadFileName));
+            imagen.setSize(upload.length());
             destacadoCambiado.setImagen(imagen);
             ci.guardar(imagen);
             flag = true;

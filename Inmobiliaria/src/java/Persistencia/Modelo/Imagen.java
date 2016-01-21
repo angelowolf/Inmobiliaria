@@ -13,6 +13,15 @@ public class Imagen {
 
     private int idImagen;
     private String ruta;
+    private long size;
+
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
+    }
 
     public int getIdImagen() {
         return idImagen;

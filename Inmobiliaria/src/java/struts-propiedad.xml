@@ -54,6 +54,9 @@
         </action>      
         <action name="ver" method="execute" class="Acciones.VerPropiedadAction">
             <result name="success" type="tiles">/Propiedad/Ver.tiles</result>
+        </action>      
+        <action name="imagenes" method="imagenes" class="Acciones.PropiedadAction">
+            <result name="success" type="tiles">/Propiedad/Default.tiles</result>
         </action>                         
     </package>
 </struts>

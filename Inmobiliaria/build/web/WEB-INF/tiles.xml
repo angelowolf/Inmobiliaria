@@ -51,6 +51,10 @@
     <definition name="/Propiedad/Ver.tiles" extends="layoutSitio">
         <put-attribute name="title" value="Propiedad" />
         <put-attribute name="body" value="/Propiedad/Ver.jsp" />
+    </definition> 
+    <definition name="/Propiedad/Default.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Imagenes Tamaño" />
+        <put-attribute name="body" value="/Propiedad/Default.jsp" />
     </definition>  
     <!--FIN PROPIEDADES-->
     <!--SITIO PAGINAS--> 

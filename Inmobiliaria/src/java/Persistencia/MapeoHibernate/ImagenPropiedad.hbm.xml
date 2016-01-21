@@ -7,5 +7,6 @@
             <generator class="identity"/>
         </id>
         <property column="ruta" length="500" name="ruta" type="string"/>
+        <property column="size" name="size" type="long"/>
     </class>
 </hibernate-mapping>

@@ -67,6 +67,7 @@ public class ControladorPropiedad {
             File cadaImagen = imagen.get(i);
             ImagenPropiedad imagenPropiedad = new ImagenPropiedad();
             imagenPropiedad.setRuta(Archivo.crearImagen(ruta, cadaImagen, imagenFileName.get(i)));
+            imagenPropiedad.setSize(cadaImagen.length());
             propiedad.addImagenPropiedad(imagenPropiedad);
         }
         propiedad.setDireccion(WordUtils.capitalize(propiedad.getDireccion()));
@@ -157,6 +158,7 @@ public class ControladorPropiedad {
                 File cadaImagen = imagen.get(i);
                 ImagenPropiedad imagenPropiedad = new ImagenPropiedad();
                 imagenPropiedad.setRuta(Archivo.crearImagen(ruta, cadaImagen, imagenFileName.get(i)));
+                imagenPropiedad.setSize(cadaImagen.length());
                 propiedad.addImagenPropiedad(imagenPropiedad);
             }
         }
@@ -302,5 +304,14 @@ public class ControladorPropiedad {
      */
     public List<Propiedad> getTodosSinDestacar() {
         return propiedadDAO.todosSinDestacar();
+    }
+
+    /**
+     * Calcula los archivos y el tamaño que ocupan en disco.
+     *
+     * @return
+     */
+    public String getArchivoTamaño() {
+        return controladorImagenPropiedad.tamañoDisponible();
     }
 }

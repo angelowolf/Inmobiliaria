@@ -54,6 +54,25 @@ public class ImagenPropiedadDAO extends GenericDAO<ImagenPropiedad, Integer> imp
             session.createSQLQuery("delete from ImagenPropiedad where id_propiedad = :id").setParameter("id", id).executeUpdate();
         } catch (RuntimeException e) {
             e.printStackTrace();
-        }}
+        }
+    }
+
+    /**
+     * Devuelve en la posicion 0 la cantidad de archivos y en la posicion 1 el
+     * tamaño que ocupan estos en disco.
+     *
+     * @return
+     */
+    public List<Object[]> getArchivoTamañoDisponible() {
+        Session session = getHibernateTemplate();
+        List<Object[]> resultado = null;
+        try {
+            String hql = "select count(*), sum(i.size) from ImagenPropiedad i";
+            resultado = session.createQuery(hql).list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return resultado;
+    }
 
 }

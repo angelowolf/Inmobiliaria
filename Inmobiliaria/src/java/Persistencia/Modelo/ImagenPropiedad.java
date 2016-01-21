@@ -13,6 +13,7 @@ public class ImagenPropiedad {
 
     private int idImagenPropiedad;
     private String ruta;
+    private long size;
 
     public ImagenPropiedad() {
     }
@@ -20,6 +21,14 @@ public class ImagenPropiedad {
     public ImagenPropiedad(int idImagenPropiedad, String ruta) {
         this.idImagenPropiedad = idImagenPropiedad;
         this.ruta = ruta;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
     }
 
     public int getIdImagenPropiedad() {

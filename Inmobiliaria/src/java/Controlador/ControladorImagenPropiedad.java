@@ -5,9 +5,10 @@
  */
 package Controlador;
 
+import Persistencia.DAO.Implementacion.ImagenDAO;
 import Persistencia.DAO.Implementacion.ImagenPropiedadDAO;
 import Persistencia.Modelo.ImagenPropiedad;
-import java.io.File;
+import Soporte.Mensaje;
 import java.util.List;
 
 /**
@@ -87,4 +88,38 @@ public class ControladorImagenPropiedad {
         return imagenPropiedadDAO.buscar(id);
     }
 
+    public String tamañoDisponible() {
+        String s = "";
+        long cantidad = 0;
+        long tamaño = 0;
+        List<Object[]> listResult = imagenPropiedadDAO.getArchivoTamañoDisponible();
+        if (listResult != null) {
+            for (Object[] aRow : listResult) {
+                Long count = (Long) aRow[0];
+                Long sum = (Long) aRow[1];
+                if (sum != null) {
+                    tamaño += sum;
+                }
+                cantidad += count;
+            }
+        }
+        ImagenDAO imagenDAO = new ImagenDAO();
+        List<Object[]> listResult2 = imagenDAO.getArchivoTamañoDisponible();
+        if (listResult2 != null) {
+            for (Object[] aRow : listResult2) {
+                Long count = (Long) aRow[0];
+                Long sum = (Long) aRow[1];
+                cantidad += count;
+                if (sum != null) {
+                    tamaño += sum;
+                }
+            }
+        }
+        //paso el tama{o de bytes a kb.
+        double x = tamaño / 1024;
+        //paso de kb a mb.
+        double xx = x / 1024;
+        s = Mensaje.getTamañoDisponible(cantidad, (long) Math.ceil(xx));
+        return s;
+    }
 }

@@ -85,7 +85,7 @@
             <div id="mapa-vista" style="width:100%;height:500px;"></div>
         </div>
     </div>
-    <div class="col-md-4" style="padding-top: 150px">  
+    <div class="col-md-4" style="padding-top: 25px">  
         <s:if test="!serviciosUno.isEmpty()">        
             <div id="servicios">
                 <h3 class="text-center text-info col-md-12">Servicios</h3>
@@ -138,7 +138,7 @@
             <s:actionmessage theme="bootstrap"/>
         </div>
         <div class="col-md-12" id="formulario-consulta" style="background: #F1F3F6; padding-bottom: 0px;border-radius: 4px; margin-top: 50px;">
-            <div id="alerta-mail" class="hidden alert alert-info text-center" style="margin-top: 15px"><p>El mensaje ha sido enviado.</p></div>
+            <div id="alerta-mail" class="hidden alert alert-info text-center" style="margin-top: 15px"><p>Recibimos tu consulta correctamente.<br>Nos comunicaremos a la brevedad.</p></div>
             <div id="contenedor-contacto">
                 <h3 class="text-center" style="color: black; padding-bottom: 25px; padding-top: 10px">Contacto</h3>
                 <form id="form-contact" validate="true" enctype="multipart/form-data" theme="simple">

@@ -128,6 +128,9 @@
                 <li>
                     <a href="<s:url action="loadContacto" namespace="/Contacto"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-user fa-stack-1x "></i></span> Contacto</a>                    
                 </li>
+                <li>
+                    <a href="<s:url action="imagenes" namespace="/Propiedad"/>"><span class="fa-stack fa-lg pull-left"><i class="glyphicon glyphicon-hdd fa-stack-1x "></i></span> Tamaño Disponible</a>                    
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

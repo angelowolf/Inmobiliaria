@@ -181,6 +181,11 @@ public class PropiedadAction extends ActionSupport implements ModelDriven<Propie
         return SUCCESS;
     }
 
+    public String imagenes() {
+        addActionMessage(controladorPropiedad.getArchivoTamaño());
+        return SUCCESS;
+    }
+
     public String nuevo() {
         this.cargarServicios();
         this.cargarAmbientes();
