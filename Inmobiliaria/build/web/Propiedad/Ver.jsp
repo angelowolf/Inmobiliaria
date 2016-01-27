@@ -74,7 +74,7 @@
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
             </a>
         </div>
-        <s:if test="propiedad.detalle.lenght != 0">
+        <s:if test="!propiedad.detalle.isEmpty()">
             <div id="detalles">
                 <h2 class="text-center text-info">Detalles</h2>
                 <p><s:property value="propiedad.detalle"/></p>

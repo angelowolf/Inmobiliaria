@@ -419,9 +419,14 @@ body {
     padding: 0px 10px;
     font-size: 1.3em;
     color: rgb(100, 100, 100);
-}
+} 
 
 .panel-image.hide-panel-body ~ .panel-body {
     height: 0px;
     padding: 0px;
 }
+
+/*FIN*/
+
+
+textarea { resize: vertical; }

@@ -58,14 +58,13 @@
                     <img width="140" height="79" src="/Imagen?idImagen=<s:url value="%{#attr.row.imagenDefault.idImagenPropiedad}"/>">
                 </a>
             </display:column>
-            <display:column sortable="true" property="tipoPropiedad.nombre" title="Tipo"/>       
-            <display:column sortable="true" property="codigoPropiedad" title="Codigo"/>
-            <display:column sortable="false" property="direccion" title="Dirección"/>       
-            <display:column sortable="true" property="terreno" title="Terreno"/>       
-            <display:column sortable="true" property="edificado" title="Edificado"/>       
-            <display:column sortable="true" property="habitacion" title="Habitaciones"/>       
-            <display:column sortable="true" property="bano" title="Baños"/>       
+            <display:column sortable="true"  property="tipoPropiedad.nombre" title="Tipo" />       
+            <display:column sortable="true" property="codigoPropiedad" title="Codigo" class="hidden-xs" headerClass="hidden-xs"/>
+            <display:column sortable="false" property="direccion" title="Dirección" class="hidden-xs" headerClass="hidden-xs" />       
+            <display:column sortable="true" property="terreno" title="Terreno" class="hidden-xs" headerClass="hidden-xs"/>       
+            <display:column sortable="true" property="edificado" title="Edificado" class="hidden-xs" headerClass="hidden-xs"/>       
+            <display:column sortable="true" property="habitacion" title="Habitaciones" />       
+            <display:column sortable="true" property="bano" title="Baños" class="hidden-xs" headerClass="hidden-xs"/>       
         </display:table>
-
     </div>
 </div>
