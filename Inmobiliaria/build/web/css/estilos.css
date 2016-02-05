@@ -349,8 +349,8 @@ body {
     vertical-align: middle;
 }
 .carousel-inner .item img {
-/*    width: 100%;
-    height: 100%;*/
+    /*    width: 100%;
+        height: 100%;*/
 }
 
 #myCarousel {/*
@@ -379,6 +379,15 @@ body {
     #titulo-imagen {
         top: 221px;
     }*/
+    .panel.panel-horizontal > .panel-footer{
+        width: 33%;
+        color:white;
+        background: #2EA3E7;
+    }
+    .panel.panel-horizontal > .panel-body{
+        width: 33%;
+    }
+
 }
 @media (max-width: 480px) {
     /*

@@ -115,11 +115,13 @@ public class ControladorImagenPropiedad {
                 }
             }
         }
-        //paso el tama{o de bytes a kb.
+        //paso el tamaño de bytes a kb.
         double x = tamaño / 1024;
         //paso de kb a mb.
         double xx = x / 1024;
-        s = Mensaje.getTamañoDisponible(cantidad, (long) Math.ceil(xx));
+        long ocupado = (long) Math.ceil(xx);
+        long disponible = 800 - ocupado;
+        s = Mensaje.getTamañoDisponible(cantidad, ocupado, disponible);
         return s;
     }
 }

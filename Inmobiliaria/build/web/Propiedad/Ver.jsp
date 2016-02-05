@@ -9,7 +9,7 @@
 <div class="col-md-12">   
     <div id="wrap" class="col-md-8">
         <h1 class="text-center text-primary"><s:property value="propiedad.direccion"/></h1>
-        <div class="panel panel-primary panel-horizontal">
+        <div class="panel panel-primary panel-horizontal hidden-xs">
             <div class="panel-body">
                 <i class="fa fa-home fa-1x"></i>
                 <s:property value="propiedad.tipoPropiedad.nombre"/>
@@ -33,7 +33,35 @@
             <div class="panel-footer panel-color">
                 Codigo: <s:property value="propiedad.codigoPropiedad"/>
             </div>
-        </div>            
+        </div>       
+        <div class="panel panel-primary panel-horizontal hidden-sm hidden-md hidden-lg">
+            <div class="panel-body">
+                <i class="fa fa-home fa-1x"></i>
+                <s:property value="propiedad.tipoPropiedad.nombre"/>
+            </div>
+            <div class="panel-body">
+                <i class="glyphicon glyphicon-fullscreen fa-1x"></i>
+                <s:property value="propiedad.terreno"/>m<sup>2</sup>
+            </div>           
+            <div class="panel-body">
+                <i class="glyphicon glyphicon-resize-small fa-1x"></i>
+                <s:property value="propiedad.edificado"/>m<sup>2</sup>
+            </div>
+        </div>  
+        <div class="panel panel-primary panel-horizontal hidden-sm hidden-md hidden-lg">
+            <div class="panel-body">
+                <i class="fa fa-bed fa-1x"></i>
+                <s:property value="propiedad.habitacion"/>
+            </div>
+            <div class="panel-body">
+                <i class="icon-bathrooms"></i>
+                <s:property value="propiedad.bano"/>
+            </div>           
+            <div class="panel-footer panel-color">
+                Codigo: <s:property value="propiedad.codigoPropiedad"/>
+            </div>
+        </div>       
+
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">

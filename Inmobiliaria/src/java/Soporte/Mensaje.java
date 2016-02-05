@@ -22,8 +22,8 @@ public class Mensaje {
     private static final String usado = "El %s esta siendo utilizado por alguna %s, debe eliminarla o desvincularlas para poder eliminar este %s!";
     private static final String usada = "La %s esta siendo utilizada por alguna %s, debe eliminarla o desvincularlas para poder eliminar esta %s!";
     private static final String codigoYaEnviado = "Ya se ha enviado un email con el codigo a la direccion ingresada. En %d minutos podra generar otro codigo.";
-    private static final String tamañoDisponible = "Actualmente existen %d imagenes, utilizando un espacio de %d MB de 800 MB disponibles.";
-    
+    private static final String tamañoDisponible = "Actualmente existen %d imagenes, utilizando un espacio de %d MB de 800 MB disponibles. Aún le quedan %d MB disponibles.";
+
     public static final String usuario = "usuario";
     public static final String propiedad = "propiedad";
     public static final String ambiente = "ambiente";
@@ -67,11 +67,20 @@ public class Mensaje {
     public static final String ingreseTelefono = "Ingrese un teléfono.";
     public static final String ingreseConsulta = "Ingrese su consulta.";
 
-
-    public static String getTamañoDisponible(long archivos, long size){
-        return String.format(tamañoDisponible, archivos,size);
+    /**
+     * crea una string con el mensaje "Actualmente existen %d imagenes,
+     * utilizando un espacio de %d MB de 800 MB disponibles. Aún le quedan %d MB
+     * disponibles."
+     *
+     * @param archivos la cantidad de archivos.
+     * @param size la cantidad que ocupan.
+     * @param disponible la cantidad de espacio que queda.
+     * @return el mensaje.
+     */
+    public static String getTamañoDisponible(long archivos, long size, long disponible) {
+        return String.format(tamañoDisponible, archivos, size, disponible);
     }
-    
+
     public static String getCodigoYaEnviado(long arg) {
         return String.format(codigoYaEnviado, arg);
     }
