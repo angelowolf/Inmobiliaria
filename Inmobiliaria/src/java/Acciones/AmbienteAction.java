@@ -27,6 +27,11 @@ public class AmbienteAction extends ActionSupport implements ModelDriven<Ambient
     private List<Ambiente> ambienteLista = new ArrayList<Ambiente>();
     private final ControladorAmbiente controladorAmbiente = new ControladorAmbiente();
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
+    private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public Ambiente getModel() {
@@ -38,11 +43,9 @@ public class AmbienteAction extends ActionSupport implements ModelDriven<Ambient
         if (ambiente.getNombre().trim().isEmpty()) {
             addFieldError("ambiente.nombre", Mensaje.ingreseNombre);
             flag = false;
-        } else {
-            if (controladorAmbiente.existe(ambiente)) {
-                addFieldError("ambiente.nombre", Mensaje.getElExiste(Mensaje.ambiente));
-                flag = false;
-            }
+        } else if (controladorAmbiente.existe(ambiente)) {
+            addFieldError("ambiente.nombre", Mensaje.getElExiste(Mensaje.ambiente));
+            flag = false;
         }
         return flag;
     }
@@ -73,9 +76,6 @@ public class AmbienteAction extends ActionSupport implements ModelDriven<Ambient
     }
 
     public String eliminar() {
-
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        int id = Integer.parseInt(request.getParameter("idAmbiente"));
         if (controladorAmbiente.ambienteEnUso(id)) {
             sesion.put("alerta", Mensaje.getUsado(Mensaje.ambiente, Mensaje.propiedad));
         } else {

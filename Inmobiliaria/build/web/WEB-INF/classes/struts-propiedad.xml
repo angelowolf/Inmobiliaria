@@ -19,18 +19,24 @@
         </interceptors>
         <default-interceptor-ref name="loggingStack"/>  
         <global-results>
-            <result name="login">/Admin/Login.jsp</result>
+            <result name="login">/WEB-INF/Admin/Login.jsp</result>
+            <result name="error" type="httpheader">
+                <param name="error">404</param>
+            </result>
         </global-results>
         <action name="guardar" method="guardar" class="Acciones.PropiedadAction">
             <interceptor-ref name="fileUpload">
+                <param name="maximumSize">10480000</param>
                 <param name="allowedTypes">image/jpg, image/png,image/jpeg</param>
             </interceptor-ref> 
             <interceptor-ref name="defaultStack"/>
             <result name="success" type="redirect">listar</result>
             <result name="input" type="tiles">/Propiedad/Alta.tiles</result>
+            <result name="error" type="tiles">/Propiedad/Alta.tiles</result>
         </action>
         <action name="modificar" method="modificar" class="Acciones.PropiedadAction">
             <interceptor-ref name="fileUpload">
+                <param name="maximumSize">10485760</param>
                 <param name="allowedTypes">image/jpg, image/png,image/jpeg</param>
             </interceptor-ref> 
             <interceptor-ref name="defaultStack"/>
@@ -54,9 +60,15 @@
         </action>      
         <action name="ver" method="execute" class="Acciones.VerPropiedadAction">
             <result name="success" type="tiles">/Propiedad/Ver.tiles</result>
+            <result name="input" type="httpheader">
+                <param name="error">404</param>
+            </result>
+            <result name="error" type="httpheader">
+                <param name="error">404</param>
+            </result>
         </action>      
         <action name="imagenes" method="imagenes" class="Acciones.PropiedadAction">
-            <result name="success" type="tiles">/Propiedad/Default.tiles</result>
+            <result name="success" type="tiles">/Propiedad/Default.tiles</result>          
         </action>                         
     </package>
 </struts>

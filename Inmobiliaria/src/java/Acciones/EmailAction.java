@@ -10,7 +10,6 @@ import Controlador.ControladorEmail;
 import Controlador.ControladorPropiedad;
 import Persistencia.Modelo.Contacto;
 import Persistencia.Modelo.Propiedad;
-import Soporte.Mensaje;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -27,23 +26,22 @@ public class EmailAction extends ActionSupport implements ModelDriven<Propiedad>
     private Propiedad propiedad;
     private final Map<String, Object> application = ActionContext.getContext().getApplication();
 
+    private String mensaje = "";
+    private int codigo = 200;
+
     private boolean validar() {
         boolean flag = true;
         if (StringUtils.isBlank(nombre)) {
             flag = false;
-            addActionError(Mensaje.ingreseNombre);
         }
         if (StringUtils.isBlank(email)) {
             flag = false;
-            addActionError(Mensaje.ingreseMail);
         }
         if (StringUtils.isBlank(telefono)) {
             flag = false;
-            addActionError(Mensaje.ingreseTelefono);
         }
         if (StringUtils.isBlank(consulta)) {
             flag = false;
-            addActionError(Mensaje.ingreseConsulta);
         }
         return flag;
     }
@@ -55,9 +53,8 @@ public class EmailAction extends ActionSupport implements ModelDriven<Propiedad>
             Contacto c = (Contacto) application.get("contacto");
             if (c == null) {
                 ControladorContacto cc = new ControladorContacto();
-                c = cc.getOne(1);
+                c = cc.getOne();
                 application.put("contacto", c);
-                addActionError(Mensaje.emailNoEnviado);
             }
             if (c != null) {
                 if (propiedad != null) {
@@ -72,11 +69,12 @@ public class EmailAction extends ActionSupport implements ModelDriven<Propiedad>
                                     + "\n" + "Mensaje: " + consulta
                                     + "\n" + "El codigo de la propiedad consultada es : " + p.getCodigoPropiedad()
                             );
-                            addActionMessage(Mensaje.emailEnviado);
-                            return NONE;
+                            mensaje = Soporte.Mensaje.emailEnviado;
                         }
-                    } catch (NullPointerException e) {
-                        System.out.println("error al mandar el email, xq no crearon el contacto...");
+                    } catch (Exception e) {
+                        System.out.println(e.toString());
+                        mensaje = Soporte.Mensaje.emailNoEnviado;
+                        codigo = 400;
                     }
                 } else {
                     try {
@@ -86,11 +84,12 @@ public class EmailAction extends ActionSupport implements ModelDriven<Propiedad>
                                     + "\n" + "Email: " + email
                                     + "\n" + "Telefono: " + telefono
                                     + "\n" + "Mensaje: " + consulta);
-                            addActionMessage(Mensaje.emailEnviado);
+                            mensaje = Soporte.Mensaje.emailEnviado;
                         }
-                    } catch (NullPointerException e) {
-                        System.out.println("error al mandar el email, xq no crearon el contacto...");
-                        addActionError("No se pudo enviar su consulta.");
+                    } catch (Exception e) {
+                        System.out.println(e.toString());
+                        mensaje = Soporte.Mensaje.emailNoEnviado;
+                        codigo = 400;
                     }
                 }
             }
@@ -121,5 +120,13 @@ public class EmailAction extends ActionSupport implements ModelDriven<Propiedad>
 
     public void setPropiedad(Propiedad propiedad) {
         this.propiedad = propiedad;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public int getCodigo() {
+        return codigo;
     }
 }

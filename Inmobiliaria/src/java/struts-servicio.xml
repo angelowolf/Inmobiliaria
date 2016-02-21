@@ -8,7 +8,7 @@
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>
-          <interceptors>
+        <interceptors>
             <interceptor name="mylogging"
                          class="Interceptor.in">
             </interceptor>
@@ -19,7 +19,10 @@
         </interceptors>
         <default-interceptor-ref name="loggingStack"/>  
         <global-results>
-            <result name="login">/Admin/Login.jsp</result>
+            <result name="login">/WEB-INF/Admin/Login.jsp</result>
+            <result name="error" type="httpheader">
+                <param name="error">404</param>
+            </result>
         </global-results>
         <action name="guardarOModificar" method="guardarOModificar" class="Acciones.ServicioAction">
             <result name="success" type="redirect">listar</result>

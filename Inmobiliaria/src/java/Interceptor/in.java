@@ -22,7 +22,12 @@ public class in extends AbstractInterceptor {
 
         String result = Action.LOGIN;
         if (actionInvocation.getInvocationContext().getSession().containsKey("user")) {
-            result = actionInvocation.invoke();
+            try {
+                result = actionInvocation.invoke();
+            } catch (Exception e) {
+                return Action.ERROR;
+            }
+
         }
         return result;
     }

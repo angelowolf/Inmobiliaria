@@ -6,11 +6,11 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>home.jsp</welcome-file>
+        <welcome-file>/WEB-INF/home.jsp</welcome-file>
     </welcome-file-list>
     <error-page>
         <error-code>404</error-code>
-        <location>/404.jsp</location>
+        <location>/WEB-INF/404.jsp</location>
     </error-page>
     <jsp-config>
         <jsp-property-group>

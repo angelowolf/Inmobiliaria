@@ -7,9 +7,15 @@
     <package name="todo" extends="struts-default" namespace="/">           
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
         </result-types>        
+        <global-results>
+            <result name="error" type="httpheader">
+                <param name="error">404</param>
+            </result>
+        </global-results>
         <action name="mandarEmail" method="execute" class="Acciones.EmailAction">
-            <result name="success" type="tiles">/Contacto.tiles</result>
+            <result type="json"/>
         </action>     
         <action name="Imagen" class="Acciones.ImagenAction">
         </action>              
@@ -30,10 +36,16 @@
         </action>      
         <action name="ver" method="execute" class="Acciones.VerPropiedadAction">
             <result name="success" type="tiles">/Propiedad/Ver.tiles</result>
+            <result name="error" type="httpheader">
+                <param name="error">404</param>
+            </result>
+            <result name="input" type="httpheader">
+                <param name="error">404</param>
+            </result>
         </action>        
         <!--LOGIN ADMIN-->
         <action name="admin" method="nuevo" class="Acciones.LinkAction">
-            <result name="nuevo" >/Admin/Login.jsp</result>
+            <result name="nuevo" >/WEB-INF/Admin/Login.jsp</result>
         </action>      
     </package>
 </struts>

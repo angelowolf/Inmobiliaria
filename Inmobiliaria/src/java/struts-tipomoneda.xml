@@ -19,7 +19,10 @@
         </interceptors>
         <default-interceptor-ref name="loggingStack"/>  
         <global-results>
-            <result name="login">/Admin/Login.jsp</result>
+            <result name="login">/WEB-INF/Admin/Login.jsp</result>
+            <result name="error" type="httpheader">
+                <param name="error">404</param>
+            </result>
         </global-results>
         <action name="guardarOModificar" method="guardarOModificar" class="Acciones.TipoMonedaAction">
             <result name="success" type="redirect">listar</result>

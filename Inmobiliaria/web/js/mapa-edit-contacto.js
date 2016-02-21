@@ -1,52 +1,46 @@
-var lat = $("#latitud").val();
-var lon = $("#longitud").val();
-if (lat == 0) {
-    lat = -31.420753028734406;
-}
-if (lon == 0) {
-    lon = -64.49841499328613;
-}
-var myCenter = new google.maps.LatLng(lat, lon);
-var markers = [];
-var mapProp = {
-    center: myCenter,
-    zoom: 16,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    scrollwheel: false,
-    styles: [{featureType: "poi", elementType: "labels", stylers: [{visibility: "off"}]},
-        {featureType: "administrative", elementType: "labels", stylers: [{visibility: "off"}]}]
-};
-var map = new google.maps.Map(document.getElementById("mapa-edit-contacto"), mapProp);
 function initialize() {
+            
+    var latlng = null;
+    var flag = false;
 
+    if ($('#latitud').val() != '' &&  $('#latitud').val() != '0.0') {
+        latlng =  new google.maps.LatLng($('#latitud').val(), $('#longitud').val());
+        flag = true;
+    } else {
+        latlng = new google.maps.LatLng(-31.420899517920617, -64.5003890991211);
+    }
+    
+    var mapProp = {
+            center: latlng,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false,
+            styles: [{featureType: "poi", elementType: "labels", stylers: [{visibility: "off"}]},
+                {featureType: "administrative", elementType: "labels", stylers: [{visibility: "off"}]}]
+        },
+        map = new google.maps.Map(document.getElementById("mapa-edit-contacto"), mapProp),
+        marker = new google.maps.Marker( {position: latlng, map: map} );
 
-
-    var marker = new google.maps.Marker({
-        position: myCenter,
+    marker.setMap( map );
+    
+    marker.setVisible(flag);
+    
+    google.maps.event.addListener(map, "click", function (event) {
+        $('#marker').val(1);
+        marker.setVisible(true);
+        var lat = event.latLng.lat();
+        var lng = event.latLng.lng();
+        mover(lat, lng, marker );
     });
-
-    marker.setMap(map);
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
-google.maps.event.addListener(map, "click", function (event) {
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(null);
-    }
-    markers = [];
-
-    var lat = event.latLng.lat();
-    var lng = event.latLng.lng();
-
-
-    var centroElegido = new google.maps.LatLng(lat, lng);
-    var marker = new google.maps.Marker({
-        position: centroElegido,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-    });
-//    marker.setIcion('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
-    markers.push(marker);
-    marker.setMap(map);
+function mover( lat, lng, marker ) {
+    marker.setPosition(new google.maps.LatLng(lat, lng));
     $("#latitud").val(lat);
     $("#longitud").val(lng);
+}
+
+
+$(function () {
+    initialize();
 });

@@ -1,0 +1,38 @@
+/* INPUTS */
+textarea {
+    resize: vertical;
+}
+
+/* TABLAS */
+
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+
+th.sortable {
+    background-image: url(../imagenes/sort.png);
+    background-repeat: no-repeat;
+    background-position:right;
+}
+
+th.sorting_asc {
+    background-image: url(../imagenes/sort-desc.png);
+    background-position:right;
+    background-repeat: no-repeat;
+}
+
+th.sorting_desc {
+    background-image: url(../imagenes/sort-asc.png);
+    background-repeat: no-repeat;
+    background-position:right;
+}
+
+/* FIX NAVBAR */
+
+.nav.nav-second-level.collapse li {
+    display: none;
+}
+
+.nav.nav-second-level.collapse.in li {
+    display: block;
+}

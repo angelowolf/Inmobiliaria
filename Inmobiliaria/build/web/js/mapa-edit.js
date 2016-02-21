@@ -13,8 +13,6 @@ var mapProp = {
 var map = new google.maps.Map(document.getElementById("mapa-edit"), mapProp);
 function initialize() {
 
-
-
     var marker = new google.maps.Marker({
         position: myCenter,
     });
@@ -36,7 +34,7 @@ google.maps.event.addListener(map, "click", function (event) {
     var centroElegido = new google.maps.LatLng(lat, lng);
     var marker = new google.maps.Marker({
         position: centroElegido,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+        icon: '/imagenes/marker.png'
     });
 //    marker.setIcion('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
     markers.push(marker);

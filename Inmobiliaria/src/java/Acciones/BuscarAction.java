@@ -47,7 +47,7 @@ public class BuscarAction extends ActionSupport {
         Contacto c = (Contacto) application.get("contacto");
         if (c == null) {
             ControladorContacto cc = new ControladorContacto();
-            c = cc.getOne(1);
+            c = cc.getOne();
             application.put("contacto", c);
         }
         return SUCCESS;
@@ -68,7 +68,7 @@ public class BuscarAction extends ActionSupport {
         Contacto c = (Contacto) application.get("contacto");
         if (c == null) {
             ControladorContacto cc = new ControladorContacto();
-            c = cc.getOne(1);
+            c = cc.getOne();
             application.put("contacto", c);
         }
         return SUCCESS;

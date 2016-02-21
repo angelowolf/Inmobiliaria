@@ -169,6 +169,11 @@ public class UsuarioAction extends ActionSupport {
         if (StringUtils.isBlank(usuario.getNick())) {
             addFieldError("", Mensaje.ingreseNick);
             flag = false;
+        }else{
+            if(usuario.getNick().length() < 3){
+                addFieldError("",Mensaje.nickMinimoCaracteres);
+                flag = false;
+            }
         }
         if (StringUtils.isBlank(usuario.getEmail())) {
             addFieldError("", Mensaje.ingreseMail);

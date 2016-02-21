@@ -64,13 +64,12 @@ public class ControladorContacto {
     }
 
     /**
-     * Retorna el contacto solicitado.
+     * Retorna el ultimo contacto.
      *
-     * @param id El id del contacto.
      * @return El contacto.
      */
-    public Contacto getOne(int id) {
-        return contactoDAO.buscar(id);
+    public Contacto getOne() {
+        return contactoDAO.contacto();
     }
 
 }

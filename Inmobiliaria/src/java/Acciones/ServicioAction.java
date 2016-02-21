@@ -29,6 +29,11 @@ public class ServicioAction extends ActionSupport implements ModelDriven<Servici
     private List<Servicio> servicioLista = new ArrayList<Servicio>();
     private final Controlador.ControladorServicio controladorServicio = new ControladorServicio();
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
+    private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public Servicio getModel() {
@@ -41,11 +46,9 @@ public class ServicioAction extends ActionSupport implements ModelDriven<Servici
             addFieldError("servicio.nombre", Mensaje.ingreseNombre);
             flag = false;
 
-        } else {
-            if (controladorServicio.existe(servicio)) {
-                addFieldError("servicio.nombre", Mensaje.getElExiste(Mensaje.servicio));
-                flag = false;
-            }
+        } else if (controladorServicio.existe(servicio)) {
+            addFieldError("servicio.nombre", Mensaje.getElExiste(Mensaje.servicio));
+            flag = false;
         }
 
         return flag;
@@ -78,8 +81,8 @@ public class ServicioAction extends ActionSupport implements ModelDriven<Servici
 
     public String eliminar() {
 
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        int id = Integer.parseInt(request.getParameter("idServicio"));
+//        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+//        int id = Integer.parseInt(request.getParameter("id"));
         if (controladorServicio.servicioEnUso(id)) {
             sesion.put("alerta", Mensaje.getUsado(Mensaje.servicio, Mensaje.propiedad));
         } else {

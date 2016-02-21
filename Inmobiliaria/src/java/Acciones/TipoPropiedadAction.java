@@ -29,6 +29,11 @@ public class TipoPropiedadAction extends ActionSupport implements ModelDriven<Ti
     private List<TipoPropiedad> tipoPropiedadLista = new ArrayList<TipoPropiedad>();
     private final ControladorTipoPropiedad controladorTipoPropiedad = new ControladorTipoPropiedad();
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
+    private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public TipoPropiedad getModel() {
@@ -41,11 +46,9 @@ public class TipoPropiedadAction extends ActionSupport implements ModelDriven<Ti
             addFieldError("tipoPropiedad.nombre", Mensaje.ingreseNombre);
             flag = false;
 
-        } else {
-            if (controladorTipoPropiedad.existe(tipoPropiedad)) {
-                addFieldError("tipoPropiedad.nombre", Mensaje.getElExiste(Mensaje.tipoPropiedad));
-                flag = false;
-            }
+        } else if (controladorTipoPropiedad.existe(tipoPropiedad)) {
+            addFieldError("tipoPropiedad.nombre", Mensaje.getElExiste(Mensaje.tipoPropiedad));
+            flag = false;
         }
 
         return flag;
@@ -77,9 +80,6 @@ public class TipoPropiedadAction extends ActionSupport implements ModelDriven<Ti
     }
 
     public String eliminar() {
-
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        int id = Integer.parseInt(request.getParameter("idTipoPropiedad"));
         if (controladorTipoPropiedad.tipoPropiedadEnUso(id)) {
             sesion.put("alerta", Mensaje.getUsado(Mensaje.tipoPropiedad, Mensaje.propiedad));
         } else {

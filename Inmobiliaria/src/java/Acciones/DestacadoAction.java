@@ -33,6 +33,11 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
     private File upload;
     private String uploadContentType, uploadFileName, guardaImagen;
+ private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public Destacado getModel() {
@@ -114,7 +119,7 @@ public class DestacadoAction extends ActionSupport implements ModelDriven<Destac
     }
 
     public String eliminar() {
-        controladorDestacado.eliminar(destacado.getIdDestacado());
+        controladorDestacado.eliminar(id);
         sesion.put("mensaje", Mensaje.getEliminada(Mensaje.propiedadDestacada));
         return SUCCESS;
     }

@@ -29,6 +29,11 @@ public class TipoMonedaAction extends ActionSupport implements ModelDriven<TipoM
     private List<TipoMoneda> tipoMonedaLista = new ArrayList<TipoMoneda>();
     private final ControladorTipoMoneda controladorTipoMoneda = new ControladorTipoMoneda();
     private final Map<String, Object> sesion = ActionContext.getContext().getSession();
+    private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public TipoMoneda getModel() {
@@ -41,11 +46,9 @@ public class TipoMonedaAction extends ActionSupport implements ModelDriven<TipoM
             addFieldError("tipoMoneda.nombre", Mensaje.ingreseNombre);
             flag = false;
 
-        } else {
-            if (controladorTipoMoneda.existe(tipoMoneda)) {
-                addFieldError("tipoMoneda.nombre", Mensaje.getElExiste(Mensaje.tipoMoneda));
-                flag = false;
-            }
+        } else if (controladorTipoMoneda.existe(tipoMoneda)) {
+            addFieldError("tipoMoneda.nombre", Mensaje.getElExiste(Mensaje.tipoMoneda));
+            flag = false;
         }
         if (tipoMoneda.getSigla().trim().isEmpty()) {
             addFieldError("tipoMoneda.simbolo", Mensaje.ingreseSimbolo);
@@ -82,9 +85,6 @@ public class TipoMonedaAction extends ActionSupport implements ModelDriven<TipoM
     }
 
     public String eliminar() {
-
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        int id = Integer.parseInt(request.getParameter("idTipoMoneda"));
         if (controladorTipoMoneda.tipoMonedaEnUso(id)) {
             sesion.put("alerta", Mensaje.getUsado(Mensaje.tipoMoneda, Mensaje.propiedad));
         } else {

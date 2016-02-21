@@ -21,6 +21,7 @@ public class ContactoAction extends ActionSupport implements ModelDriven<Contact
     private Contacto contacto = new Contacto();
     private final ControladorContacto controladorContacto = new ControladorContacto();
     private final Map<String, Object> application = ActionContext.getContext().getApplication();
+    private int marker;
 
     @Override
     public Contacto getModel() {
@@ -43,14 +44,14 @@ public class ContactoAction extends ActionSupport implements ModelDriven<Contact
     public String cargar() {
         Contacto c = (Contacto) application.get("contacto");
         if (c == null) {
-            c = controladorContacto.getOne(1);
+            c = controladorContacto.getOne();
             application.put("contacto", c);
         }
         return SUCCESS;
     }
 
     public String loadContacto() {
-        contacto = controladorContacto.getOne(1);
+        contacto = controladorContacto.getOne();
         return SUCCESS;
     }
 
@@ -62,4 +63,11 @@ public class ContactoAction extends ActionSupport implements ModelDriven<Contact
         this.contacto = contacto;
     }
 
+    public int getMarker() {
+        return marker;
+    }
+
+    public void setMarker(int marker) {
+        this.marker = marker;
+    }
 }

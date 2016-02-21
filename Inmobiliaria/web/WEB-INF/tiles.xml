@@ -1,124 +1,191 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
-       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-    <definition name="baseLayout" template="/BaseLayout.jsp">
-        <put-attribute name="title" value="" />
+    <!--MASTER PAGES-->
+    <definition name="rootlayout" template="/WEB-INF/rootlayout.jsp">
+        <put-attribute name="title" value="Administración" />
         <put-attribute name="body" value="" /> 
+        <put-attribute name="modal-delete" value="/WEB-INF/modal-delete.jsp" />
+        <put-list-attribute name="stylesheet" >
+            <add-attribute value="/../bower_components/bootstrap/dist/css/bootstrap.css" />
+            <add-attribute value="/../css/bootstrap-multiselect.min.css" />
+            <add-attribute value="/../bower_components/metisMenu/dist/metisMenu.min.css" />
+            <add-attribute value="/../css/sb-admin-2.css" />
+            <add-attribute value="/../bower_components/font-awesome/css/font-awesome.min.css" />
+            <add-attribute value="/../css/root.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascript" >
+            <add-attribute value="/../bower_components/jquery/dist/jquery.min.js" />
+            <add-attribute value="/../js/bootstrap-multiselect.js" />
+            <add-attribute value="/../js/bootstrap.min.js" />
+            <add-attribute value="/../bower_components/metisMenu/dist/metisMenu.min.js" />
+            <add-attribute value="/../js/sb-admin-2.js" />
+        </put-list-attribute>
     </definition>
-    <!--    <definition name="baseLayout" template="/NewIndex.jsp">
+    <definition name="layoutSitio" template="/WEB-INF/LayoutSitio.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="body" value="" /> 
-    </definition>-->
-    <definition name="layoutSitio" template="/LayoutSitio.jsp">
-        <put-attribute name="title" value="" />
-        <put-attribute name="body" value="" /> 
+        <put-list-attribute name="stylesheet" >
+            <add-attribute value="/../css/jquery-ui.min.css" />
+            <add-attribute value="/../css/bootstrap.min.css" />
+            <add-attribute value="/../font-awesome/css/font-awesome.min.css" />
+            <add-attribute value="/../css/estilos.css" />
+        </put-list-attribute>
+        <put-list-attribute name="javascript" >
+            <add-attribute value="/../js/jquery-2.1.1.min.js" />
+            <add-attribute value="/../js/jquery-ui.min.js" />
+            <add-attribute value="/../js/bootstrap.min.js" />
+            <add-attribute value="http://maps.googleapis.com/maps/api/js" />
+        </put-list-attribute>
     </definition>
     <!--Servicios-->
-    <definition name="/Servicio/AltaModificacion.tiles" extends="baseLayout">
+    <definition name="/Servicio/AltaModificacion.tiles" extends="rootlayout">
         <put-attribute name="title" value="Formulario Servicios" />
-        <put-attribute name="body" value="/Servicio/AltaModificacion.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Servicio/AltaModificacion.jsp" />
     </definition>
-    <definition name="/Servicio/Todos.tiles" extends="baseLayout">
+    <definition name="/Servicio/Todos.tiles" extends="rootlayout">
         <put-attribute name="title" value="Servicios" />
-        <put-attribute name="body" value="/Servicio/Todos.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Servicio/Todos.jsp" />      
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="/../js/root.js" />
+        </put-list-attribute> 
     </definition>
     <!--FIN SERVICIOS-->
     <!--Ambientes-->
-    <definition name="/Ambiente/AltaModificacion.tiles" extends="baseLayout">
+    <definition name="/Ambiente/AltaModificacion.tiles" extends="rootlayout">
         <put-attribute name="title" value="Formulario Ambientes" />
-        <put-attribute name="body" value="/Ambiente/AltaModificacion.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Ambiente/AltaModificacion.jsp" />
     </definition>
-    <definition name="/Ambiente/Todos.tiles" extends="baseLayout">
+    <definition name="/Ambiente/Todos.tiles" extends="rootlayout">
         <put-attribute name="title" value="Ambientes" />
-        <put-attribute name="body" value="/Ambiente/Todos.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Ambiente/Todos.jsp" />
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="/../js/root.js" />
+        </put-list-attribute>
     </definition>
     <!--FIN AMBIENTES-->
     <!--Propiedades-->
-    <definition name="/Propiedad/Alta.tiles" extends="baseLayout">
+    <definition name="/Propiedad/Alta.tiles" extends="rootlayout">
         <put-attribute name="title" value="Alta Propiedad" />
-        <put-attribute name="body" value="/Propiedad/Alta.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Propiedad/Alta.jsp" />
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="http://maps.googleapis.com/maps/api/js" />
+            <add-attribute value="/../js/AddFile.js" />
+            <add-attribute value="/../js/mapa-alta.js" />            
+        </put-list-attribute>     
     </definition>
-    <definition name="/Propiedad/Modificacion.tiles" extends="baseLayout">
+    <definition name="/Propiedad/Modificacion.tiles" extends="rootlayout">
         <put-attribute name="title" value="Modificar Propiedad" />
-        <put-attribute name="body" value="/Propiedad/Modificacion.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Propiedad/Modificacion.jsp" />
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="http://maps.googleapis.com/maps/api/js" />
+            <add-attribute value="/../js/mapa-edit.js" />
+            <add-attribute value="/../js/AddFile.js" />            
+        </put-list-attribute>           
     </definition>
-    <definition name="/Propiedad/Todos.tiles" extends="baseLayout">
+    <definition name="/Propiedad/Todos.tiles" extends="rootlayout">
         <put-attribute name="title" value="Propiedads" />
-        <put-attribute name="body" value="/Propiedad/Todos.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Propiedad/Todos.jsp" />
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="/../js/root.js" />
+        </put-list-attribute>
     </definition>  
     <definition name="/Propiedad/Ver.tiles" extends="layoutSitio">
         <put-attribute name="title" value="Propiedad" />
-        <put-attribute name="body" value="/Propiedad/Ver.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Propiedad/Ver.jsp" />
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="http://maps.googleapis.com/maps/api/js" />
+            <add-attribute value="/../js/email-ajax.js" />
+            <add-attribute value="/../js/mapa-vista.js" />            
+        </put-list-attribute>       
     </definition> 
-    <definition name="/Propiedad/Default.tiles" extends="baseLayout">
+    <definition name="/Propiedad/Default.tiles" extends="rootlayout">
         <put-attribute name="title" value="Imagenes Tamaño" />
-        <put-attribute name="body" value="/Propiedad/Default.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Propiedad/Default.jsp" />
     </definition>  
     <!--FIN PROPIEDADES-->
     <!--SITIO PAGINAS--> 
     <definition name="/Index.tiles" extends="layoutSitio">
         <put-attribute name="title" value="Inmobiliaria" />
-        <put-attribute name="body" value="/index.jsp" />
+        <put-attribute name="body" value="/WEB-INF/index.jsp" />
     </definition>  
     <definition name="/Buscar.tiles" extends="layoutSitio">
         <put-attribute name="title" value="Buscar Propiedad" />
-        <put-attribute name="body" value="/Buscar.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Buscar.jsp" />
     </definition>  
     <definition name="/Contacto.tiles" extends="layoutSitio">
         <put-attribute name="title" value="Contacto" />
-        <put-attribute name="body" value="/Contacto.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Contacto.jsp" />
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="http://maps.googleapis.com/maps/api/js" />
+            <add-attribute value="/../js/email-ajax.js" />
+            <add-attribute value="/../js/mapa-contacto.js" />            
+        </put-list-attribute>       
     </definition>  
     <!--FIN SITIO PAGINAS-->
     <!--ADMIN-->
-    <definition name="/Admin/Inicio.tiles" extends="baseLayout">
+    <definition name="/Admin/Inicio.tiles" extends="rootlayout">
         <put-attribute name="title" value="Bienvenido" />
-        <put-attribute name="body" value="/Admin/Inicio.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Admin/Inicio.jsp" />
     </definition>  
-    <definition name="/Admin/Modificar.tiles" extends="baseLayout">
+    <definition name="/Admin/Modificar.tiles" extends="rootlayout">
         <put-attribute name="title" value="Modificar Cuenta" />
-        <put-attribute name="body" value="/Admin/Modificar.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Admin/Modificar.jsp" />
     </definition>  
     <!--FIN ADMIN-->
     <!--TIPO MONEDA-->
-    <definition name="/TipoMoneda/AltaModificacion.tiles" extends="baseLayout">
+    <definition name="/TipoMoneda/AltaModificacion.tiles" extends="rootlayout">
         <put-attribute name="title" value="Formulario Tipo Monedas" />
-        <put-attribute name="body" value="/TipoMoneda/AltaModificacion.jsp" />
+        <put-attribute name="body" value="/WEB-INF/TipoMoneda/AltaModificacion.jsp" />
     </definition>
-    <definition name="/TipoMoneda/Todos.tiles" extends="baseLayout">
+    <definition name="/TipoMoneda/Todos.tiles" extends="rootlayout">
         <put-attribute name="title" value="Tipo Monedas" />
-        <put-attribute name="body" value="/TipoMoneda/Todos.jsp" />
+        <put-attribute name="body" value="/WEB-INF/TipoMoneda/Todos.jsp" />
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="/../js/root.js" />
+        </put-list-attribute>
     </definition>
     <!--FIN MONEDA-->
     <!--TIPO PROPIEDAD-->
-    <definition name="/TipoPropiedad/AltaModificacion.tiles" extends="baseLayout">
+    <definition name="/TipoPropiedad/AltaModificacion.tiles" extends="rootlayout">
         <put-attribute name="title" value="Formulario Tipo Propiedades" />
-        <put-attribute name="body" value="/TipoPropiedad/AltaModificacion.jsp" />
+        <put-attribute name="body" value="/WEB-INF/TipoPropiedad/AltaModificacion.jsp" />
     </definition>
-    <definition name="/TipoPropiedad/Todos.tiles" extends="baseLayout">
+    <definition name="/TipoPropiedad/Todos.tiles" extends="rootlayout">
         <put-attribute name="title" value="Tipo Propiedades" />
-        <put-attribute name="body" value="/TipoPropiedad/Todos.jsp" />
+        <put-attribute name="body" value="/WEB-INF/TipoPropiedad/Todos.jsp" />
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="/../js/root.js" />
+        </put-list-attribute>
     </definition>
     <!--FIN TIPO PROPIEDAD--> 
     <!--DESTACADO-->
-    <definition name="/Destacado/Alta.tiles" extends="baseLayout">
+    <definition name="/Destacado/Alta.tiles" extends="rootlayout">
         <put-attribute name="title" value="Alta Propiedad Destacada" />
-        <put-attribute name="body" value="/Destacado/Alta.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Destacado/Alta.jsp" />
     </definition>
-    <definition name="/Destacado/Modificacion.tiles" extends="baseLayout">
+    <definition name="/Destacado/Modificacion.tiles" extends="rootlayout">
         <put-attribute name="title" value="Modificar Propiedad Destacada" />
-        <put-attribute name="body" value="/Destacado/Modificacion.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Destacado/Modificacion.jsp" />
     </definition>
-    <definition name="/Destacado/Todos.tiles" extends="baseLayout">
+    <definition name="/Destacado/Todos.tiles" extends="rootlayout">
         <put-attribute name="title" value="Propiedades Destacadas" />
-        <put-attribute name="body" value="/Destacado/Todos.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Destacado/Todos.jsp" />
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="/../js/root.js" />
+        </put-list-attribute>
     </definition>
     <!--FIN DESTACADO-->
     <!--FORMULARIO CONTACTO-->
-    <definition name="/Contacto/Modificar.tiles" extends="baseLayout">
+    <definition name="/Contacto/Modificar.tiles" extends="rootlayout">
         <put-attribute name="title" value="Formulario Contacto" />
-        <put-attribute name="body" value="/Contacto/Modificar.jsp" />
+        <put-attribute name="body" value="/WEB-INF/Contacto/Modificar.jsp" />        
+        <put-list-attribute name="javascript" inherit="true">
+            <add-attribute value="http://maps.googleapis.com/maps/api/js" />
+            <add-attribute value="/../js/mapa-edit-contacto.js" />            
+        </put-list-attribute>           
     </definition>
     <!--FIN FORMULARIO CONTACTO--> 
 </tiles-definitions>

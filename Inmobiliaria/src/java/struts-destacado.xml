@@ -19,10 +19,14 @@
         </interceptors>
         <default-interceptor-ref name="loggingStack"/>  
         <global-results>
-            <result name="login">/Admin/Login.jsp</result>
+            <result name="login">/WEB-INF/Admin/Login.jsp</result>
+            <result name="error" type="httpheader">
+                <param name="error">404</param>
+            </result>
         </global-results>
         <action name="guardar" method="guardar" class="Acciones.DestacadoAction">
             <interceptor-ref name="fileUpload">
+                <param name="maximumSize">10485760</param>
                 <param name="allowedTypes">image/jpg, image/png,image/jpeg</param>
             </interceptor-ref> 
             <interceptor-ref name="defaultStack"/>
@@ -31,10 +35,11 @@
         </action>
         <action name="modificar" method="modificar" class="Acciones.DestacadoAction">
             <interceptor-ref name="fileUpload">
+                <param name="maximumSize">10485760</param>
                 <param name="allowedTypes">image/jpg, image/png,image/jpeg</param>
             </interceptor-ref> 
             <interceptor-ref name="defaultStack"/>
-            <result name="success" type="redirect">listar</result>
+            <result name="success" type="redirect">listar</result>            
             <result name="input" type="tiles">/Destacado/Modificacion.tiles</result>
         </action>
         <action name="eliminar" method="eliminar" class="Acciones.DestacadoAction">

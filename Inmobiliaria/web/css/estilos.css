@@ -437,5 +437,5 @@ body {
 
 /*FIN*/
 
-
+.loading .fa { color: #229EE6; }
 textarea { resize: vertical; }

@@ -54,6 +54,12 @@ public class PropiedadAction extends ActionSupport implements ModelDriven<Propie
     private List<String> ambientesDefault = new ArrayList<String>();
     private List<TipoPropiedad> tipoPropiedadLista = new ArrayList<TipoPropiedad>();
     private List<TipoMoneda> tipoMonedaLista = new ArrayList<TipoMoneda>();
+    private int marker;
+    private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     private boolean validar() {
         boolean flag = true;
@@ -157,10 +163,10 @@ public class PropiedadAction extends ActionSupport implements ModelDriven<Propie
     }
 
     public String eliminar() {
-        if (controladorPropiedad.propiedadEnUso(propiedad.getIdPropiedad())) {
+        if (controladorPropiedad.propiedadEnUso(id)) {
             sesion.put("alerta", Mensaje.getUsada(Mensaje.propiedad, Mensaje.propiedadDestacada));
         } else {
-            Propiedad p = controladorPropiedad.getOne(propiedad.getIdPropiedad());
+            Propiedad p = controladorPropiedad.getOne(id);
             controladorPropiedad.eliminar(p);
             sesion.put("mensaje", Mensaje.getEliminada(Mensaje.propiedad));
         }
@@ -382,6 +388,14 @@ public class PropiedadAction extends ActionSupport implements ModelDriven<Propie
     @Override
     public Propiedad getModel() {
         return propiedad;
+    }
+
+    public int getMarker() {
+        return marker;
+    }
+
+    public void setMarker(int marker) {
+        this.marker = marker;
     }
 
 }

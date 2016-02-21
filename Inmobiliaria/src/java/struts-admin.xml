@@ -18,25 +18,28 @@
             </interceptor-stack>
         </interceptors>
         <global-results>
-            <result name="login">/Admin/Login.jsp</result>
+            <result name="login">/WEB-INF/Admin/Login.jsp</result>
+            <result name="error" type="httpheader">
+                <param name="error">404</param>
+            </result>
         </global-results>
         <action name="login" method="login" class="Acciones.UsuarioAction">
             <result name="success" type="tiles">/Admin/Inicio.tiles</result>
-            <result name="input">/Admin/Login.jsp</result>
+            <result name="input">/WEB-INF/Admin/Login.jsp</result>
         </action>
         <action name="recuperarCuenta" method="recuperarCuenta" class="Acciones.UsuarioAction">
-            <result name="success">/Admin/ResetearCuenta.jsp</result>
-            <result name="input">/Admin/RecuperarCuenta.jsp</result>
+            <result name="success">/WEB-INF/Admin/ResetearCuenta.jsp</result>
+            <result name="input">/WEB-INF/Admin/RecuperarCuenta.jsp</result>
         </action>
         <action name="resetearCuenta" method="resetearCuenta" class="Acciones.UsuarioAction">
-            <result name="success" >/Admin/Login.jsp</result>
-            <result name="input">/Admin/ResetearCuenta.jsp</result>
+            <result name="success" >/WEB-INF/Admin/Login.jsp</result>
+            <result name="input">/WEB-INF/Admin/ResetearCuenta.jsp</result>
         </action>       
         <action name="modificar" method="modificar" class="Acciones.UsuarioAction">
             <interceptor-ref name="loggingStack" />
             <result name="success"  type="tiles">/Admin/Inicio.tiles</result>
             <result name="input" type="tiles">/Admin/Modificar.tiles</result>
-            <result name="cambiaClave">/Admin/Login.jsp</result>
+            <result name="cambiaClave">/WEB-INF/Admin/Login.jsp</result>
         </action>   
         <action name="loadEdit" method="cargarUsuario" class="Acciones.UsuarioAction">
             <interceptor-ref name="loggingStack" />
@@ -44,7 +47,7 @@
         </action>
         <action name="logout" method="logout" class="Acciones.UsuarioAction">
             <interceptor-ref name="loggingStack" />
-            <result name="success">/Admin/Login.jsp</result>
+            <result name="success">/WEB-INF/Admin/Login.jsp</result>
         </action>  
     </package>
 </struts>

@@ -62,10 +62,11 @@ public class Mensaje {
     public static final String claveCambiada = "Clave cambiada con exito.";
     public static final String claveIngresadaMal = "Su clave ingresada no es correcta.";
     public static final String codigoEnUso = "El codigo ingresado ya se encuentra en uso.";
-    public static final String emailNoEnviado = "Lo sentimos pero su consulta no ha sido enviado.";
+    public static final String emailNoEnviado = "Lo sentimos pero su consulta no ha sido enviada.";
     public static final String emailEnviado = "Recibimos tu consulta correctamente.<br>Nos comunicaremos a la brevedad.";
     public static final String ingreseTelefono = "Ingrese un teléfono.";
     public static final String ingreseConsulta = "Ingrese su consulta.";
+    public static final String nickMinimoCaracteres = "El nombre de usuario debe de contener 3 caracteres como mínimo.";
 
     /**
      * crea una string con el mensaje "Actualmente existen %d imagenes,

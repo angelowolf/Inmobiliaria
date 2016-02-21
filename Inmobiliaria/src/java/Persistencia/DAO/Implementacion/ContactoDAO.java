@@ -8,7 +8,9 @@ package Persistencia.DAO.Implementacion;
 import Persistencia.DAO.Interface.IContacto;
 import Persistencia.DAO.Util.GenericDAO;
 import Persistencia.Modelo.Contacto;
+import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Session;
 
 /**
  *
@@ -19,6 +21,17 @@ public class ContactoDAO extends GenericDAO<Contacto, Integer> implements IConta
     @Override
     public List<Contacto> listar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Contacto contacto() {
+        Session session = getHibernateTemplate();
+        List<Contacto> objetos = new ArrayList();
+        try {
+            objetos = session.createQuery("from Contacto").list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return objetos.get(objetos.size()-1);
     }
 
 }

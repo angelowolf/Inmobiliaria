@@ -4,10 +4,10 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <package name="error" extends="struts-default" >
+    <package name="error" extends="struts-default" namespace="/">
         
         <global-results>
-            <result name="error">/error.jsp</result>
+            <result name="error">/WEB-INF/error.jsp</result>
         </global-results>        
         
         <global-exception-mappings>

@@ -5,25 +5,36 @@ $(document).ready(function () {
     });
 });
 
-
-
 function enviar_mail() {
+    var atributos = $('form').serialize();
+    
+    $("#contenedor-contacto").fadeOut(function () {
+        $('.loading').fadeIn(function () {
+            $.ajax({
+                url: "mandarEmail",
+                data: atributos,
+                success: function (data) {
+                    $("#contenedor-contacto").fadeOut(function () {
+                        $('.loading').hide();
+                        if (data.codigo) {
+                            $("#alerta-mail").html(data.mensaje);
 
-    var atributos = 'propiedad.idPropiedad=' + $("#idpropiedad").val() +
-            "&nombre=" + $("#nombre").val() +
-            "&email=" + $("#email").val() +
-            "&telefono=" + $("#telefono").val() +
-            "&consulta=" + $("#consulta").val();
-    $.ajax({
-        async: false,
-        url: "mandarEmail",
-        data: atributos,
-        success: function () {
-            $("#contenedor-contacto").addClass("hidden");
-            $("#alerta-mail").removeClass("hidden");
-        },
-        error: function () {
-            alert("Ocurrio un problema al mandar el email.");
-        }});
+                            if (data.codigo === 200) {
+                                $("#alerta-mail").addClass('alert-info');
+                            } else {
+                                $("#alerta-mail").addClass('alert-danger');
+                            }
+                        }
+                        $("#alerta-mail").fadeIn();
+                    });
+                },
+                error: function () {
+                    $('.loading').hide();
+                    alert("Ocurrió un problema al mandar el email.");
+                }});
+
+        });
+    });
+
 
 }

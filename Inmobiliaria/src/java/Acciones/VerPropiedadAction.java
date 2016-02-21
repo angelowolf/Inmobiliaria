@@ -11,14 +11,11 @@ import Persistencia.Modelo.Ambiente;
 import Persistencia.Modelo.Contacto;
 import Persistencia.Modelo.Propiedad;
 import Persistencia.Modelo.Servicio;
-import Soporte.ServicioDoble;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.struts2.ServletActionContext;
 
 /**
  *
@@ -37,40 +34,42 @@ public class VerPropiedadAction extends ActionSupport {
 
     @Override
     public String execute() {
-//        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-//        int id = Integer.parseInt(request.getParameter("idPropiedad"));
-        propiedad = controladorPropiedad.getOne(idPropiedad);
-        //obtengo los servicios
-        List<Servicio> todosLosServicios = propiedad.getServicios();
-        boolean flag = true;
-        for (Servicio cadaServicio : todosLosServicios) {
-            if (flag) {
-                serviciosUno.add(cadaServicio);
-                flag = false;
-            } else {
-                serviciosDos.add(cadaServicio);
-                flag = true;
+        try {
+            propiedad = controladorPropiedad.getOne(idPropiedad);
+            //obtengo los servicios
+            List<Servicio> todosLosServicios = propiedad.getServicios();
+            boolean flag = true;
+            for (Servicio cadaServicio : todosLosServicios) {
+                if (flag) {
+                    serviciosUno.add(cadaServicio);
+                    flag = false;
+                } else {
+                    serviciosDos.add(cadaServicio);
+                    flag = true;
+                }
             }
-        }
-        //obtengo los ambientes
-        List<Ambiente> todosLosAmbientes = propiedad.getAmbientes();
-        boolean flag2 = true;
-        for (Ambiente cadaAmbiente : todosLosAmbientes) {
-            if (flag2) {
-                ambientesUno.add(cadaAmbiente);
-                flag2 = false;
-            } else {
-                ambientesDos.add(cadaAmbiente);
-                flag2 = true;
+            //obtengo los ambientes
+            List<Ambiente> todosLosAmbientes = propiedad.getAmbientes();
+            boolean flag2 = true;
+            for (Ambiente cadaAmbiente : todosLosAmbientes) {
+                if (flag2) {
+                    ambientesUno.add(cadaAmbiente);
+                    flag2 = false;
+                } else {
+                    ambientesDos.add(cadaAmbiente);
+                    flag2 = true;
+                }
             }
+            Contacto c = (Contacto) application.get("contacto");
+            if (c == null) {
+                ControladorContacto cc = new ControladorContacto();
+                c = cc.getOne();
+                application.put("contacto", c);
+            }
+            return SUCCESS;
+        } catch (org.hibernate.ObjectNotFoundException e) {
+            return ERROR;
         }
-        Contacto c = (Contacto) application.get("contacto");
-        if (c == null) {
-            ControladorContacto cc = new ControladorContacto();
-            c = cc.getOne(1);
-            application.put("contacto", c);
-        }
-        return SUCCESS;
     }
 
     public List<Servicio> getServiciosUno() {
@@ -91,10 +90,10 @@ public class VerPropiedadAction extends ActionSupport {
 
     public List<Ambiente> getAmbientesUno() {
         return ambientesUno;
-    }  
+    }
 
     public List<Ambiente> getAmbientesDos() {
         return ambientesDos;
     }
-    
+
 }
