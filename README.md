@@ -1,15 +1,9 @@
 # Inmobiliaria
 
-Liberias.
+Librerias
 
-http://puu.sh/lUPSL/a4d958832e.png
+Struts 2
+Hibernate 4.5 (c3p0)
+Tiles 2
 
-http://puu.sh/lUPTL/4fd2175839.png
-
-http://puu.sh/lUPVm/8097a9ef5a.png
-
-http://puu.sh/lUPWb/e3a804029b.png
-
-http://puu.sh/lUPWj/343f69d724.png
-
-http://puu.sh/lUPWI/d74ad682c4.png
+Este sistema permiete cargar distintas propiedades que posea una inmobiliaria, y posee un conjunto de páginas que permiten la visualización de estas propiedades, un buscador, y una página de contacto. Las propiedades se ubican en el mapa con Google Maps.
