@@ -25,8 +25,8 @@ public class ControladorEmail {
      */
     public void enviarEmail(String destino, String titulo, String mensaje) {
 
-        final String username = "angelowolf21@gmail.com";
-        final String password = "telacreiste";
+        final String username = "email@gmail.com";
+        final String password = "clave123456";
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
